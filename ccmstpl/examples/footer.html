@@ -1,0 +1,20 @@
+<p style="margin:10px 0; text-align: right;">
+		Copyright &copy; {CCMS_LIB:_default.php;FUNC:ccms_dateYear} assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>
+	</p>
+	{CCMS_LIB:_default.php;FUNC:ccms_user_admin_slider}
+	<script>
+		/* This feature helps clear out a cached cookies so that a new one can be written in place when changing your language.  You can choose to not use if you wish, it was just added to help make sure the example templates would do as we wished them to as written.  Your templates probably will not require such code, all links should contain the full language snippit in them to help drive the templates to the correct language content.  ie: { CCMS_LIB:_default.php;FUNC:ccms_lng} <-- remove the space. */
+		function lcu(lng) { /* lcu = language cookie update */
+			document.cookie = "ccms_lng={CCMS_LIB:_default.php;FUNC:ccms_lng}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+			/* insert a new cookie and get it in the cache, just incase we're dealing with the home page.  */
+			var d = new Date();
+			d.setTime(d.getTime() + (365*24*60*60*1000));
+			var expires = "expires=" + d.toUTCString();
+			document.cookie = "ccms_lng=" + lng + "; " + expires + "; path=/";
+			return;
+		}
+
+		/* Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent */
+		window.cookieconsent_options = {"message":"<bdo dir=\"{CCMS_DB_DIR:all,cookie-text}\" style=\"color: #fff;\">{CCMS_DB:all,cookie-text}</bdo>","dismiss":"<bdo dir=\"{CCMS_DB_DIR:all,cookie-button}\">{CCMS_DB:all,cookie-button}</bdo>","learnMore":"More info","link":"","theme":"dark-bottom"};
+	</script>
+	<script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>

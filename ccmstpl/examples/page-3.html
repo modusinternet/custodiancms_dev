@@ -1,0 +1,73 @@
+{CCMS_DB_PRELOAD:all,page,page-3}<!DOCTYPE html>
+<html id="no-fouc" lang="{CCMS_LIB:_default.php;FUNC:ccms_lng}" style="opacity: 0;">
+	<head>
+		<meta charset="utf-8">
+		<title>Custodian CMS v{CCMS_LIB:_default.php;FUNC:ccms_version} | {CCMS_DB:page,title}3</title>
+		<meta name="description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
+		{CCMS_TPL:examples/header-head.html}
+		<style type="text/css">
+			/*
+				You can improve your 'Above Fold Content' score on Google Pagespeed using the two online utilities and placing your resurlts below.
+				https://jonassebastianohlsson.com/criticalpathcssgenerator/
+				https://cssminifier.com/
+			*/
+		</style>
+	</head>
+	<body>
+		{CCMS_TPL:examples/header-body.html}
+		<ul>
+			<li><a class="tapTarget" href="/en/examples/page-3.html" onclick="lcu('en')">English</a></li>
+			<li><a class="tapTarget" href="/fr/examples/page-3.html" onclick="lcu('fr')">Français (French)</a></li>
+			<li><a class="tapTarget" href="/de/examples/page-3.html" onclick="lcu('de')">Deutsch (German)</a></li>
+			<li><a class="tapTarget" href="/ar/examples/page-3.html" onclick="lcu('ar')">العربية (Arabic)</a></li>
+			<li><a class="tapTarget" href="/he/examples/page-3.html" onclick="lcu('he')">עברית (Hebrew)</a></li>
+			<li><a class="tapTarget" href="/hi/examples/page-3.html" onclick="lcu('hi')">हिन्दी (Hindi)</a></li>
+			<li><a class="tapTarget" href="/ja/examples/page-3.html" onclick="lcu('ja')">日本語 (Japanese)</a></li>
+			<li><a class="tapTarget" href="/zh-cn/examples/page-3.html" onclick="lcu('zh-cn')">中文 (Chinese, Simplified)</a></li>
+		</ul>
+		<p>
+			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">{CCMS_DB:page,page-num}1</a>
+			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">{CCMS_DB:page,page-num}2</a>
+			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html" style="text-decoration: underline;">{CCMS_DB:page,page-num}3</a>
+		</p>
+		<p dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}">
+			<bdo dir="{CCMS_DB_DIR:page-3,para1:1}">{CCMS_DB:page-3,para1}</bdo>
+		</p>
+		{CCMS_TPL:examples/footer.html}
+		<script>
+			function loadFirst(e,t){var a=document.createElement("script");a.async = true;a.readyState?a.onreadystatechange=function(){("loaded"==a.readyState||"complete"==a.readyState)&&(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src=e,document.body.appendChild(a);}
+
+			var cb = function() {
+				var l = document.createElement('link'); l.rel = 'stylesheet';
+				/* l.href = "/ccmstpl/examples/css/style.css"; */
+				l.href = "/ccmstpl/examples/css/style.min.css";
+				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+
+				var l = document.createElement('link'); l.rel = 'stylesheet';
+				l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
+				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+			};
+
+			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+			if (raf) raf(cb);
+			else window.addEventListener('load', cb);
+
+			function loadJSResources() {
+				loadFirst("/ccmsusr/_js/jquery-2.2.4.min.js", function() { /* JQuery */
+
+					/* Fade in web page. */
+					$("#no-fouc").delay(200).animate({"opacity": "1"}, 500);
+
+				});
+			}
+
+			if(window.addEventListener) {
+				window.addEventListener("load", loadJSResources, false);
+			} else if(window.attachEvent) {
+				window.attachEvent("onload", loadJSResources);
+			} else {
+				window.onload = loadJSResources;
+			}
+		</script>
+	</body>
+</html>
