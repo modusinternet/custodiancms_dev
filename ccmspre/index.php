@@ -776,6 +776,9 @@ function CCMS_Main() {
 								// If this is a normal session and the user is not logged in then cache this page in the visitors browers.
 								// .html template, normal template request, not logged in.  Check for a cache version, that's not expired and if necessary, cache a new copy.
 								header("Content-Type: text/html; charset=UTF-8");
+								// Expires in
+								header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + ($CFG["CACHE_EXPIRE"] * 60)));
+
 								$url = "/" . $CLEAN["ccms_lng"] . "/" . $ccms_dir . $file;
 								$url_md5 = md5($url);
 
