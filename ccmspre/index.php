@@ -555,9 +555,8 @@ function CCMS_html_min($buffer) {
 */
 
 
-		$search = array("!<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+!g","!/ {2}!g");
-		$replace = array("", " ");
-		$buffer = preg_replace($search, $replace, $buffer);
+		$buffer = preg_replace('/<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+/g', '', $buffer);
+		$buffer = preg_replace('/ {2}/g', ' ', $buffer);
 
 
 		$search = array("{CHAR_RET}", "{CHAR_TAB}");
