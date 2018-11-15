@@ -555,7 +555,7 @@ function CCMS_html_min($buffer) {
 */
 
 
-		$buffer = preg_replace(['/<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+/','/ {2}/'],['',' '] $buffer);
+		$buffer = preg_replace(['/<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+/','/ {2}/'],['',' '],$buffer);
 		//$buffer = preg_replace('/ {2}/', ' ', $buffer);
 
 
