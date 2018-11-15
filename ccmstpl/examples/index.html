@@ -27,9 +27,9 @@
 		<p style="margin-left: 20px;">
 			<h1>The MIT License (MIT)</h1>
 			<p>
-				Permission     is hereby granted, free of charge, to any      person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute,       sublicense, and/or sell copies of the  Software, and to permit persons to whom the Software is furnished to do so,          subject to the following conditions:<br />
+				Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />
 				<br />
-				The above            copyright notice and this permission notice       shall be included in all copies or substantial portions of the Software.<br />
+				The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />
 				<br />
 				THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			</p>
@@ -79,22 +79,21 @@
 			Place the <span class="oj">CCMS_DB_PRELOAD</span> tag at the top of your html to preload all the <span class="oj">ccms_ins_db grp</span> records into memory that you might need for a given page.<br />
 			e.g.:
 		</p>
-		<pre>&#123;CCMS_DB_PRELOAD:index}&lt;!DOCTYPE html>
+<pre>&#123;CCMS_DB_PRELOAD:index}&lt;!DOCTYPE html>
 &lt;html>
 	&lt;head>
 		&lt;meta charset="utf-8">
-		...</pre>
+</pre>
 		<p>
 			Then use the <span class="oj">CCMS_DB</span> tag to display database content.  CCMS will automatically determine if the prefered language of the visitors browser is even supported by your website and display content from your database in the correct language, if available.  Otherwise the websites default language will be displayed.<br />
 			e.g.:
 		</p>
-		<pre>...
-&lt;p>
+<pre>&lt;p>
 	&lt;span style="color: rgb(134, 177, 53);">
 		"&#123;CCMS_DB:index,para1}"
 	&lt;/span>&lt;br />
 	&lt;br />
-	...</pre>
+</pre>
 		<a id="a"></a>
 		<h2>Multilingual Content Example</h2>
 		<p>
@@ -159,12 +158,12 @@
 		<p>
 			The <span class="oj">/ccmslib/</span>, <span class="oj">/ccmspre/</span> and <span class="oj">/ccmstpl/</span> folders are protected by <span class="oj">.htaccess</span>.
 		</p>
-		<pre style="overflow-x: auto;">
+<pre style="overflow-x: auto;">
 &lt;FilesMatch ".(fla|htaccess|html|ini|php)$"&gt;
 	Order Allow,Deny
 	Deny from all
 &lt;/FilesMatch&gt;
-		</pre>
+</pre>
 		<p>
 			Templates in these folders, and their subfolders, cannot be called directly.  Templates inside the <span class="oj">/ccmstpl/</span> folder can only be called using correctly formatted URI's containing browser language codes supported by the site.  Other wise the <span class="oj">/ccmstpl/error404.php</span> template will be thrown.  A 2-5 character language code followed by the <span class="oj">1-1024</span> character long name of the dir and or page desired.
 		</p>
