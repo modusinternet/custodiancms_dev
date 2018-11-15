@@ -548,10 +548,14 @@ function CCMS_html_min($buffer) {
 			},
 			$buffer
 		);
-		/*
+
+
+
 		$buffer = preg_replace(['/\>[^\S ]+/s','/[^\S ]+\</s','/[\t\n]+/s','/<!--(.|\s)*?-->/','/\/\*(.|\s)*?\*\//'],['>','<','','',''], $buffer);
-		*/
-		$search = array("/<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+/g","/ {2}/g");
+
+
+
+		$search = array("!<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+!g","!/ {2}!g");
 		$replace = array("", " ");
 		$buffer = preg_replace($search, $replace, $buffer);
 
