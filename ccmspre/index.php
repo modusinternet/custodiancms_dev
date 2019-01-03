@@ -707,7 +707,7 @@ function CCMS_Main() {
 	// index
 	// index
 	if (!isset($CLEAN["ccms_tpl"]) || $CLEAN["ccms_tpl"] == "" || $CLEAN["ccms_tpl"] == "/") {
-	  $CLEAN["ccms_tpl"] = $CFG["INDEX"];
+		$CLEAN["ccms_tpl"] = $CFG["INDEX"];
 	}
 
 	// If the template being requested is inside a dir and no specific template name is
@@ -720,7 +720,7 @@ function CCMS_Main() {
 	// /fruit/orange/index
 	// /fruit/orange/vitamin/index
 	if (preg_match('/[\/]\z/', $CLEAN["ccms_tpl"])) {
-	  $CLEAN["ccms_tpl"] .= "index";
+		$CLEAN["ccms_tpl"] .= "index";
 	}
 
 	// Trims the forward slash (/) from the beginning and .html from the end.  Resave back to CLEAN["ccms_tpl"]:
@@ -733,7 +733,8 @@ function CCMS_Main() {
 	// fruit/orange
 	// fruit/orange/vitamin
 	// fruit/orange/vitamin/c
-	$CLEAN["ccms_tpl"] = preg_replace('/^(\/)(.*?)(\.html?)?\z/i', '$2', $CLEAN["ccms_tpl"]);
+	/*$CLEAN["ccms_tpl"] = preg_replace('/^(\/)(.*?)(\.html?)?\z/i', '$2', $CLEAN["ccms_tpl"]);*/
+	$CLEAN["ccms_tpl"] = preg_replace('/^(\/)(.*?)(\.css?)?(\.html?)?(\.js?)?\z/i', '$2', $CLEAN["ccms_tpl"]);
 
 	// Copys the end of the string found inside $CLEAN["ccms_tpl"] after the last /.
 	preg_match('/([^\/]*)\z/', $CLEAN["ccms_tpl"], $ccms_file);
@@ -756,66 +757,54 @@ function CCMS_Main() {
 	$found = false;
 
 	if ($CFG["lngCodeFoundFlag"] && $CFG["lngCodeActiveFlag"]) {
-	  // Test to make sure the visitor is not requesting a language which is either non existant or status not live.  If so they should be sent to the error.php template regardless.
-	  if (is_dir($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir)) {
+		// Test to make sure the visitor is not requesting a language which is either non existant or status not live.  If so they should be sent to the error.php template regardless.
+		if (is_dir($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir)) {
 			$odhandle = @opendir($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir);
 			while (($file = @readdir($odhandle)) !== false) {
-				 if ($file != "." && $file != ".." && is_file($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file)) {
-					  if ($file == $ccms_file[0] . ".php") {
-							// .php template.  Do not check or save cached version.
-							ob_start();
-							include $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file;
-							$html = ob_get_contents();
-							ob_end_clean();
-							CCMS_TPL_Parser($html);
-							$found = true;
-							break;
-					  } elseif ($file == $ccms_file[0] . ".html") {
-							if ($CLEAN["SESSION"]["user_id"] == null) {
-								// If this is a normal session and the user is not logged in then cache this page in the visitors browers.
-								// .html template, normal template request, not logged in.  Check for a cache version, that's not expired and if necessary, cache a new copy.
-								header("Content-Type: text/html; charset=UTF-8");
-								// Expires in
-								header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + ($CFG["CACHE_EXPIRE"] * 60)));
+				if ($file != "." && $file != ".." && is_file($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file)) {
+					if ($file == $ccms_file[0] . ".php") {
+						// .php template.  Do not check or save cached version.
+						ob_start();
+						include $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file;
+						$html = ob_get_contents();
+						ob_end_clean();
+						CCMS_TPL_Parser($html);
+						$found = true;
+						break;
+					} elseif ($file == $ccms_file[0] . ".css" || $file == $ccms_file[0] . ".html" || $file == $ccms_file[0] . ".js") {
+						if ($CLEAN["SESSION"]["user_id"] == null) {
+							// If this is a normal session and the user is not logged in then cache this page in the visitors browers.
+							if($file == $ccms_file[0] . ".css"){
+								header("Content-Type: text/css; charset=utf-8");
+							} elseif ($file == $ccms_file[0] . ".html") {
+								header("Content-Type: text/html; charset=utf-8");
+							} elseif ($file == $ccms_file[0] . ".js") {
+								header("Content-Type: application/javascript");
+							} else {
+								header("Content-Type: text/html; charset=utf-8");
+							}
+							// Expires in
+							header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + ($CFG["CACHE_EXPIRE"] * 60)));
 
-								$url = "/" . $CLEAN["ccms_lng"] . "/" . $ccms_dir . $file;
-								$url_md5 = md5($url);
+							// Check for a cache version, that's not expired and if necessary, cache a new copy.
+							$url = "/" . $CLEAN["ccms_lng"] . "/" . $ccms_dir . $file;
+							$url_md5 = md5($url);
 
-								if($CFG["CACHE"] == 1) {
-									// Cache setting in /ccmspre/config.php is enabled, $CFG["CACHE"] = 1;.
-									$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_cache` WHERE `url_md5` = :url_md5 LIMIT 1;");
-									$qry->execute(array(':url_md5' => $url_md5));
-									$row = $qry->fetch(PDO::FETCH_ASSOC);
+							if($CFG["CACHE"] == 1) {
+								// Cache setting in /ccmspre/config.php is enabled, $CFG["CACHE"] = 1;.
+								$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_cache` WHERE `url_md5` = :url_md5 LIMIT 1;");
+								$qry->execute(array(':url_md5' => $url_md5));
+								$row = $qry->fetch(PDO::FETCH_ASSOC);
 
-									if($row) {
-										// A cached version of the page was found, we need to check if it is expired.
+								if($row) {
+									// A cached version of the page was found, we need to check if it is expired.
 
-										if(time() >= $row["exp"]) {
-											// The cached template is expried.  It should be removed, rebuild and recached.
+									if(time() >= $row["exp"]) {
+										// The cached template is expried.  It should be removed, rebuild and recached.
 
-											$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_cache` WHERE `id` = :id LIMIT 1;");
-											$qry->execute(array(':id' => $row["id"]));
+										$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_cache` WHERE `id` = :id LIMIT 1;");
+										$qry->execute(array(':id' => $row["id"]));
 
-											ob_start();
-											$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
-											CCMS_TPL_Parser($html);
-											$buf = ob_get_contents();
-											ob_end_clean();
-											$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url_md5, url, exp, content) VALUES (:url_md5, :url, :exp, :content);");
-											$qry->execute(array(':url_md5' => $url_md5, ':url' => $url, ':exp' => time() + ($CFG["CACHE_EXPIRE"] * 60), ':content' => $buf));
-
-											echo $buf;
-											echo "<!-- cache id: " . $CFG["DBH"]->lastInsertId() . " -->";
-
-										} else {
-											// The cached template is NOT expried.  It should be used.
-
-											echo $row["content"];
-											echo "<!-- cache id: " . $row["id"] . " -->";
-										}
-									} else {
-										// A cached version of the page requested was NOT found.
-										// It should be built and cached.
 										ob_start();
 										$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
 										CCMS_TPL_Parser($html);
@@ -826,49 +815,77 @@ function CCMS_Main() {
 
 										echo $buf;
 										echo "<!-- cache id: " . $CFG["DBH"]->lastInsertId() . " -->";
+
+									} else {
+										// The cached template is NOT expried.  It should be used.
+
+										echo $row["content"];
+										echo "<!-- cache id: " . $row["id"] . " -->";
 									}
 								} else {
-									// Cache setting in /ccmspre/config.php is NOT enabled, $CFG["CACHE"] = 0;.
-									// Just do a normal template pars.
+									// A cached version of the page requested was NOT found.
+									// It should be built and cached.
+									ob_start();
 									$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
 									CCMS_TPL_Parser($html);
-								}
+									$buf = ob_get_contents();
+									ob_end_clean();
+									$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url_md5, url, exp, content) VALUES (:url_md5, :url, :exp, :content);");
+									$qry->execute(array(':url_md5' => $url_md5, ':url' => $url, ':exp' => time() + ($CFG["CACHE_EXPIRE"] * 60), ':content' => $buf));
 
-								$found = true;
-								break;
+									echo $buf;
+									echo "<!-- cache id: " . $CFG["DBH"]->lastInsertId() . " -->";
+								}
 							} else {
-								 // If this is a verified session asigned of an active user then disable cache.
-								 // .html template, admin/translator template request, logged in.  Do not check or save cached version.
-								 header("Content-Type: text/html; charset=UTF-8");
-								 header("Cache-Control: no-cache, must-revalidate");
-								 header("Pragma: no-cache");
-								 $html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
-								 CCMS_TPL_Parser($html);
-								 $found = true;
-								 break;
+								// Cache setting in /ccmspre/config.php is NOT enabled, $CFG["CACHE"] = 0;.
+								// Just do a normal template pars.
+								$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
+								CCMS_TPL_Parser($html);
 							}
-					  }
-				 }
+
+							$found = true;
+							break;
+						} else {
+							// If this is a verified session asigned of an active user then disable cache.
+							// .html template, admin/translator template request, logged in.  Do not check or save cached version.
+							if($file == $ccms_file[0] . ".css"){
+								header("Content-Type: text/css; charset=utf-8");
+							} elseif ($file == $ccms_file[0] . ".html") {
+								header("Content-Type: text/html; charset=utf-8");
+							} elseif ($file == $ccms_file[0] . ".js") {
+								header("Content-Type: application/javascript");
+							} else {
+								header("Content-Type: text/html; charset=utf-8");
+							}
+							header("Cache-Control: no-cache, must-revalidate");
+							header("Pragma: no-cache");
+							$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
+							CCMS_TPL_Parser($html);
+							$found = true;
+							break;
+						}
+					}
+				}
 			}
 			@closedir($odhandle);
-	  }
+		}
 	}
 
 	if (!$found) {
-	  // Store a copy of the original tpl requested for use later on in the error page.
-	  $CLEAN["ccms_tpl_org"] = $CLEAN["ccms_tpl"];
+		// Store a copy of the original tpl requested for use later on in the error page.
+		$CLEAN["ccms_tpl_org"] = $CLEAN["ccms_tpl"];
 
-	  // Rest the tpl variable to the error page.
-	  $CLEAN["ccms_tpl"] = "error";
-	  if ($CLEAN["ccms_tpl"] == "error") {
+		// Rest the tpl variable to the error page.
+		$CLEAN["ccms_tpl"] = "error";
+		if ($CLEAN["ccms_tpl"] == "error") {
 			header("HTTP/1.0 404 not found");
-	  }
+		}
 
-	  ob_start();
-	  include $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $CLEAN["ccms_tpl"] . ".php";
-	  $html = ob_get_contents();
-	  ob_end_clean();
-	  CCMS_TPL_Parser($html);
+		ob_start();
+		include $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $CLEAN["ccms_tpl"] . ".php";
+		$html = ob_get_contents();
+		ob_end_clean();
+		CCMS_TPL_Parser($html);
 	}
 }
 
