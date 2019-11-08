@@ -84,6 +84,7 @@ function CCMS_Set_LNG() {
 			if(strcasecmp($key, $CLEAN["ccms_lng"]) == 0) {
 				// The language code provided was found in the database.
 				$CFG["lngCodeFoundFlag"] = true;
+				/*
 				if($value["status"] == 1) {
 					// The language code provided is active in the database.
 					//$CLEAN["ccms_lng"] = $key;
@@ -106,6 +107,45 @@ function CCMS_Set_LNG() {
 						}
 					}
 				}
+				*/
+
+				if($value["status"] == 1) {
+					// The language code provided is active in the database.
+					//$CLEAN["ccms_lng"] = $key;
+					$CFG["CCMS_LNG_DIR"] = $value["dir"];
+					$CFG["lngCodeActiveFlag"] = true;
+					//break;
+				} elseif($CLEAN["SESSION"]["user_id"]) {
+					// If this is a verified user trying to make changes to content in a language which is currently
+					// not set live, get the users privilages and verify their rights to make updates in the language.
+					$qry = $CFG["DBH"]->prepare("SELECT super, priv FROM `ccms_user` WHERE id = :user_id LIMIT 1;");
+					$qry->execute(array(':user_id' => $CLEAN["SESSION"]["user_id"]));
+					$row = $qry->fetch(PDO::FETCH_ASSOC);
+					$json_a = json_decode($row["priv"], true);
+					if($row["super"] == 1 || $json_a[priv][content_manager][r] == 1) {
+						if($row["super"] == 1 || $json_a[priv][content_manager][lng][$key] == 1 || $json_a[priv][content_manager][lng][$key] == 2) {
+							//$CLEAN["ccms_lng"] = $key;
+							$CFG["CCMS_LNG_DIR"] = $value["dir"];
+							$CFG["lngCodeActiveFlag"] = true;
+							//break;
+						}
+					}
+				}
+				break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			}
 		}
 	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
