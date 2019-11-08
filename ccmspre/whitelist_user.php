@@ -18,14 +18,14 @@ A list of predefined PHP constants for use with the filter_var() function can be
 The following is a list of types already pre defined that you can use and the regular expressions they represent.
 These types are found at the top of the /ccmspre/index.php template and should not be altered there.
 
-CRYPT									=>	/^[a-z-_/#=&:\pN\?\.\";\'\`\*\s]*\z/i
-HTTP_ACCEPT_LANGUAGE				=>	/^[a-z0-9-,;=\.]{2,}\z/i
-HTTP_COOKIE							=>	/^[a-z-_=\.\pN]{1,}\z/i
+CRYPT									=>	/^[a-z\-_/#=&:\pN\?\.\";\'\`\*\s]*\z/i
+HTTP_ACCEPT_LANGUAGE				=>	/^[a-z0-9\-,;=\.]{2,}\z/i
+HTTP_COOKIE							=>	/^[a-z\-_=\.\pN]{1,}\z/i
 LNG									=>	/^[a-z]{2}(-[a-z]{2})?\z/i
-PARMS									=>	/^[a-z-_\pN/]+\z/i
-QUERY_STRING						=>	/^[a-z-_=&\.\pN]{1,}\z/i
+PARMS									=>	/^[a-z\-_\pN/]+\z/i
+QUERY_STRING						=>	/^[a-z\-_=&\.\pN]{1,}\z/i
 SESSION_ID							=>	/^[a-z0-9]{1,}\z/i
-TPL									=>	/^[a-z-\pN\/]{1,}\z/i
+TPL									=>	/^[a-z\-\pN\/]{1,}\z/i
 UTF8_STRING_WHITE					=>	/^[\pL\pM*+\s]*\z/u
 UTF8_STRING_DIGIT_WHITE			=>	/^[\pL\pM*+\pN\s]*\z/u
 UTF8_STRING_DIGIT_PUNC_WHITE	=>	/^[\pL\pM*+\pN\pP\s]*\z/u
@@ -63,7 +63,7 @@ define('WHOLE_NUMBER', '/^[\pN]*\z/');
 // \z		End of subject or newline at end. (Better then $ because $ does not include /n characters at the end of a line.)
 // /		End of the Pattern.
 
-define('EMAIL', '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}\z/i');
+define('EMAIL', '/^[A-Z0-9._%+\-]+@[A-Z0-9.\-]+\.[A-Z]{2,6}\z/i');
 
 define('PASSWORD', '/^(.+)\z/');
 // ^		Start of line
@@ -92,7 +92,7 @@ define('ANY', '/^(.*)\z/s');
 // /		End of the Pattern.
 // s		Newlines
 
-define('G_RECAPTCHA_RESPONSE', '/^[a-z\pN-_]*\z/i');
+define('G_RECAPTCHA_RESPONSE', '/^[a-z\pN\-_]*\z/i');
 // ^		Start of line
 // [		Start of the character class.
 // a-z		Any kind of letter from any language, upper or lower case.
