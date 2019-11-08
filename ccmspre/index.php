@@ -222,6 +222,7 @@ function CCMS_cookie_SESSION() {
 
 	$CLEAN["SESSION"]["user_agent"] = $CLEAN["HTTP_USER_AGENT"];
 
+	/*
 	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
 		// A value was found, so we'll try testing it against the database.
 		break;
@@ -247,6 +248,41 @@ function CCMS_cookie_SESSION() {
 			}
 		}
 	}
+	*/
+
+
+
+
+
+	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
+		// A value was found, so we'll try testing it against the database.
+		//break;
+	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
+		// A value was found in $CLEAN["HTTP_COOKIE"] variable.  We'll try extracting the session value and validate it
+		// here first.  If it passes then we'll try testing it against the database.
+		$cookieSess = explode("; ", $CLEAN["HTTP_COOKIE"]);
+		foreach($cookieSess as $cookieSess2) {
+			$cookieSess3 = explode("=", $cookieSess2);
+			if($cookieSess3[0] == "ccms_session") {
+				$cookieSess3[1] = @trim($cookieSess3[1]);
+				// utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
+				$length = strlen(utf8_decode($cookieSess3[1]));
+				$buf = NULL;
+				if($length > 64) {
+					$CLEAN["ccms_session"] = "MAXLEN";
+				} else {
+					$CLEAN["ccms_session"] = (preg_match('/^[a-z\pN]{1,}\z/i', $cookieSess3[1])) ? $cookieSess3[1] : "INVAL";
+				}
+				//$CLEAN["ccms_session"] = $buf;
+				break;
+			}
+		}
+	}
+
+
+
+
+
 
 	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
 		// The user appears to already have a session code so now we test it.  Check the 'ccms_session' table for matches.
