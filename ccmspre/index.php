@@ -13,15 +13,15 @@ https://regex101.com/
 A list of predefined PHP constants for use with the filter_var() function can be found here: http://ca2.php.net/manual/en/filter.constants.php
 **************************************************************/
 
-define('CRYPT', '/^[a-z-_/#=&:\pN\?\.\";\'\`\*\s]*\z/i');
-define('HTTP_ACCEPT_LANGUAGE', '/^[a-z0-9-,;=\.]{2,}\z/i');
-define('HTTP_COOKIE', '/^[a-z\pN-_=\.; \/]{2,}\z/i');
-define('HTTP_USER_AGENT', '/^[a-z\pN-_;:,.()#\/\+ ]{2,}\z/i');
+define('CRYPT', '/^[a-z\-_/#=&:\pN\?\.\";\'\`\*\s]*\z/i');
+define('HTTP_ACCEPT_LANGUAGE', '/^[a-z0-9\-,;=\.]{2,}\z/i');
+define('HTTP_COOKIE', '/^[a-z\pN\-_=\.; \/]{2,}\z/i');
+define('HTTP_USER_AGENT', '/^[a-z\pN\-_;:,.()#\/\+ ]{2,}\z/i');
 define('LNG', '/^[a-z]{2}(-[a-z]{2})?\z/i');
-define('PARMS', '/^[a-z-_\pN/]+\z/i');
-define('QUERY_STRING', '/^[a-z\pN-_=&\?\.\/]{1,}\z/i');
+define('PARMS', '/^[a-z\-_\pN/]+\z/i');
+define('QUERY_STRING', '/^[a-z\pN\-_=&\?\.\/]{1,}\z/i');
 define('SESSION_ID', '/^[a-z\pN]{1,}\z/i');
-define('TPL', '/^[a-z-_\pN\.\/]*\z/i');
+define('TPL', '/^[a-z\-_\pN\.\/]*\z/i');
 
 define('UTF8_STRING_WHITE', '/^[\pL\pM*+\s]*\z/u');
 // ^ Start of line
