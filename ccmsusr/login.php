@@ -514,11 +514,9 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 					</div>
 <?php endif ?>
 					<div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            Password Reset
-                        </div>
-                        <div class="panel-body">
-                            <p>Please enter your account email address. We will send you a link to reset your password.</p>
+						<div class="panel-heading">Password Reset</div>
+						<div class="panel-body">
+							<p>Please enter your account email address. We will send you a link to reset your password.</p>
 							<form action="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/user/" id="ccms_pass_reset_form" method="post">
 								<input type="hidden" name="ccms_pass_reset_form" value="1">
 								<div id="reset-status" style="color:#ec7f27; font-weight:bold;"></div>
@@ -532,9 +530,9 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 								</div>
 								<button type="submit" class="btn btn-lg btn-success btn-block">Request Link</button>
 							</form>
-                            <p>NOTE: The link contained in the email will only work once and only within one hour of its request.</p>
-                        </div>
-                    </div>
+							<p>NOTE: The link contained in the email will only work once and only within one hour of its request.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
