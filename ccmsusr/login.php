@@ -67,7 +67,6 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 		if($row) {
 			// An active user with the same email address WAS found in the database.
 			//if($row["hash"] == crypt($CLEAN["loginPassword"], $row["hash"])) {
-			//if(hash_equals($row["hash"], crypt($CLEAN["loginPassword"], $row["hash"]))) {
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
 
 
@@ -375,10 +374,23 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 				// Encrypt the new password and overwrite the old one.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
+				/*
 				$cost = 10;
 				$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
 				$salt = sprintf("$2a$%02d$", $cost) . $salt;
 				$hash = crypt($CLEAN["password1"], $salt);
+				*/
+
+				$options = ['cost' => 11];
+				$hash = password_hash($CLEAN["password1"], PASSWORD_BCRYPT, $options)."\n";
+
+
+
+
+
+
+
+
 
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
 				$qry->execute(array(':hash' => $hash, ':id' => $id));
