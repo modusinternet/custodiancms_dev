@@ -390,8 +390,6 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 
 
 
-
-
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
 				$qry->execute(array(':hash' => $hash, ':id' => $id));
 
