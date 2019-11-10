@@ -66,15 +66,29 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
 		if($row) {
 			// An active user with the same email address WAS found in the database.
-			if($row["hash"] == crypt($CLEAN["loginPassword"], $row["hash"])) {
+			//if($row["hash"] == crypt($CLEAN["loginPassword"], $row["hash"])) {
+			//if(hash_equals($row["hash"], crypt($CLEAN["loginPassword"], $row["hash"]))) {
+			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
+
+
+
+
 				// The submitted password matches the hashed password stored on the server.
 
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
+				/*
 				$cost = 10;
 				$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
 				$salt = sprintf("$2a$%02d$", $cost) . $salt;
 				$hash = crypt($CLEAN["loginPassword"], $salt);
+				*/
+				$options = ['cost' => 11];
+				$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options)."\n";
+
+
+
+
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
 				$qry->execute(array(':hash' => $hash, ':id' => $row["id"]));
 
@@ -415,16 +429,16 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5 col-md-offset-3">
-					
+
 					<div>
 						<img alt="Custodian CMS Banner." src="/ccmsusr/_img/ccms-535x107.png" style="height: 56px; margin-top: 20px;" title="Custodian CMS Banner.  Easy gears no spilled beers.">
 					</div>
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
 <?php if(isset($message) && $message != ""): ?>
 					<div class="alert alert-danger" style="margin-bottom: 0; margin-top: 20px;">
 						<?php echo $message; ?>
@@ -579,7 +593,7 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 				l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
 				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
 			};
-			
+
 			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
 			if (raf) raf(cb);
 			else window.addEventListener('load', cb);
