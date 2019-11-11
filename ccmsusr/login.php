@@ -468,16 +468,14 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 									<label for="loginEmail">Email Address</label>
 									<div class="input-group">
 										<div class="input-group-addon"><i class="fa fa-at"></i></div>
-										<input class="form-control" id="loginEmail" name="loginEmail" placeholder="Email" type="email" autocomplete="off" readonly
-onfocus="this.removeAttribute('readonly');">
+										<input class="form-control" id="loginEmail" name="loginEmail" placeholder="Email" type="email" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="loginPassword">Password</label>
 									<div class="input-group">
 										<div class="input-group-addon"><i class="fa fa-key"></i></div>
-										<input class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" type="password" autocomplete="off" readonly
-onfocus="this.removeAttribute('readonly');">
+										<input class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" type="password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 									</div>
 								</div>
 								<div class="form-group">
