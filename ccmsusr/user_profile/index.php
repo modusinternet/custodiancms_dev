@@ -579,7 +579,7 @@ if ($qry->rowCount() > 1) :
 														// reenable the inputs
 														setTimeout(function() {
 															$inputs.prop("disabled", false);
-														}, 2000);
+														}, 5000);
 													});
 													// Prevent default posting of form.
 													return false;
@@ -677,7 +677,7 @@ if ($qry->rowCount() > 1) :
 															$("#password").val("");
 															$("#password1").val("");
 															$("#password2").val("");
-														}, 2000);
+														}, 5000);
 													});
 													// Prevent default posting of form.
 													return false;
