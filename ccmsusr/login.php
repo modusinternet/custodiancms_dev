@@ -73,8 +73,8 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 			echo $hash . "<br>\n";
 			die();
 			*/
-			$verify = password_verify($CLEAN["loginPassword"], $row["hash"]);
-			if($verify) {
+
+			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
 
 
 
