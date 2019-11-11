@@ -508,7 +508,7 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 						<i class="fa fa-caret-square-o-left"></i> Return
 					</a>
 					<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/user/" id="loginHelpLink" style="float: right;">
-						Login Help test<i class="fa fa-caret-square-o-right"></i>
+						Login Help <i class="fa fa-caret-square-o-right"></i>
 					</a>
 				</div>
 			</div>
