@@ -68,16 +68,11 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 			// An active user with the same email address WAS found in the database.
 			//if($row["hash"] == crypt($CLEAN["loginPassword"], $row["hash"])) {
 			/*
-			$options = ['cost' => 11];
+			$options = ['cost' => 10];
 			$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options);
 			echo $hash . "<br>\n";
 			die();
 			*/
-
-			$options = ['cost' => 11];
-			$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options);
-			echo $hash . "<br>\n";
-
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
 
 
@@ -92,7 +87,7 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 				$salt = sprintf("$2a$%02d$", $cost) . $salt;
 				$hash = crypt($CLEAN["loginPassword"], $salt);
 				*/
-				$options = ['cost' => 11];
+				$options = ['cost' => 10];
 				$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options);
 
 
@@ -390,7 +385,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 				$salt = sprintf("$2a$%02d$", $cost) . $salt;
 				$hash = crypt($CLEAN["password1"], $salt);
 				*/
-				$options = ['cost' => 11];
+				$options = ['cost' => 10];
 				$hash = password_hash($CLEAN["password1"], PASSWORD_BCRYPT, $options);
 
 
