@@ -73,13 +73,15 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 
 
 
+			/*
 			$options = ['cost' => 11];
 			$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options);
 			echo $hash . "<br>\n";
 			die();
-			
+
 			echo "row['hash']=" . $row["hash"] . "<br>\n";
 			echo "row['hash']=" . $row["hash"] . "<br>\n";
+			*/
 
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
 
