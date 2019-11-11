@@ -2,7 +2,7 @@
 header("Content-Type: text/html; charset=UTF-8");
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
@@ -205,21 +205,21 @@ $ccms_user = $qry->fetch(PDO::FETCH_ASSOC);
 										<label for="password" class="control-label">Password *</label>
 										<div class="input-group">
 											<div class="input-group-addon"><i class="fa fa-key"></i></div>
-											<input class="form-control" id="password" name="password" placeholder="Type your current password here." type="password" value="">
+											<input class="form-control" id="password" name="password" placeholder="Type your current password here." type="password" value="" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="password1" class="control-label">New Password *</label>
 										<div class="input-group">
 											<div class="input-group-addon"><i class="fa fa-key"></i></div>
-											<input class="form-control" id="password1" name="password1" placeholder="Type your new password here." type="password" value="">
+											<input class="form-control" id="password1" name="password1" placeholder="Type your new password here." type="password" value="" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="password2" class="control-label">Repeat New Password *</label>
 										<div class="input-group">
 											<div class="input-group-addon"><i class="fa fa-key"></i></div>
-											<input class="form-control" id="password2" name="password2" placeholder="Type your new password here again." type="password" value="">
+											<input class="form-control" id="password2" name="password2" placeholder="Type your new password here again." type="password" value="" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 										</div>
 									</div>
 								</div>
@@ -239,10 +239,10 @@ $ccms_user = $qry->fetch(PDO::FETCH_ASSOC);
 								<h3>Your User Privileges</h3>
 								The string below is an exact copy of what the server reads in order to determine your personal read/write privileges for functions found throughout this site.  The data below that is the same content structured to help make it easier to read.  These setting <span style="text-decoration: underline;">can not</span> be modified here.  Changes can only be made by users with read/write access to the '<span class="oj">Admin / User Privileges</span>' area.<br />
 								<div class="alert alert-success" style="word-wrap: break-word;">
-									<?php
-                                        $json = json_decode($ccms_user["priv"]);
-                                        echo json_encode($json, JSON_UNESCAPED_SLASHES);
-                                    ?>
+<?php
+	$json = json_decode($ccms_user["priv"]);
+	echo json_encode($json, JSON_UNESCAPED_SLASHES);
+?>
 									<pre><?=json_encode($json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
 								</div>
 							</div>
@@ -354,7 +354,7 @@ if ($qry->rowCount() > 1) :
 				l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
 				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
 			};
-			
+
 			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
 			if (raf) raf(cb);
 			else window.addEventListener('load', cb);
@@ -365,7 +365,7 @@ if ($qry->rowCount() > 1) :
 						loadFirst("/ccmsusr/_js/metisMenu-2.4.0.min.js", function() { /* MetisMenu JavaScript */
 							/*loadFirst("/ccmsusr/_js/custodiancms.js", function() { /* CustodianCMS JavaScript */
 							loadFirst("/ccmsusr/_js/custodiancms.min.js", function() { /* CustodianCMS JavaScript */
-								
+
 								navActiveArray.forEach(function(s) {$("#"+s).addClass("active");});
 
 								// Load MetisMenu
