@@ -72,6 +72,10 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 
 
 
+
+
+
+
 				// The submitted password matches the hashed password stored on the server.
 
 				// Rehash the password and replace original password hash on the server to make even more secure.
@@ -84,6 +88,9 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 				*/
 				$options = ['cost' => 11];
 				$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options)."\n";
+
+
+
 
 
 
@@ -383,6 +390,13 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 
 				$options = ['cost' => 11];
 				$hash = password_hash($CLEAN["password1"], PASSWORD_BCRYPT, $options)."\n";
+
+
+
+
+
+
+
 
 
 
