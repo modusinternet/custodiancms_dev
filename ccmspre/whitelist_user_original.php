@@ -148,7 +148,7 @@ $whitelist = array(
 function CCMS_User_Filter($input, $whitelist) {
 	global $CLEAN;
 	foreach ($input as $key => $value) {
-	  if (array_key_exists($key, $whitelist)) {
+		if (array_key_exists($key, $whitelist)) {
 			$buf = null;
 			$value = @trim($value);
 			// utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
@@ -192,9 +192,9 @@ function CCMS_User_Filter($input, $whitelist) {
 // Add your own case statements here, just copy the patter above, make the neccessary changes, save and upload.
 
 
-                }
-            }
-            $CLEAN[$key] = $buf;
-        }
-    }
+				}
+			}
+			$CLEAN[$key] = $buf;
+		}
+	}
 }

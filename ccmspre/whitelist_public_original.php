@@ -52,43 +52,44 @@ define('EXAMPLE_EXPRESSION_2', '/^[\pN]+\z/');
 
 
 $whitelist = array(
-    "example_given_name"    => array("type" => "EXAMPLE_EXPRESSION_1",  "minlength" => 1,   "maxlength" => 15),
-    "example_age"           => array("type" => "EXAMPLE_EXPRESSION_2",  "maxlength" => 3),
+	"example_given_name"	 => array("type" => "EXAMPLE_EXPRESSION_1",  "minlength" => 1,	"maxlength" => 15),
+	"example_age"			  => array("type" => "EXAMPLE_EXPRESSION_2",  "maxlength" => 3),
 );
 
 
-function CCMS_Public_Filter($input, $whitelist)
-{
-    global $CLEAN;
-    foreach ($input as $key => $value) {
-        if (array_key_exists($key, $whitelist)) {
-            $buf = null;
-            $value = @trim($value);
-            // utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
-            $length = strlen(utf8_decode($value));
-            if (isset($whitelist[$key]['minlength']) && ($length < $whitelist[$key]['minlength'])) {
-                $buf = "MINLEN";
-            }
-            if (isset($whitelist[$key]['maxlength']) && ($length > $whitelist[$key]['maxlength'])) {
-                $buf = "MAXLEN";
-            }
-            if ($buf != "MINLEN" && $buf != "MAXLEN") {
-                switch ($whitelist[$key]['type']) {
+function CCMS_Public_Filter($input, $whitelist) {
+	global $CLEAN;
+
+	foreach ($input as $key => $value) {
+		if (array_key_exists($key, $whitelist)) {
+			$buf = null;
+			$value = @trim($value);
+			// utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
+			$length = strlen(utf8_decode($value));
+			if (isset($whitelist[$key]['minlength']) && ($length < $whitelist[$key]['minlength'])) {
+				$buf = "MINLEN";
+			}
+			if (isset($whitelist[$key]['maxlength']) && ($length > $whitelist[$key]['maxlength'])) {
+				$buf = "MAXLEN";
+			}
+			if ($buf != "MINLEN" && $buf != "MAXLEN") {
+				switch ($whitelist[$key]['type']) {
 
 
-                    case "EXAMPLE_EXPRESSION_1":
-                        $buf = (preg_match(EXAMPLE_EXPRESSION_1, $value)) ? $value : "INVAL";
-                        break;
-                    case "EXAMPLE_EXPRESSION_2":
-                        $buf = (preg_match(EXAMPLE_EXPRESSION_2, $value)) ? $value : "INVAL";
-                        break;
+					case "EXAMPLE_EXPRESSION_1":
+						$buf = (preg_match(EXAMPLE_EXPRESSION_1, $value)) ? $value : "INVAL";
+						break;
+					case "EXAMPLE_EXPRESSION_2":
+						$buf = (preg_match(EXAMPLE_EXPRESSION_2, $value)) ? $value : "INVAL";
+						break;
+
 
 // Add your own case statements here, just copy the patter above, make the neccessary changes, save and upload.
 
 
-                }
-            }
-            $CLEAN[$key] = $buf;
-        }
-    }
+				}
+			}
+			$CLEAN[$key] = $buf;
+		}
+	}
 }
