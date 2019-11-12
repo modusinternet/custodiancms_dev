@@ -84,31 +84,6 @@ function CCMS_Set_LNG() {
 			if(strcasecmp($key, $CLEAN["ccms_lng"]) == 0) {
 				// The language code provided was found in the database.
 				$CFG["lngCodeFoundFlag"] = true;
-				/*
-				if($value["status"] == 1) {
-					// The language code provided is active in the database.
-					//$CLEAN["ccms_lng"] = $key;
-					$CFG["CCMS_LNG_DIR"] = $value["dir"];
-					$CFG["lngCodeActiveFlag"] = true;
-					break;
-				} elseif($CLEAN["SESSION"]["user_id"]) {
-					// If this is a verified user trying to make changes to content in a language which is currently
-					// not set live, get the users privilages and verify their rights to make updates in the language.
-					$qry = $CFG["DBH"]->prepare("SELECT super, priv FROM `ccms_user` WHERE id = :user_id LIMIT 1;");
-					$qry->execute(array(':user_id' => $CLEAN["SESSION"]["user_id"]));
-					$row = $qry->fetch(PDO::FETCH_ASSOC);
-					$json_a = json_decode($row["priv"], true);
-					if($row["super"] == 1 || $json_a[priv][content_manager][r] == 1) {
-						if($row["super"] == 1 || $json_a[priv][content_manager][lng][$key] == 1 || $json_a[priv][content_manager][lng][$key] == 2) {
-							//$CLEAN["ccms_lng"] = $key;
-							$CFG["CCMS_LNG_DIR"] = $value["dir"];
-							$CFG["lngCodeActiveFlag"] = true;
-							break;
-						}
-					}
-				}
-				*/
-
 				if($value["status"] == 1) {
 					// The language code provided is active in the database.
 					//$CLEAN["ccms_lng"] = $key;
@@ -132,20 +107,6 @@ function CCMS_Set_LNG() {
 					}
 				}
 				break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			}
 		}
 	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
@@ -213,7 +174,7 @@ function CCMS_Set_LNG() {
 
 	setcookie("ccms_lng", $CLEAN["ccms_lng"], time() + ($CFG["COOKIE_SESSION_EXPIRE"] * 60), "/", "", 0, 0);
 	// 259200 = 3 days of secconds based on 60*60*24*3
-	//setcookie("ccms_lng", $CLEAN["ccms_lng"], time() + 259200, "/", "", 0, 0);
+	// setcookie("ccms_lng", $CLEAN["ccms_lng"], time() + 259200, "/", "", 0, 0);
 }
 
 
@@ -221,39 +182,6 @@ function CCMS_cookie_SESSION() {
 	global $CFG, $CLEAN;
 
 	$CLEAN["SESSION"]["user_agent"] = $CLEAN["HTTP_USER_AGENT"];
-
-	/*
-	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
-		// A value was found, so we'll try testing it against the database.
-		break;
-	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
-		// A value was found in $CLEAN["HTTP_COOKIE"] variable.  We'll try extracting the session value and validate it
-		// here first.  If it passes then we'll try testing it against the database.
-		$cookieSess = explode("; ", $CLEAN["HTTP_COOKIE"]);
-		foreach($cookieSess as $cookieSess2) {
-			$cookieSess3 = explode("=", $cookieSess2);
-			if($cookieSess3[0] == "ccms_session") {
-				$cookieSess3[1] = @trim($cookieSess3[1]);
-				// utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
-				$length = strlen(utf8_decode($cookieSess3[1]));
-				$buf = NULL;
-				if($length > 64) {
-					$buf = "MAXLEN";
-				}
-				if($buf != "MAXLEN") {
-					$buf = (preg_match('/^[a-z\pN]{1,}\z/i', $cookieSess3[1])) ? $cookieSess3[1] : "INVAL";
-				}
-				$CLEAN["ccms_session"] = $buf;
-				break;
-			}
-		}
-	}
-	*/
-
-
-
-
-
 	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
 		// A value was found, so we'll try testing it against the database.
 		//break;
@@ -278,12 +206,6 @@ function CCMS_cookie_SESSION() {
 			}
 		}
 	}
-
-
-
-
-
-
 	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
 		// The user appears to already have a session code so now we test it.  Check the 'ccms_session' table for matches.
 		$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_session` WHERE `code` = :ccms_session AND `ip` = :ip AND `user_agent` = :user_agent AND `prf` IS NULL LIMIT 1;");
@@ -701,68 +623,68 @@ function CCMS_TPL_Parser($a = null) {
 				// When PHP attempts to load the the user_lib.php template it will produce an error complaining that the
 				// test1 function is already in use because it was previously loaded on the _default.php template.
 				// Rule of thumb, make sure all your functions have different names.
-                if (function_exists($c[4])) {
-                    if ($c["5"] == "") {
-                        call_user_func($c[4]);
-                    } else {
-                        call_user_func_array($c[4], $tmp);
-                    }
-                } else {
-                    require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["LIBDIR"] . "/" . $c[2];
-                    if (function_exists($c[4])) {
-                        if ($c["5"] == "") {
-                            call_user_func($c[4]);
-                        } else {
-                            call_user_func_array($c[4], $tmp);
-                        }
-                    } else {
-                        echo $c[0] . " ERROR: FUNC '" . $c[4] . "' not found. ";
-                    }
-                }
-            } elseif (preg_match('/^\{(CCMS_DB):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)}\z/i', $b, $c)) {
-                // {CCMS_DB:about_us_filter,meta_description}
-                // {CCMS_DB:about_us_filter,meta_keywords}
-                // {CCMS_DB:about_us_filter,title}
-                // {CCMS_DB:about_us_filter,first_paragraph}
-                // {CCMS_DB:about_us_filter,second_paragraph}
-                // {CCMS_DB:footer_filter,copywrite}
-                // {CCMS_DB:header_filter,title}
-                // {CCMS_DB:twiter_feed_filter,title}
-                // {CCMS_DB:twiter_feed_filter,tag_top}
-                // {CCMS_DB:twiter_feed_filter,tag_bottm}
-                CCMS_DB($c);
-            } elseif (preg_match('/^\{(CCMS_DB_DIR):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)(:(1))?}\z/i', $b, $c)) {
-                // {CCMS_DB_DIR:about_us_filter,meta_description}
-                // {CCMS_DB_DIR:about_us_filter,meta_description:1}
-                // {CCMS_DB_DIR:about_us_filter,meta_keywords:1}
-                // {CCMS_DB_DIR:about_us_filter,title}
-                // {CCMS_DB_DIR:about_us_filter,first_paragraph}
-                // {CCMS_DB_DIR:about_us_filter,second_paragraph}
-                // {CCMS_DB_DIR:footer_filter,copywrite}
-                // {CCMS_DB_DIR:footer_filter,copywrite:1}
-                // {CCMS_DB_DIR:header_filter,title}
-                // {CCMS_DB_DIR:twiter_feed_filter,title}
-                // {CCMS_DB_DIR:twiter_feed_filter,tag_top:1}
-                // {CCMS_DB_DIR:twiter_feed_filter,tag_bottm}
-                CCMS_DB_Dir($c);
-            } elseif (preg_match('/^\{(CCMS_DB_PRELOAD):([a-z]+[a-z-_,\pN]*)}\z/i', $b, $c)) {
-                // {CCMS_DB_PRELOAD:about_us_filter,footer_filter,header_filter,twiter_feed_filter}
-                CCMS_DB_Preload($c);
-            } elseif (preg_match('/^\{(CCMS_TPL):([a-z-_\pN\/]+(\.php|\.html)?)}\z/i', $b, $c)) {
-                // This preg_match helps prevent CCMS_TPL calls like this; {CCMS_TPL:css/../../../../../../../etc/passwd}
-                // {CCMS_TPL:test_01}
-                // {CCMS_TPL:test_02.html}
-                // {CCMS_TPL:test_03.php}
-                // {CCMS_TPL:temp/test_04}
-                // {CCMS_TPL:temp/test_05.html}
-                // {CCMS_TPL:temp/test_06.php}
-                CCMS_TPL_Insert($c);
-            } else {
-                echo $b;
-            }
-        }
-        echo substr($a, $from, strlen($a)-$from);
-    }
+				if (function_exists($c[4])) {
+					if ($c["5"] == "") {
+						call_user_func($c[4]);
+					} else {
+						call_user_func_array($c[4], $tmp);
+					}
+				} else {
+					require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["LIBDIR"] . "/" . $c[2];
+					if (function_exists($c[4])) {
+						if ($c["5"] == "") {
+							call_user_func($c[4]);
+						} else {
+							call_user_func_array($c[4], $tmp);
+						}
+					} else {
+						echo $c[0] . " ERROR: FUNC '" . $c[4] . "' not found. ";
+					}
+				}
+			} elseif (preg_match('/^\{(CCMS_DB):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)}\z/i', $b, $c)) {
+				// {CCMS_DB:about_us_filter,meta_description}
+				// {CCMS_DB:about_us_filter,meta_keywords}
+				// {CCMS_DB:about_us_filter,title}
+				// {CCMS_DB:about_us_filter,first_paragraph}
+				// {CCMS_DB:about_us_filter,second_paragraph}
+				// {CCMS_DB:footer_filter,copywrite}
+				// {CCMS_DB:header_filter,title}
+				// {CCMS_DB:twiter_feed_filter,title}
+				// {CCMS_DB:twiter_feed_filter,tag_top}
+				// {CCMS_DB:twiter_feed_filter,tag_bottm}
+				CCMS_DB($c);
+			} elseif (preg_match('/^\{(CCMS_DB_DIR):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)(:(1))?}\z/i', $b, $c)) {
+				// {CCMS_DB_DIR:about_us_filter,meta_description}
+				// {CCMS_DB_DIR:about_us_filter,meta_description:1}
+				// {CCMS_DB_DIR:about_us_filter,meta_keywords:1}
+				// {CCMS_DB_DIR:about_us_filter,title}
+				// {CCMS_DB_DIR:about_us_filter,first_paragraph}
+				// {CCMS_DB_DIR:about_us_filter,second_paragraph}
+				// {CCMS_DB_DIR:footer_filter,copywrite}
+				// {CCMS_DB_DIR:footer_filter,copywrite:1}
+				// {CCMS_DB_DIR:header_filter,title}
+				// {CCMS_DB_DIR:twiter_feed_filter,title}
+				// {CCMS_DB_DIR:twiter_feed_filter,tag_top:1}
+				// {CCMS_DB_DIR:twiter_feed_filter,tag_bottm}
+				CCMS_DB_Dir($c);
+			} elseif (preg_match('/^\{(CCMS_DB_PRELOAD):([a-z]+[a-z-_,\pN]*)}\z/i', $b, $c)) {
+				// {CCMS_DB_PRELOAD:about_us_filter,footer_filter,header_filter,twiter_feed_filter}
+				CCMS_DB_Preload($c);
+			} elseif (preg_match('/^\{(CCMS_TPL):([a-z-_\pN\/]+(\.php|\.html)?)}\z/i', $b, $c)) {
+				// This preg_match helps prevent CCMS_TPL calls like this; {CCMS_TPL:css/../../../../../../../etc/passwd}
+				// {CCMS_TPL:test_01}
+				// {CCMS_TPL:test_02.html}
+				// {CCMS_TPL:test_03.php}
+				// {CCMS_TPL:temp/test_04}
+				// {CCMS_TPL:temp/test_05.html}
+				// {CCMS_TPL:temp/test_06.php}
+				CCMS_TPL_Insert($c);
+			} else {
+				echo $b;
+			}
+		}
+		echo substr($a, $from, strlen($a)-$from);
+	}
 }
 
 
