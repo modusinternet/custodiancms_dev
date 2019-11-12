@@ -444,7 +444,7 @@ if($CFG["DBH"]) {
 												<label for="password">Password *</label>
 												<div class="input-group">
 													<div class="input-group-addon"><i class="fa fa-key"></i></div>
-													<input class="form-control placeholder" id="password" name="password" placeholder="Password" type="password">
+													<input class="form-control placeholder" id="password" name="password" placeholder="Password" type="password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 												</div>
 											</div>
 											<button type="submit" class="btn btn-lg btn-success btn-block">Submit</button>
