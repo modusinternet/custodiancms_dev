@@ -115,7 +115,7 @@ function CCMS_Set_LNG() {
 		foreach($cookieLng as $cookieLng2) {
 			$cookieLng3 = explode("=", $cookieLng2);
 			if($cookieLng3[0] == "ccms_lng") {
-				if(preg_match('/^[a-z]{2}(-[a-z]{2})?\z/i', $cookieLng3[1], $match)) {
+				if(preg_match('/^[a-z]{2}(\-[a-z]{2})?\z/i', $cookieLng3[1], $match)) {
 					foreach($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
 						if(strcasecmp($key, $match[0]) == 0) {
 							// The language code provided was found in the database.
@@ -136,7 +136,7 @@ function CCMS_Set_LNG() {
 
 	if($CLEAN["ccms_lng"] == "" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "MAXLEN" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "INVAL") {
 		// Nothing has been found or set in the CLEAN[ccms_lng] variable but there is something in the HTTP_ACCEPT_LANGUAGE variable we can check.
-		preg_match_all('/([a-z]{2}((-[a-z]{2,4})*)?)(;q=[0-9]\.[0-9])?/i', $CLEAN["HTTP_ACCEPT_LANGUAGE"], $match_all);
+		preg_match_all('/([a-z]{2}((\-[a-z]{2,4})*)?)(;q=[0-9]\.[0-9])?/i', $CLEAN["HTTP_ACCEPT_LANGUAGE"], $match_all);
 		foreach($match_all[1] as $match) {
 			foreach($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
 				if(strcasecmp($key, $match) == 0) {
@@ -547,8 +547,7 @@ function CCMS_html_min($buffer) {
 			$buffer
 		);
 
-		$buffer = preg_replace(["/<!--(.|\s)*?-->|\/\*(.|\s)*?\*\/|[\r\n\t\f\v]+/","/ {2,}/"],[""," "],$buffer);
-
+		$buffer = preg_replace(["/<!--.*?-->/s","/\/\*.*?\*\//s","/[[:cntrl:]]+/s","/ {2,}/s"],["","",""," "],$buffer);
 		$buffer = preg_replace(["/\{CHAR_RET\}/","/\{CHAR_TAB\}/"],["\n","\t"],$buffer);
 	}
 	return $buffer;
@@ -603,7 +602,7 @@ function CCMS_TPL_Parser($a = null) {
 			$to++;
 			$b = substr($a, $from, $to-$from);
 			$from = $to;
-			if(preg_match('/^\{(CCMS_LIB):(_?[a-z]+[a-z-_\pN\/]+[a-z-_\pN]+\.php);(FUNC):([a-z_\pN]+)\(?(.*?)\)?}\z/i', $b, $c)) {
+			if(preg_match('/^\{(CCMS_LIB):(_?[a-z]+[a-z\-_\pN\/]+[a-z\-_\pN]+\.php);(FUNC):([a-z_\pN]+)\(?(.*?)\)?}\z/i', $b, $c)) {
 				// {CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}
 				// {CCMS_LIB:cms/_123.php;FUNC:XyZZy123_}
 				// {CCMS_LIB:test/dir/indeX_Asdf-123.php;FUNC:cfgindeX_Asdf123("arg1", "arg2")}
@@ -641,7 +640,7 @@ function CCMS_TPL_Parser($a = null) {
 						echo $c[0] . " ERROR: FUNC '" . $c[4] . "' not found. ";
 					}
 				}
-			} elseif (preg_match('/^\{(CCMS_DB):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)}\z/i', $b, $c)) {
+			} elseif (preg_match('/^\{(CCMS_DB):([a-z]+[a-z\-_\pN]+),([a-z]+[a-z\-_\pN]+)}\z/i', $b, $c)) {
 				// {CCMS_DB:about_us_filter,meta_description}
 				// {CCMS_DB:about_us_filter,meta_keywords}
 				// {CCMS_DB:about_us_filter,title}
@@ -653,7 +652,7 @@ function CCMS_TPL_Parser($a = null) {
 				// {CCMS_DB:twiter_feed_filter,tag_top}
 				// {CCMS_DB:twiter_feed_filter,tag_bottm}
 				CCMS_DB($c);
-			} elseif (preg_match('/^\{(CCMS_DB_DIR):([a-z]+[a-z-_\pN]+),([a-z]+[a-z-_\pN]+)(:(1))?}\z/i', $b, $c)) {
+			} elseif (preg_match('/^\{(CCMS_DB_DIR):([a-z]+[a-z\-_\pN]+),([a-z]+[a-z\-_\pN]+)(:(1))?}\z/i', $b, $c)) {
 				// {CCMS_DB_DIR:about_us_filter,meta_description}
 				// {CCMS_DB_DIR:about_us_filter,meta_description:1}
 				// {CCMS_DB_DIR:about_us_filter,meta_keywords:1}
@@ -667,10 +666,15 @@ function CCMS_TPL_Parser($a = null) {
 				// {CCMS_DB_DIR:twiter_feed_filter,tag_top:1}
 				// {CCMS_DB_DIR:twiter_feed_filter,tag_bottm}
 				CCMS_DB_Dir($c);
-			} elseif (preg_match('/^\{(CCMS_DB_PRELOAD):([a-z]+[a-z-_,\pN]*)}\z/i', $b, $c)) {
-				// {CCMS_DB_PRELOAD:about_us_filter,footer_filter,header_filter,twiter_feed_filter}
+			} elseif (preg_match('/^\{(CCMS_DB_PRELOAD):([a-z]+[a-z\-_,\pN]*)}\z/i', $b, $c)) {
+				// This goes in the header of any template you will be placing database calls for multilingual content in.
+				// Its purpose is to help speed up reads from the database by pulling everything you might need for a given
+				// template in one call and storing it in memory where it can be accessed much faster.
+				// These calls typically go at the top of your template and look like this:
+				// {CCMS_DB_PRELOAD:all,index}<!DOCTYPE html>
+				// {CCMS_DB_PRELOAD:about_us_filter,footer_filter,header_filter,twiter_feed_filter}<!DOCTYPE html>
 				CCMS_DB_Preload($c);
-			} elseif (preg_match('/^\{(CCMS_TPL):([a-z-_\pN\/]+(\.php|\.html)?)}\z/i', $b, $c)) {
+			} elseif (preg_match('/^\{(CCMS_TPL):([a-z\-_\pN\/]+(\.php|\.html)?)}\z/i', $b, $c)) {
 				// This preg_match helps prevent CCMS_TPL calls like this; {CCMS_TPL:css/../../../../../../../etc/passwd}
 				// {CCMS_TPL:test_01}
 				// {CCMS_TPL:test_02.html}
