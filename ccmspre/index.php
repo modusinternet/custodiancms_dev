@@ -60,18 +60,19 @@ define('UTF8_STRING_DIGIT_PUNC_WHITE', '/^[\pL\pM*+\pN\pP\s]*\z/u');
 // /u Pattern strings are treated as UTF-8
 
 $ccms_whitelist = array(
-	"ccms_lngSelect"			=> array("type" => "LNG",								"maxlength"     => 5),
-	"ccms_parms"				=> array("type" => "PARMS",							"maxlength"     => 128),
-	"ccms_tpl"					=> array("type" => "TPL",								"maxlength"     => 256),
-	"ccms_session"				=> array("type" => "SESSION_ID",						"maxlength"     => 64),
-	"ccms_cid"					=> array("type" => "SESSION_ID",						"maxlength"     => 64),
-	"ccms_lng"					=> array("type" => "LNG",								"maxlength"     => 5),
-	"ccms_token"				=> array("type" => "UTF8_STRING_DIGIT_WHITE",	"maxlength"     => 64),
-	"HTTP_ACCEPT_LANGUAGE"	=> array("type" => "HTTP_ACCEPT_LANGUAGE",		"maxlength"     => 256),
-	"HTTP_COOKIE"				=> array("type" => "HTTP_COOKIE",					"maxlength"     => 512),
-	"HTTP_USER_AGENT"			=> array("type" => "HTTP_USER_AGENT",				"maxlength"     => 512),
-	"QUERY_STRING"				=> array("type" => "QUERY_STRING",					"maxlength"     => 1024)
+	"ccms_lngSelect"				=> array("type" => "LNG",											"maxlength" => 5),
+	"ccms_parms"						=> array("type" => "PARMS",										"maxlength" => 128),
+	"ccms_tpl"							=> array("type" => "TPL",											"maxlength" => 256),
+	"ccms_session"					=> array("type" => "SESSION_ID",							"maxlength" => 64),
+	"ccms_cid"							=> array("type" => "SESSION_ID",							"maxlength" => 64),
+	"ccms_lng"							=> array("type" => "LNG",											"maxlength" => 5),
+	"ccms_token"						=> array("type" => "UTF8_STRING_DIGIT_WHITE",	"maxlength" => 64),
+	"HTTP_ACCEPT_LANGUAGE"	=> array("type" => "HTTP_ACCEPT_LANGUAGE",		"maxlength" => 256),
+	"HTTP_COOKIE"						=> array("type" => "HTTP_COOKIE",							"maxlength" => 512),
+	"HTTP_USER_AGENT"				=> array("type" => "HTTP_USER_AGENT",					"maxlength" => 512),
+	"QUERY_STRING"					=> array("type" => "QUERY_STRING",						"maxlength" => 1024)
 );
+
 
 function CCMS_Set_LNG() {
 	global $CFG, $CLEAN;
@@ -79,81 +80,61 @@ function CCMS_Set_LNG() {
 	$CFG["lngCodeFoundFlag"] = false;
 	$CFG["lngCodeActiveFlag"] = false;
 
-	if($CLEAN["ccms_lng"] != "" && $CLEAN["ccms_lng"] != "MAXLEN" && $CLEAN["ccms_lng"] != "INVAL") {
-		foreach ($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
-			if(strcasecmp($key, $CLEAN["ccms_lng"]) == 0) {
-				// The language code provided was found in the database.
+	if(isset($_SESSION["LNG"]) && !isset($CLEAN["ccms_lng"])) {
+		$CLEAN["ccms_lng"] = $_SESSION["LNG"];
+	}
+
+	if(isset($CLEAN["ccms_lng"]) && $CLEAN["ccms_lng"] !== "MAXLEN" && $CLEAN["ccms_lng"] !== "INVAL") {
+		// A language variable was found in the $_SESSION["LNG"], URI or POST arguments.
+		foreach($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
+			if($key === $CLEAN["ccms_lng"]) {
+				// The $CLEAN["ccms_lng"] language code was found in the database.
 				$CFG["lngCodeFoundFlag"] = true;
-				if($value["status"] == 1) {
+				$_SESSION["LNG"] = $key;
+				if($value["status"] === "1") {
 					// The language code provided is active in the database.
-					//$CLEAN["ccms_lng"] = $key;
 					$CFG["CCMS_LNG_DIR"] = $value["dir"];
 					$CFG["lngCodeActiveFlag"] = true;
-					//break;
-				} elseif($CLEAN["SESSION"]["user_id"]) {
+				} elseif(isset($_SESSION["USER_ID"])) {
 					// If this is a verified user trying to make changes to content in a language which is currently
 					// not set live, get the users privilages and verify their rights to make updates in the language.
 					$qry = $CFG["DBH"]->prepare("SELECT super, priv FROM `ccms_user` WHERE id = :user_id LIMIT 1;");
-					$qry->execute(array(':user_id' => $CLEAN["SESSION"]["user_id"]));
+					$qry->execute(array(':user_id' => $_SESSION["USER_ID"]));
 					$row = $qry->fetch(PDO::FETCH_ASSOC);
 					$json_a = json_decode($row["priv"], true);
-					if($row["super"] == 1 || $json_a[priv][content_manager][r] == 1) {
-						if($row["super"] == 1 || $json_a[priv][content_manager][lng][$key] == 1 || $json_a[priv][content_manager][lng][$key] == 2) {
-							//$CLEAN["ccms_lng"] = $key;
+					if($row["super"] === "1" || $json_a[priv][content_manager][r] === "1") {
+						if($row["super"] === "1" || $json_a[priv][content_manager][lng][$key] === "1" || $json_a[priv][content_manager][lng][$key] === "2") {
 							$CFG["CCMS_LNG_DIR"] = $value["dir"];
 							$CFG["lngCodeActiveFlag"] = true;
-							//break;
 						}
 					}
 				}
 				break;
 			}
 		}
-	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
-		// A value was found in $CLEAN["HTTP_COOKIE"] variable.
-		$cookieLng = explode("; ", $CLEAN["HTTP_COOKIE"]);
-		foreach($cookieLng as $cookieLng2) {
-			$cookieLng3 = explode("=", $cookieLng2);
-			if($cookieLng3[0] == "ccms_lng") {
-				if(preg_match('/^[a-z]{2}(\-[a-z]{2})?\z/i', $cookieLng3[1], $match)) {
-					foreach($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
-						if(strcasecmp($key, $match[0]) == 0) {
-							// The language code provided was found in the database.
-							$CFG["lngCodeFoundFlag"] = true;
-							if($value["status"] == 1) {
-								// The language code provided is active in the database.
-								$CLEAN["ccms_lng"] = $key;
-								$CFG["CCMS_LNG_DIR"] = $value["dir"];
-								$CFG["lngCodeActiveFlag"] = true;
-								break 2;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	if($CLEAN["ccms_lng"] == "" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "MAXLEN" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] != "INVAL") {
-		// Nothing has been found or set in the CLEAN[ccms_lng] variable but there is something in the HTTP_ACCEPT_LANGUAGE variable we can check.
+	} elseif(isset($CLEAN["HTTP_ACCEPT_LANGUAGE"]) && $CLEAN["HTTP_ACCEPT_LANGUAGE"] !== "MAXLEN" && $CLEAN["HTTP_ACCEPT_LANGUAGE"] !== "INVAL") {
+		// Something was found in the HTTP_ACCEPT_LANGUAGE variable.
+		// define('LNG', '/^[a-z]{2}(-[a-z]{2})?\z/i');
 		preg_match_all('/([a-z]{2}((\-[a-z]{2,4})*)?)(;q=[0-9]\.[0-9])?/i', $CLEAN["HTTP_ACCEPT_LANGUAGE"], $match_all);
 		foreach($match_all[1] as $match) {
 			foreach($CFG["CCMS_LNG_CHARSET"] as $key => $value) {
-				if(strcasecmp($key, $match) == 0) {
+				if($key === $match) {
 					// The language code provided was found in the database.
 					$CFG["lngCodeFoundFlag"] = true;
 					if($value["ptrLng"]) {
 						// The language code found is a pointer to another language code in the database.
-						if($CFG["CCMS_LNG_CHARSET"][$value["ptrLng"]]["status"] == 1) {
+						if($CFG["CCMS_LNG_CHARSET"][$value["ptrLng"]]["status"] === "1") {
 							// The other language code pointed to is active in the database.
 							$CLEAN["ccms_lng"] = $value["ptrLng"];
+							$_SESSION["LNG"] = $value["ptrLng"];
 							$CFG["CCMS_LNG_DIR"] = $CFG["CCMS_LNG_CHARSET"][$value["ptrLng"]]["dir"];
 							$CFG["lngCodeActiveFlag"] = true;
 							break 2;
 						}
-					} elseif($value["status"] == 1) {
+					} elseif($value["status"] === "1") {
 						// The language code provided is active in the database.
 						$CLEAN["ccms_lng"] = $key;
+						$_SESSION["LNG"] = $key;
 						$CFG["CCMS_LNG_DIR"] = $value["dir"];
 						$CFG["lngCodeActiveFlag"] = true;
 						break 2;
@@ -163,156 +144,87 @@ function CCMS_Set_LNG() {
 		}
 	}
 
-	if($CLEAN["ccms_lng"] == "") {
-		// There is still no value assigned to the $CLEAN["ccms_lng"] variable so we will first attempt to retrieve one set
-		// in the database.  If not found in the database we will pull a default language setting from the config file.
+	if(!isset($CLEAN["ccms_lng"])) {
+		// There was nothing in $_SESSION["LNG"], the $CLEAN["ccms_lng"] variable was empty, MAXLEN or INVAL, and $CLEAN["HTTP_ACCEPT_LANGUAGE"] variable was empty, MAXLEN or INVAL.  So we will pull the default language set from the database.
 		$CFG["lngCodeFoundFlag"] = true;
 		$CLEAN["ccms_lng"] = $CFG["DEFAULT_SITE_CHAR_SET"];
+		$_SESSION["LNG"] = $CFG["DEFAULT_SITE_CHAR_SET"];
 		$CFG["CCMS_LNG_DIR"] = $CFG["DEFAULT_SITE_CHAR_SET_DIR"];
 		$CFG["lngCodeActiveFlag"] = true;
 	}
-
-	setcookie("ccms_lng", $CLEAN["ccms_lng"], time() + ($CFG["COOKIE_SESSION_EXPIRE"] * 60), "/", "", 0, 0);
-	// 259200 = 3 days of secconds based on 60*60*24*3
-	// setcookie("ccms_lng", $CLEAN["ccms_lng"], time() + 259200, "/", "", 0, 0);
 }
 
 
-function CCMS_cookie_SESSION() {
+function CCMS_Set_SESSION() {
 	global $CFG, $CLEAN;
 
-	$CLEAN["SESSION"]["user_agent"] = $CLEAN["HTTP_USER_AGENT"];
-	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
-		// A value was found, so we'll try testing it against the database.
-		//break;
-	} elseif($CLEAN["HTTP_COOKIE"] != "" && $CLEAN["HTTP_COOKIE"] != "MAXLEN" && $CLEAN["HTTP_COOKIE"] != "INVAL") {
-		// A value was found in $CLEAN["HTTP_COOKIE"] variable.  We'll try extracting the session value and validate it
-		// here first.  If it passes then we'll try testing it against the database.
-		$cookieSess = explode("; ", $CLEAN["HTTP_COOKIE"]);
-		foreach($cookieSess as $cookieSess2) {
-			$cookieSess3 = explode("=", $cookieSess2);
-			if($cookieSess3[0] == "ccms_session") {
-				$cookieSess3[1] = @trim($cookieSess3[1]);
-				// utf8_decode() converts unknown ISO-8859-1 chars to '?' for the purpose of counting.
-				$length = strlen(utf8_decode($cookieSess3[1]));
-				$buf = NULL;
-				if($length > 64) {
-					$CLEAN["ccms_session"] = "MAXLEN";
-				} else {
-					$CLEAN["ccms_session"] = (preg_match('/^[a-z\pN]{1,}\z/i', $cookieSess3[1])) ? $cookieSess3[1] : "INVAL";
-				}
-				//$CLEAN["ccms_session"] = $buf;
-				break;
-			}
+	ini_set('session.use_only_cookies', 1);
+	ini_set('session.cookie_lifetime', $CFG["COOKIE_SESSION_EXPIRE"]);
+	ini_set('session.cookie_httponly', 1);
+	ini_set('session.cookie_secure', 1);
+	ini_set('session.cookie_samesite', "Lax");
+
+	session_name("__Host-ccms_session");
+
+	// Check to see if a session has already been started.
+	if(PHP_VERSION_ID >= 50400) { // PHP version 5.4.0 or higher
+		if(session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+	} else { // PHP version 5.3.9 or lower
+		if(session_id() == '') {
+			session_start();
 		}
 	}
-	if(isset($CLEAN["ccms_session"]) && $CLEAN["ccms_session"] != "MAXLEN" && $CLEAN["ccms_session"] != "INVAL") {
-		// The user appears to already have a session code so now we test it.  Check the 'ccms_session' table for matches.
-		$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_session` WHERE `code` = :ccms_session AND `ip` = :ip AND `user_agent` = :user_agent AND `prf` IS NULL LIMIT 1;");
-		$qry->execute(array(':ccms_session' => $CLEAN["ccms_session"], ':ip' => $_SERVER["REMOTE_ADDR"], ':user_agent' => $CLEAN["SESSION"]["user_agent"]));
-		$row = $qry->fetch(PDO::FETCH_ASSOC);
 
-		if($row) {
-			// Session match found
-			$a = time();
-
-			if($a > $row["exp"]) {
-				// Session expired
-
-				if(isset($CLEAN["ccms_token"])) {
-					// If the session belonged to an administrator or translator we should redirect them to the login page instead.
-					header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-					die();
-				}
-
-				$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `id` = :id LIMIT 1;");
-				$qry->execute(array(':id' => $row["id"]));
-
-				$a = time();
-				$b = $a;
-				$a = md5($a);
-				$c = $b + ($CFG["COOKIE_SESSION_EXPIRE"] * 60);
-				setcookie("ccms_session", $a, $c, "/", "", 0, 0);
-
-				$CLEAN["SESSION"]["code"] = $a;
-				$CLEAN["SESSION"]["first"] = $b;
-				$CLEAN["SESSION"]["last"] = $b;
-				$CLEAN["SESSION"]["exp"] = $c;
-				$CLEAN["SESSION"]["ip"] = $_SERVER["REMOTE_ADDR"];
-				$CLEAN["SESSION"]["user_id"] = null;
-				$CLEAN["SESSION"]["fail"] = "0";
-
-				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_session` (code, first, last, exp, ip, user_agent) VALUES (:code, :first, :last, :exp, :ip, :user_agent);");
-				$qry->execute(array(':code' => $a, ':first' => $b, ':last' => $b, ':exp' => $c, ':ip' => $_SERVER["REMOTE_ADDR"], ':user_agent' => $CLEAN["SESSION"]["user_agent"]));
-			} else {
-				// Session not expired
-				$a = time();
-				$b = $a;
-				$a = md5($a);
-				$c = $b + ($CFG["COOKIE_SESSION_EXPIRE"] * 60);
-				setcookie("ccms_session", $a, $c, "/", "", 0, 0);
-
-				$CLEAN["SESSION"]["code"] = $a;
-				$CLEAN["SESSION"]["first"] = $row["first"];
-				$CLEAN["SESSION"]["last"] = $b;
-				$CLEAN["SESSION"]["exp"] = $c;
-				$CLEAN["SESSION"]["ip"] = $row["ip"];
-				$CLEAN["SESSION"]["user_id"] = $row["user_id"];
-				$CLEAN["SESSION"]["fail"] = $row["fail"];
-
-				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `code` = :code, `last` = :last, `exp` = :exp WHERE `id` = :id LIMIT 1;");
-				$qry->execute(array(':code' => $a, ':last' => $b, ':exp' => $c, ':id' => $row["id"]));
+	// Check if the timeout field exists.
+	if(isset($_SESSION['startTime'])) {
+		// See if the number of seconds since the last visit is larger than the timeout period.
+		$duration = time() - (int)$_SESSION['startTime'];
+		if($duration > $CFG["COOKIE_SESSION_EXPIRE"]) {
+			// Destroy the session and restart it but direct logged in users to relogin.
+			if(isset($_SESSION["USER_ID"])) { // true
+				session_destroy();
+				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
+				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+				exit;
+			} else { // false
+				session_destroy();
+				session_start();
+				$_SESSION['startTime'] = time();
 			}
 		} else {
-			// Session not found
-			if(isset($CLEAN["ccms_token"])) {
-				// If the URI contains a ccms_token administrator or translator token we should redirect them to the login page instead.
-				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-				die();
-			}
-
-			$a = time();
-			$b = $a;
-			$a = md5($a);
-			$c = $b + ($CFG["COOKIE_SESSION_EXPIRE"] * 60);
-			setcookie("ccms_session", $a, $c, "/", "", 0, 0);
-
-			$CLEAN["SESSION"]["code"] = $a;
-			$CLEAN["SESSION"]["first"] = $b;
-			$CLEAN["SESSION"]["last"] = $b;
-			$CLEAN["SESSION"]["exp"] = $c;
-			$CLEAN["SESSION"]["ip"] = $_SERVER["REMOTE_ADDR"];
-			$CLEAN["SESSION"]["user_id"] = null;
-			$CLEAN["SESSION"]["fail"] = "0";
-
-			$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_session` (code, first, last, exp, ip, user_agent) VALUES (:code, :first, :last, :exp, :ip, :user_agent);");
-			$qry->execute(array(':code' => $a, ':first' => $b, ':last' => $b, ':exp' => $c, ':ip' => $_SERVER["REMOTE_ADDR"], ':user_agent' => $CLEAN["SESSION"]["user_agent"]));
+			$_SESSION['startTime'] = time();
 		}
 	} else {
-		// Session not found
-		if(isset($CLEAN["ccms_token"])) {
-			// If the URI contins a ccms_token administrator or translator token we should redirect them to the login page instead.
-			header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-			die();
-		}
-
-		$a = time();
-		$b = $a;
-		$a = md5($a);
-		$c = $b + ($CFG["COOKIE_SESSION_EXPIRE"] * 60);
-		setcookie("ccms_session", $a, $c, "/", "", 0, 0);
-
-		$CLEAN["SESSION"]["code"] = $a;
-		$CLEAN["SESSION"]["first"] = $b;
-		$CLEAN["SESSION"]["last"] = $b;
-		$CLEAN["SESSION"]["exp"] = $c;
-		$CLEAN["SESSION"]["ip"] = $_SERVER["REMOTE_ADDR"];
-		$CLEAN["SESSION"]["user_id"] = null;
-		$CLEAN["SESSION"]["fail"] = "0";
-
-		$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_session` (code, first, last, exp, ip, user_agent) VALUES (:code, :first, :last, :exp, :ip, :user_agent);");
-		$qry->execute(array(':code' => $a, ':first' => $b, ':last' => $b, ':exp' => $c, ':ip' => $_SERVER["REMOTE_ADDR"], ':user_agent' => $CLEAN["SESSION"]["user_agent"]));
+		$_SESSION['startTime'] = time();
 	}
+
+	// Confirm the users browser agent hasn't changed to help strengthen login sessions.
+	if(isset($_SESSION['HTTP_USER_AGENT'])) {
+		if($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT'])) {
+			// Possible session highjacking attempt, destroy the session and restart it but direct logged in users to relogin.
+			if(isset($_SESSION["USER_ID"])) { // true
+				session_destroy();
+				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
+				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+				exit;
+			} else { // false
+				session_destroy();
+				session_start();
+				$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+				$_SESSION['startTime'] = time();
+			}
+		}
+	} else {
+		$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+	}
+
+	session_regenerate_id();
+
+	$CLEAN["ccms_session"] = session_id();
 }
 
 
@@ -695,9 +607,10 @@ function CCMS_TPL_Parser($a = null) {
 function CCMS_Main() {
 	global $CFG, $CLEAN;
 
-	if(!preg_match('/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui', $_SERVER["REQUEST_URI"])) {
-		CCMS_cookie_SESSION();
-	}
+	//if(!preg_match("/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui", $_SERVER["REQUEST_URI"])) {
+		//CCMS_cookie_SESSION();
+		CCMS_Set_SESSION();
+	//}
 
 	CCMS_Set_LNG();
 
@@ -721,7 +634,7 @@ function CCMS_Main() {
 	// /fruit/index
 	// /fruit/orange/index
 	// /fruit/orange/vitamin/index
-	if (preg_match('/[\/]\z/', $CLEAN["ccms_tpl"])) {
+	if (preg_match("/[\/]\z/", $CLEAN["ccms_tpl"])) {
 		$CLEAN["ccms_tpl"] .= "index";
 	}
 
@@ -739,7 +652,7 @@ function CCMS_Main() {
 	$CLEAN["ccms_tpl"] = preg_replace('/^(\/)(.*?)(\.css?)?(\.html?)?(\.js?)?\z/i', '$2', $CLEAN["ccms_tpl"]);
 
 	// Copys the end of the string found inside $CLEAN["ccms_tpl"] after the last /.
-	preg_match('/([^\/]*)\z/', $CLEAN["ccms_tpl"], $ccms_file);
+	preg_match("/([^\/]*)\z/", $CLEAN["ccms_tpl"], $ccms_file);
 
 	// Copys the first part of the string inside $CLEAN["ccms_tpl"] before the last /.
 	$ccms_dir = @strstr($CLEAN["ccms_tpl"], $ccms_file[0], true);
@@ -758,7 +671,7 @@ function CCMS_Main() {
 	// the new file extension all together.
 	$found = false;
 
-	if ($CFG["lngCodeFoundFlag"] && $CFG["lngCodeActiveFlag"]) {
+	if($CFG["lngCodeFoundFlag"] && $CFG["lngCodeActiveFlag"]) {
 		// Test to make sure the visitor is not requesting a language which is either non existant or status not live.  If so they should be sent to the error.php template regardless.
 		if (is_dir($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir)) {
 			$odhandle = @opendir($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir);
@@ -774,7 +687,7 @@ function CCMS_Main() {
 						$found = true;
 						break;
 					} elseif ($file == $ccms_file[0] . ".css" || $file == $ccms_file[0] . ".html" || $file == $ccms_file[0] . ".js") {
-						if ($CLEAN["SESSION"]["user_id"] == null) {
+						if($CLEAN["SESSION"]["user_id"] == null) {
 							// If this is a normal session and the user is not logged in then cache this page in the visitors browers.
 							if($file == $ccms_file[0] . ".css"){
 								header("Content-Type: text/css; charset=utf-8");
@@ -785,17 +698,27 @@ function CCMS_Main() {
 							} else {
 								header("Content-Type: text/html; charset=utf-8");
 							}
-							// Expires in
-							header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + ($CFG["CACHE_EXPIRE"] * 60)));
+
+							if($_SERVER['SCRIPT_URL'] === "/"){
+								// if the visitor is looking at the root of the website WITHOUT the language dir. ie:
+								// https://yourdomain.com
+
+								$url = "/";
+							} else {
+								// if the visitor is looking at the root of the website or any other page in the site WITH the language dir. ie:
+								// https://yourdomain.com/en/
+								// https://yourdomain.com/en/test.html
+								// https://yourdomain.com/en/somedir/
+
+								$url = "/" . $CLEAN["ccms_lng"] . "/" . $ccms_dir . $file;
+							}
 
 							// Check for a cache version, that's not expired and if necessary, cache a new copy.
-							$url = "/" . $CLEAN["ccms_lng"] . "/" . $ccms_dir . $file;
-							$url_md5 = md5($url);
-
 							if($CFG["CACHE"] == 1) {
 								// Cache setting in /ccmspre/config.php is enabled, $CFG["CACHE"] = 1;.
-								$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_cache` WHERE `url_md5` = :url_md5 LIMIT 1;");
-								$qry->execute(array(':url_md5' => $url_md5));
+
+								$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_cache` WHERE `url` = :url LIMIT 1;");
+								$qry->execute(array(':url' => $url));
 								$row = $qry->fetch(PDO::FETCH_ASSOC);
 
 								if($row) {
@@ -812,35 +735,122 @@ function CCMS_Main() {
 										CCMS_TPL_Parser($html);
 										$buf = ob_get_contents();
 										ob_end_clean();
-										$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url_md5, url, exp, content) VALUES (:url_md5, :url, :exp, :content);");
-										$qry->execute(array(':url_md5' => $url_md5, ':url' => $url, ':exp' => time() + ($CFG["CACHE_EXPIRE"] * 60), ':content' => $buf));
+										$date = time();
+
+										if(empty($CFG["csp"])) {
+											/* This feature only works on sites that build up their Content-Security-Policy features and want to cache them along with the cached template in the database for extration later. eg: icondds.com. */
+											$CFG["csp"] = "";
+										}
+
+										$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url, date, exp, csp, content) VALUES (:url, :date, :exp, :csp, :content);");
+										$qry->execute(array(':url' => $url, ':date' => $date, ':exp' => $date + ($CFG["CACHE_EXPIRE"] * 60), ':csp' => $CFG["csp"], ':content' => $buf));
+
+										header("Expires: " . gmdate('D, d M Y H:i:s T', $date + ($CFG["CACHE_EXPIRE"] * 60)));
+										header("Last-Modified: " . gmdate('D, d M Y H:i:s T', $date));
+
+										$tmp = $date + ($CFG["CACHE_EXPIRE"] * 60);
+										header("Cache-Control: max-age=" . $tmp);
+										$etag = md5($url) . "." . $date;
+										header("ETag: " . $etag);
 
 										echo $buf;
+										/*
 										echo "<!-- cache id: " . $CFG["DBH"]->lastInsertId() . " -->";
-
+										*/
 									} else {
 										// The cached template is NOT expried.  It should be used.
 
-										echo $row["content"];
+										$etag = md5($url) . "." . $row["date"];
+
+										if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+											if(strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $row["date"]) {
+												header('HTTP/1.0 304 Not Modified');
+											} else {
+												header("Expires: " . gmdate('D, d M Y H:i:s T', $row["exp"]));
+												header('Last-Modified: ' . gmdate('D, d M Y H:i:s T', $row["date"]));
+
+												header("Cache-Control: max-age=" . $row["exp"]);
+												header("ETag: " . $etag);
+
+												if(!empty($row["csp"])) {
+													/* This feature only works on sites that build up their Content-Security-Policy features and want to cache them along with the cached template in the database for extration later. eg: icondds.com. */
+													header($row["csp"]);
+												}
+
+												echo $row["content"];
+											}
+										} elseif(isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
+											if($_SERVER['HTTP_IF_NONE_MATCH'] == $etag) {
+												header('HTTP/1.0 304 Not Modified');
+											} else {
+												header("Expires: " . gmdate('D, d M Y H:i:s T', $row["exp"]));
+												header('Last-Modified: ' . gmdate('D, d M Y H:i:s T', $row["date"]));
+
+												header("Cache-Control: max-age=" . $row["exp"]);
+												header("ETag: " . $etag);
+
+												if(!empty($row["csp"])) {
+													/* This feature only works on sites that build up their Content-Security-Policy features and want to cache them along with the cached template in the database for extration later. eg: icondds.com. */
+													header($row["csp"]);
+												}
+
+												echo $row["content"];
+											}
+										} else {
+											header("Expires: " . gmdate('D, d M Y H:i:s T', $row["exp"]));
+											header('Last-Modified: ' . gmdate('D, d M Y H:i:s T', $row["date"]));
+
+											header("Cache-Control: max-age=" . $row["exp"]);
+											header("ETag: " . $etag);
+
+											if(!empty($row["csp"])) {
+												/* This feature only works on sites that build up their Content-Security-Policy features and want to cache them along with the cached template in the database for extration later. eg: icondds.com. */
+												header($row["csp"]);
+											}
+
+											echo $row["content"];
+										}
+
+										/*
 										echo "<!-- cache id: " . $row["id"] . " -->";
+										*/
 									}
 								} else {
 									// A cached version of the page requested was NOT found.
 									// It should be built and cached.
+
 									ob_start();
 									$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
 									CCMS_TPL_Parser($html);
 									$buf = ob_get_contents();
 									ob_end_clean();
-									$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url_md5, url, exp, content) VALUES (:url_md5, :url, :exp, :content);");
-									$qry->execute(array(':url_md5' => $url_md5, ':url' => $url, ':exp' => time() + ($CFG["CACHE_EXPIRE"] * 60), ':content' => $buf));
+									$date = time();
+
+									if(empty($CFG["csp"])) {
+										/* This feature only works on sites that build up their Content-Security-Policy features and want to cache them along with the cached template in the database for extration later. eg: icondds.com. */
+										$CFG["csp"] = "";
+									}
+
+									$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_cache` (url, date, exp, csp, content) VALUES (:url, :date, :exp, :csp, :content);");
+									$qry->execute(array(':url' => $url, ':date' => $date, ':exp' => $date + ($CFG["CACHE_EXPIRE"] * 60), ':csp' => $CFG["csp"], ':content' => $buf));
+
+									header("Expires: " . gmdate('D, d M Y H:i:s T', $date + ($CFG["CACHE_EXPIRE"] * 60)));
+									header("Last-Modified: " . gmdate('D, d M Y H:i:s T', $date));
+
+									$tmp = $date + ($CFG["CACHE_EXPIRE"] * 60);
+									header("Cache-Control: max-age=" . $tmp);
+									$etag = md5($url) . "." . $date;
+									header("ETag: " . $etag);
 
 									echo $buf;
+									/*
 									echo "<!-- cache id: " . $CFG["DBH"]->lastInsertId() . " -->";
+									*/
 								}
 							} else {
 								// Cache setting in /ccmspre/config.php is NOT enabled, $CFG["CACHE"] = 0;.
 								// Just do a normal template pars.
+
 								$html = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["TPLDIR"] . "/" . $ccms_dir . $file);
 								CCMS_TPL_Parser($html);
 							}
@@ -848,8 +858,9 @@ function CCMS_Main() {
 							$found = true;
 							break;
 						} else {
-							// If this is a verified session asigned of an active user then disable cache.
+							// If this is a verified session assigned of an active user then disable cache.
 							// .html template, admin/translator template request, logged in.  Do not check or save cached version.
+
 							if($file == $ccms_file[0] . ".css"){
 								header("Content-Type: text/css; charset=utf-8");
 							} elseif ($file == $ccms_file[0] . ".html") {
