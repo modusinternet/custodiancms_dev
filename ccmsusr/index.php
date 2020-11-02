@@ -9,9 +9,9 @@
 $CFG = array();
 $CLEAN = array();
 
-if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php")) {
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/index.php");
-    die();
+if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php")) {
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php");
+	die();
 }
 
 require_once "../ccmspre/config.php";
