@@ -177,27 +177,38 @@ function CCMS_Set_SESSION() {
 		}
 	}
 
+	echo "/n/nsession id = [" . session_id() . "]/n/n";
+
 	// Check if the timeout field exists.
 	if(isset($_SESSION['startTime'])) {
 		// See if the number of seconds since the last visit is larger than the timeout period.
 		$duration = time() - (int)$_SESSION['startTime'];
 		if($duration > $CFG["COOKIE_SESSION_EXPIRE"]) {
 			// Destroy the session and restart it but direct logged in users to relogin.
-			if(isset($_SESSION["USER_ID"])) { // true
+			if(isset($_SESSION["USER_ID"])) {
+				// They were a valid user but their session is now expired so send them back to the login page.
+
+				if($CFG["LOG_EVENTS"] === '1'){
+					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SERVER["USER_ID"].") session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+				}
+
 				session_destroy();
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+
 				exit;
-			} else { // false
+			} else {
+				// This user was never logged in so go ahead and just restart their session.
 				session_destroy();
 				session_start();
 				$_SESSION['startTime'] = time();
 			}
 		} else {
+			// This users session is not too old so go ahead and just update the start time.
 			$_SESSION['startTime'] = time();
 		}
 	} else {
+		// This is prorably a first visit to the site by this user so set the start time in thier session.
 		$_SESSION['startTime'] = time();
 	}
 
@@ -205,13 +216,19 @@ function CCMS_Set_SESSION() {
 	if(isset($_SESSION['HTTP_USER_AGENT'])) {
 		if($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT'])) {
 			// Possible session highjacking attempt, destroy the session and restart it but direct logged in users to relogin.
-			if(isset($_SESSION["USER_ID"])) { // true
+			if(isset($_SESSION["USER_ID"])) {
+				// They were a valid logged in user but their session appears to be under attack so send them back to the login page.
 				session_destroy();
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+
+				if($CFG["LOG_EVENTS"] === '1'){
+					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+				}
+
 				exit;
-			} else { // false
+			} else {
+				// This user was never logged in so go ahead and just restart their session.
 				session_destroy();
 				session_start();
 				$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
