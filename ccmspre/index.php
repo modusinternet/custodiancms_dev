@@ -251,7 +251,7 @@ function CCMS_Set_SESSION() {
 
 	$CLEAN["ccms_session"] = session_id();
 
-	echo "/n/nsession id = [" . $CLEAN["ccms_session"] . "]/n/n";
+	echo "<br>/n/nsession id = [" . $CLEAN["ccms_session"] . "]/n/n";
 }
 
 
