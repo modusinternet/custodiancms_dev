@@ -239,7 +239,7 @@ function CCMS_Set_SESSION() {
 		$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 	}
 
-	session_regenerate_id();
+	//session_regenerate_id();
 
 	$CLEAN["ccms_session"] = session_id();
 }
