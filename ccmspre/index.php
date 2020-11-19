@@ -237,9 +237,11 @@ function CCMS_Set_SESSION() {
 		$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_user` WHERE `id` = :id && `status` = 1 LIMIT 1;");
 		$qry->execute(array(':id' => $_SESSION["USER_ID"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
-		if(!$row) {
-			// looks like they were properly logged in at one point but their 'status' has EventBufferEvent
-			// set to '0' since so they are no longer permited to act as administrators.
+		if($row) {
+			// The users 'status' is still live so we get a copy of their privilages and place it inside of session.
+			$_SESSION["PRIV"] = $row["priv"];
+		} else {
+			/* Looks like they were properly logged in at one point but their 'status' is set to '0' now so they are no longer permitted to act as administrators or access the user templates. */
 			if($CFG["LOG_EVENTS"] === '1'){
 				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
 				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
