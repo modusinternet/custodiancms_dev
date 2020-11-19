@@ -176,9 +176,7 @@ function CCMS_Set_SESSION() {
 			session_start();
 		}
 	}
-
-	echo "/n/nsession id = [" . session_id() . "]/n/n";
-
+//echo "/n/nsession id = [" . session_id() . "]/n/n";
 	// Check if the timeout field exists.
 	if(isset($_SESSION['startTime'])) {
 		// See if the number of seconds since the last visit is larger than the timeout period.
@@ -251,12 +249,9 @@ function CCMS_Set_SESSION() {
 		header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
 		exit;
 	}
-
 	session_regenerate_id();
-
 	$CLEAN["ccms_session"] = session_id();
-
-	echo "<br>/n/nsession id = [" . $CLEAN["ccms_session"] . "]/n/n";
+//echo "<br>/n/nsession id = [" . $CLEAN["ccms_session"] . "]/n/n";
 }
 
 
