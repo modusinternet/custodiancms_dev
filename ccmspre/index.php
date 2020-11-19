@@ -187,23 +187,12 @@ function CCMS_Set_SESSION() {
 			// Destroy the session and restart it but direct logged in users to relogin.
 			if(isset($_SESSION["USER_ID"])) {
 				// They were a valid user but their session is now expired so send them back to the login page.
-
-
-
-
-
-
-
-
-
 				if($CFG["LOG_EVENTS"] === '1'){
 					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SERVER["USER_ID"].") session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
 				}
-
 				session_destroy();
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-
 				exit;
 			} else {
 				// This user was never logged in so go ahead and just restart their session.
@@ -228,12 +217,10 @@ function CCMS_Set_SESSION() {
 				// They were a valid logged in user but their session appears to be under attack so send them back to the login page.
 				session_destroy();
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-
 				if($CFG["LOG_EVENTS"] === '1'){
 					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
 					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
 				}
-
 				exit;
 			} else {
 				// This user was never logged in so go ahead and just restart their session.
@@ -245,6 +232,24 @@ function CCMS_Set_SESSION() {
 		}
 	} else {
 		$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+	}
+
+	if(isset($_SESSION["USER_ID"])) {
+		// They were a valid user but their session is now expired so send them back to the login page.
+		$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_user` WHERE `id` = :id && `status` = 1 LIMIT 1;");
+		$qry->execute(array(':id' => $_SESSION["USER_ID"]));
+		$row = $qry->fetch(PDO::FETCH_ASSOC);
+		if(!$row) {
+			// looks like they were properly logged in at one point but their 'status' has EventBufferEvent
+			// set to '0' since so they are no longer permited to act as administrators.
+			if($CFG["LOG_EVENTS"] === '1'){
+				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+			}
+		}
+		session_destroy();
+		header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
+		exit;
 	}
 
 	session_regenerate_id();
