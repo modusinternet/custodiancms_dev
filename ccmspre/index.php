@@ -642,13 +642,14 @@ function CCMS_Main() {
 	CCMS_Set_LNG();
 
 	// If there is no template requested, show $CFG["INDEX"].
-	// This code helps when dealing with URL's that resemble:
+	// This code is used when accessing the /user/ templates, before login credentials have between
+	// verified and when dealing with URL's that resemble:
 	// $CLEAN["INDEX"] == BLANK
 	// /
 	// Make into:
 	// index
 	// index
-	if (!isset($CLEAN["ccms_tpl"]) || $CLEAN["ccms_tpl"] == "" || $CLEAN["ccms_tpl"] == "/") {
+	if(!isset($CLEAN["ccms_tpl"]) || $CLEAN["ccms_tpl"] == "" || $CLEAN["ccms_tpl"] == "/") {
 		$CLEAN["ccms_tpl"] = $CFG["INDEX"];
 	}
 
