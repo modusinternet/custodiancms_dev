@@ -189,7 +189,7 @@ function CCMS_Set_SESSION() {
 				// They were a valid user but their session is now expired so send them back to the login page.
 				if($CFG["LOG_EVENTS"] === '1'){
 					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") session expired, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
 				}
 				session_destroy();
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
@@ -219,7 +219,7 @@ function CCMS_Set_SESSION() {
 				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
 				if($CFG["LOG_EVENTS"] === '1'){
 					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "Possible session highjacking attempt.  Session deleted and user redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
 				}
 				exit;
 			} else {
@@ -244,7 +244,7 @@ function CCMS_Set_SESSION() {
 			// set to '0' since so they are no longer permited to act as administrators.
 			if($CFG["LOG_EVENTS"] === '1'){
 				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".$_SERVER["argv"]));
+				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
 			}
 		}
 		session_destroy();
