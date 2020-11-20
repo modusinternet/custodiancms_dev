@@ -649,13 +649,6 @@ function CCMS_TPL_Parser($a = null) {
 function CCMS_Main() {
 	global $CFG, $CLEAN;
 
-	//if(!preg_match("/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui", $_SERVER["REQUEST_URI"])) {
-		//CCMS_cookie_SESSION();
-		CCMS_Set_SESSION();
-	//}
-
-	CCMS_Set_LNG();
-
 	// If there is no template requested, show $CFG["INDEX"].
 	// This code is used when accessing the /user/ templates, before login credentials have between
 	// verified and when dealing with URL's that resemble:
@@ -667,6 +660,13 @@ function CCMS_Main() {
 	if(!isset($CLEAN["ccms_tpl"]) || $CLEAN["ccms_tpl"] == "" || $CLEAN["ccms_tpl"] == "/") {
 		$CLEAN["ccms_tpl"] = $CFG["INDEX"];
 	}
+
+	//if(!preg_match("/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui", $_SERVER["REQUEST_URI"])) {
+		//CCMS_cookie_SESSION();
+		CCMS_Set_SESSION();
+	//}
+
+	CCMS_Set_LNG();
 
 	// If the template being requested is inside a dir and no specific template name is
 	// part of that request, add index to the end.
