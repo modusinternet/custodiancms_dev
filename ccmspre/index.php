@@ -233,7 +233,6 @@ function CCMS_Set_SESSION() {
 	}
 
 	if(isset($_SESSION["USER_ID"])) {
-		// They were a valid user but their session is now expired so send them back to the login page.
 		$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_user` WHERE `id` = :id && `status` = 1 LIMIT 1;");
 		$qry->execute(array(':id' => $_SESSION["USER_ID"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
@@ -242,12 +241,26 @@ function CCMS_Set_SESSION() {
 			$_SESSION["PRIV"] = $row["priv"];
 		} else {
 			/* Looks like they were properly logged in at one point but their 'status' is set to '0' now so they are no longer permitted to act as administrators or access the user templates. */
-			if($CFG["LOG_EVENTS"] === '1'){
-				$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
-				$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
+			session_destroy();
+
+			if($CLEAN["ccms_ajax_flag"] == 1) {
+				// If this call contains an Ajax flag set to '1' we don't actually want to send them to the login page, we'll just send a session expired message instead.
+				header("Content-Type: application/javascript; charset=UTF-8");
+				header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+				header("Cache-Control: post-check=0, pre-check=0", false);
+				header("Pragma: no-cache");
+				echo "/* Session Error */";
+				exit;
+			} else {
+				// Show login template because they are NOT logged in.
+				if($CFG["LOG_EVENTS"] === '1'){
+					$qry = $CFG["DBH"]->prepare("INSERT INTO `ccms_log` (date, ip, url, log) VALUES (:date, :ip, :url, :log);");
+					$qry->execute(array(':date' => time(), ':ip' => $_SERVER["REMOTE_ADDR"], ':url' => $_SERVER["REQUEST_URI"], ':log' => "User ID (".$_SESSION["USER_ID"].") status set to 0 between sessions, redirected to login page.\n\n".$_SERVER["HTTP_USER_AGENT"]."\n\n".var_dump($argv)));
+				}
+				header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
+				exit;
 			}
 		}
-		session_destroy();
 		header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
 		exit;
 	}
