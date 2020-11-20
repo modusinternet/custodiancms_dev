@@ -13,6 +13,7 @@ $CLEAN = array();
 
 echo $_SERVER["REAL_DOCUMENT_ROOT"]."<br>";
 echo $_SERVER["DOCUMENT_ROOT"]."<br>";
+exit;
 
 
 
