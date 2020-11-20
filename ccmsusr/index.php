@@ -20,9 +20,9 @@ if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php")) {
 }
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/config.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["PREDIR"] . "/index.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["PREDIR"] . "/whitelist_user.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["LIBDIR"] . "/_default.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/index.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/whitelist_user.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmslib/_default.php";
 
 $CFG["TPLDIR"] = $CFG["USRDIR"];
 $CFG["INDEX"] = $CFG["USRINDEX"];
