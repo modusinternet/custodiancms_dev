@@ -39,7 +39,7 @@ CCMS_Set_SESSION();
 
 ob_start("ob_gzhandler");
 
-if($CLEAN["logout"] == "1" || $CLEAN["login"] == "1") {
+if(!isset($_SESSION["USER_ID"]) || $CLEAN["logout"] == "1" || $CLEAN["login"] == "1") {
 	$CLEAN["ccms_tpl"] = "login";
 }
 
