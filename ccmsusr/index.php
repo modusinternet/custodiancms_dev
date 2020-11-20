@@ -28,7 +28,7 @@ if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php")) {
 	exit;
 }
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["PREDIR"] . "/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/config.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["PREDIR"] . "/index.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["PREDIR"] . "/whitelist_user.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["LIBDIR"] . "/_default.php";
