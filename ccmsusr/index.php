@@ -24,6 +24,8 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/index.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmspre/whitelist_user.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/ccmslib/_default.php";
 
+ob_start("ob_gzhandler");
+
 $CFG["TPLDIR"] = $CFG["USRDIR"];
 $CFG["INDEX"] = $CFG["USRINDEX"];
 
@@ -34,10 +36,7 @@ CCMS_Filter($_SERVER + $_REQUEST, $ccms_whitelist);
 
 CCMS_User_Filter($_SERVER + $_REQUEST, $whitelist);
 
-//CCMS_cookie_SESSION();
 CCMS_Set_SESSION();
-
-ob_start("ob_gzhandler");
 
 if(!isset($_SESSION["USER_ID"]) || $CLEAN["logout"] == "1" || $CLEAN["login"] == "1") {
 	$CLEAN["ccms_tpl"] = "login";
