@@ -661,11 +661,6 @@ function CCMS_Main() {
 		$CLEAN["ccms_tpl"] = $CFG["INDEX"];
 	}
 
-	//if(!preg_match("/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui", $_SERVER["REQUEST_URI"])) {
-		//CCMS_cookie_SESSION();
-		//CCMS_Set_SESSION();
-	//}
-
 	CCMS_Set_LNG();
 
 	// If the template being requested is inside a dir and no specific template name is
