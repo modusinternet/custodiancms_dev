@@ -158,10 +158,10 @@ function CCMS_Set_LNG() {
 function CCMS_Set_SESSION() {
 	global $CFG, $CLEAN;
 
-	ini_set('session.use_only_cookies', 1);
-	ini_set('session.cookie_lifetime', $CFG["COOKIE_SESSION_EXPIRE"]);
-	ini_set('session.cookie_httponly', 1);
-	ini_set('session.cookie_secure', 1);
+	ini_set('session.use_only_cookies', 1); //By setting this directive cookies are used as the mandatory storage to preserve session id. It prevents session hijacking.
+	ini_set('session.cookie_lifetime', $CFG["COOKIE_SESSION_EXPIRE"]); //This is used to set cookie lifetime. If it is set as 0, then cookie remains until browser restart.
+	ini_set('session.cookie_httponly', 1); //This directive stops client side scripts from accessing session id preserved in cookie.
+	ini_set('session.cookie_secure', 1); //Controls whether cookies are sent via secure connections or not. Set it with 1 | 0 value. The default (off) is 0.
 	ini_set('session.cookie_samesite', "Lax");
 
 	session_name("__Host-ccms_session");
@@ -663,7 +663,7 @@ function CCMS_Main() {
 
 	//if(!preg_match("/^\/(([a-z]{2})(-[a-z]{2})?)\/user\/(.*)\z/ui", $_SERVER["REQUEST_URI"])) {
 		//CCMS_cookie_SESSION();
-		CCMS_Set_SESSION();
+		//CCMS_Set_SESSION();
 	//}
 
 	CCMS_Set_LNG();

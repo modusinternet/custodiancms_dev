@@ -36,6 +36,8 @@ CCMS_Filter($_SERVER + $_REQUEST, $ccms_whitelist);
 
 CCMS_Public_Filter($_SERVER + $_REQUEST, $whitelist);
 
+CCMS_Set_SESSION();
+
 CCMS_Main();
 
 // benchmark end
