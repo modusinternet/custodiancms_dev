@@ -85,11 +85,11 @@ echo "22";
 				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
 				$_SESSION["USER_ID"] = $row["id"];
 				$_SESSION["FAIL"] = 0;
-
-				header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
+echo "33";
+				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
 				die();
 			} else {
-echo "33";
+echo "44";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
 				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
