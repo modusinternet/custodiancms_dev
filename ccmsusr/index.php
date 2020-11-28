@@ -44,6 +44,8 @@ if(!isset($_SESSION["USER_ID"]) || $CLEAN["logout"] == "1" || $CLEAN["login"] ==
 	$CLEAN["ccms_tpl"] = "login";
 }
 
+echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]";
+
 CCMS_Main();
 
 // benchmark end
