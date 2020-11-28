@@ -15,8 +15,8 @@ $message = NULL;
 $ccms_pass_reset_form_message = NULL;
 
 // This line scrubs out all the sessions that are expired.
-$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `exp` < :first;");
-$qry->execute(array(':first' => $CLEAN["SESSION"]["first"]));
+//$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `exp` < :first;");
+//$qry->execute(array(':first' => $CLEAN["SESSION"]["first"]));
 
 if($CLEAN["SESSION"]["fail"] >= 5) {
 	// If the users session record indicates that they have attempted to login 5 or more times and failed; do not
@@ -76,18 +76,22 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
 				$qry->execute(array(':hash' => $hash, ':id' => $row["id"]));
 
-				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
-				$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
+				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
+				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
+				$_SESSION["USER_ID"] = $row["id"];
+				$_SESSION["FAIL"] = 0;
 
 				header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
 				die();
 			} else {
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
-				$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
-				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-				$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-				if($CLEAN["SESSION"]["fail"] >= 5) {
+				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
+				$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
+				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
+				//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
+				//if($CLEAN["SESSION"]["fail"] >= 5) {
+				if($_SESSION["FAIL"] >= 5) {
 					// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 					header("Location: /");
 					die();
@@ -99,10 +103,12 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 			// An active user with the same email address WAS NOT found in the database.
 			// Login failed so we increment the fail field by 1, once it reaches 5 the login page wont
 			// even be available to the user anymore till their session expires.
-			$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
-			$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-			$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-			if($CLEAN["SESSION"]["fail"] >= 5) {
+			//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
+			$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
+			//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
+			//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
+			//if($CLEAN["SESSION"]["fail"] >= 5) {
+			if($_SESSION["FAIL"] >= 5) {
 				// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 				header("Location: /");
 				die();
@@ -113,10 +119,12 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 	} else {
 		// Login failed so we increment the fail field by 1, once it reaches 5 the login page wont
 		// even be available to the user anymore till their session expires.
-		$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
-		$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-		$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-		if($CLEAN["SESSION"]["fail"] >= 5) {
+		//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
+		$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
+		//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
+		//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
+		//if($CLEAN["SESSION"]["fail"] >= 5) {
+		if($_SESSION["FAIL"] >= 5) {
 			// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 			header("Location: /");
 			die();
