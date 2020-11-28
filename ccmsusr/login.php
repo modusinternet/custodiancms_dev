@@ -25,8 +25,9 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 	die();
 } elseif($CLEAN["logout"] == "1") {
 	// log out
-	$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = NULL WHERE `code` = :code LIMIT 1;");
-	$qry->execute(array(':code' => $CLEAN["SESSION"]["code"]));
+	//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = NULL WHERE `code` = :code LIMIT 1;");
+	//$qry->execute(array(':code' => $CLEAN["SESSION"]["code"]));
+	$_SESSION["USER_ID"] = "";
 	$message = "Logout Successful";
 } elseif($CLEAN["login"] == "1") {
 	// Login credentials posted, test them.
@@ -65,8 +66,10 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 		$qry->execute(array(':loginEmail' => $CLEAN["loginEmail"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
 		if($row) {
+echo "1";
 			// An active user with the same email address WAS found in the database.
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
+echo "2";
 				// The submitted password matches the hashed password stored on the server.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
@@ -84,6 +87,7 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 				header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
 				die();
 			} else {
+echo "3";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
 				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
