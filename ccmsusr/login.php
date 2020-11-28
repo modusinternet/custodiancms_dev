@@ -18,6 +18,8 @@ $ccms_pass_reset_form_message = NULL;
 //$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `exp` < :first;");
 //$qry->execute(array(':first' => $CLEAN["SESSION"]["first"]));
 
+echo "xyzzy";
+
 if($CLEAN["SESSION"]["fail"] >= 5) {
 	// If the users session record indicates that they have attempted to login 5 or more times and failed; do not
 	// show this page at all.  Simply redirect them base to the homepage for this site immediatly.
@@ -66,10 +68,10 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 		$qry->execute(array(':loginEmail' => $CLEAN["loginEmail"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
 		if($row) {
-echo "1";
+echo "11";
 			// An active user with the same email address WAS found in the database.
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
-echo "2";
+echo "22";
 				// The submitted password matches the hashed password stored on the server.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
@@ -87,7 +89,7 @@ echo "2";
 				header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
 				die();
 			} else {
-echo "3";
+echo "33";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
 				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
