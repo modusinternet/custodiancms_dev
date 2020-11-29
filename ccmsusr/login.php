@@ -83,7 +83,9 @@ echo "22";
 
 				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
 				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
+print_r($_SESSION)."\n";
 				$_SESSION["USER_ID"] = $row["id"];
+print_r($_SESSION)."\n";
 				$_SESSION["FAIL"] = 0;
 echo "33";
 				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
