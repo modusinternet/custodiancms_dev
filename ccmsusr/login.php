@@ -1,10 +1,12 @@
 <?php
-header("Content-Type:text/html; charset=UTF-8");
+//header("Content-Type:text/html; charset=UTF-8");
+/*
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
+*/
 
 if($_SERVER["SCRIPT_NAME"] != "/ccmsusr/index.php") {
 	echo "This script can NOT be called directly.";
@@ -32,6 +34,7 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 	$_SESSION["USER_ID"] = "";
 	$message = "Logout Successful";
 } elseif($CLEAN["login"] == "1") {
+print_r($_SESSION);
 	// Login credentials posted, test them.
 	if(!ccms_badIPCheck($_SERVER["REMOTE_ADDR"])) {
 		$message = "There is a problem with your login, your IP Address is currently being blocked.  Please contact the website administrators directly by either phone or email if you feel this message is in error for more information.";
@@ -83,11 +86,11 @@ echo "22";
 
 				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
 				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
-print_r($_SESSION);
-echo "\n";
+//print_r($_SESSION);
+//echo "\n";
 				$_SESSION["USER_ID"] = $row["id"];
-print_r($_SESSION);
-echo "\n";
+//print_r($_SESSION);
+//echo "\n";
 				$_SESSION["FAIL"] = 0;
 echo "33";
 				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
