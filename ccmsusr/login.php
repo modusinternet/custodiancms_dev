@@ -20,7 +20,7 @@ $ccms_pass_reset_form_message = NULL;
 //$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `exp` < :first;");
 //$qry->execute(array(':first' => $CLEAN["SESSION"]["first"]));
 
-echo "xyzzy";
+//echo "xyzzy";
 
 if($CLEAN["SESSION"]["fail"] >= 5) {
 	// If the users session record indicates that they have attempted to login 5 or more times and failed; do not
