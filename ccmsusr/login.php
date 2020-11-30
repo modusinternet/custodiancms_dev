@@ -71,10 +71,10 @@ print_r($_SESSION);
 		$qry->execute(array(':loginEmail' => $CLEAN["loginEmail"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
 		if($row) {
-echo "11";
+//echo "11";
 			// An active user with the same email address WAS found in the database.
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
-echo "22";
+//echo "22";
 				// The submitted password matches the hashed password stored on the server.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
@@ -92,11 +92,13 @@ echo "22";
 //print_r($_SESSION);
 //echo "\n";
 				$_SESSION["FAIL"] = 0;
-echo "33";
-				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CLEAN["ccms_tpl"]);
+//echo "33";
+echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
+echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]";
+				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CLEAN["ccms_tpl"]);
 				die();
 			} else {
-echo "44";
+//echo "44";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
 				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
