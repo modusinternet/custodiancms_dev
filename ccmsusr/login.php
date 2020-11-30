@@ -93,8 +93,8 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 //echo "\n";
 				$_SESSION["FAIL"] = 0;
 //echo "33";
-//echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
-//echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]";
+echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
+echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
 echo "INDEX=[".$CFG["INDEX"]."]";
 				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 				die();
