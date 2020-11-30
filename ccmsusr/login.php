@@ -34,7 +34,7 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 	$_SESSION["USER_ID"] = "";
 	$message = "Logout Successful";
 } elseif($CLEAN["login"] == "1") {
-print_r($_SESSION);
+//print_r($_SESSION);
 	// Login credentials posted, test them.
 	if(!ccms_badIPCheck($_SERVER["REMOTE_ADDR"])) {
 		$message = "There is a problem with your login, your IP Address is currently being blocked.  Please contact the website administrators directly by either phone or email if you feel this message is in error for more information.";
