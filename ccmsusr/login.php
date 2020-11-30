@@ -93,7 +93,7 @@ echo "22";
 //echo "\n";
 				$_SESSION["FAIL"] = 0;
 echo "33";
-				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/");
+				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CLEAN["ccms_tpl"]);
 				die();
 			} else {
 echo "44";
