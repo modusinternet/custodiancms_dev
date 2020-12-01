@@ -96,7 +96,7 @@ echo "\n";
 echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
 echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
 echo "INDEX=[".$CFG["INDEX"]."]";
-				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
+				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 				die();
 			} else {
 //echo "44";
