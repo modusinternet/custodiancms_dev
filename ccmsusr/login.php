@@ -96,8 +96,8 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 //echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
 //echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
 //echo "INDEX=[".$CFG["INDEX"]."]\n";
-				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
-				header("Refresh:30; url=/" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
+				//header("Refresh:30; url=/" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
+				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 //echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
 //phpinfo();
 				die();
