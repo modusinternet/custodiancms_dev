@@ -39,16 +39,18 @@ CCMS_User_Filter($_SERVER + $_REQUEST, $whitelist);
 CCMS_Set_SESSION();
 
 //echo "1";
-//print_r($_SESSION);
+print_r($_SESSION);
 //session_destroy();
-phpinfo();
-die();
+//phpinfo();
+//die();
 
 if(!isset($_SESSION["USER_ID"]) || $CLEAN["logout"] == "1" || $CLEAN["login"] == "1") {
 	$CLEAN["ccms_tpl"] = "login";
 }
 
 //echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]";
+phpinfo();
+die();
 
 CCMS_Main();
 
