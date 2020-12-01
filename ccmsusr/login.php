@@ -96,10 +96,10 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 //echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
 //echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
 //echo "INDEX=[".$CFG["INDEX"]."]\n";
-				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
-echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
-phpinfo();
-die();
+				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
+//echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
+//phpinfo();
+				die();
 			} else {
 //echo "44";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
