@@ -261,8 +261,6 @@ function CCMS_Set_SESSION() {
 				exit;
 			}
 		}
-		//header("Location: /" . $CFG["DEFAULT_SITE_CHAR_SET"] . "/user/");
-		//exit;
 	}
 	session_regenerate_id();
 	$CLEAN["ccms_session"] = session_id();
