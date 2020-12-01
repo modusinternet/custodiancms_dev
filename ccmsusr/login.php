@@ -86,16 +86,16 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 
 				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
 				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
-print_r($_SESSION);
-echo "\n";
+//print_r($_SESSION);
+//echo "\n";
 				$_SESSION["USER_ID"] = $row["id"];
-print_r($_SESSION);
-echo "\n";
+//print_r($_SESSION);
+//echo "\n";
 				$_SESSION["FAIL"] = 0;
 //echo "33";
-echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
-echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
-echo "INDEX=[".$CFG["INDEX"]."]\n";
+//echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
+//echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
+//echo "INDEX=[".$CFG["INDEX"]."]\n";
 				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
 die();
