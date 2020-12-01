@@ -264,7 +264,6 @@ function CCMS_Set_SESSION() {
 	}
 	session_regenerate_id();
 	$CLEAN["ccms_session"] = session_id();
-//echo "<br>/n/nsession id = [" . $CLEAN["ccms_session"] . "]/n/n";
 }
 
 
@@ -646,8 +645,6 @@ function CCMS_TPL_Parser($a = null) {
 
 function CCMS_Main() {
 	global $CFG, $CLEAN;
-
-//echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]\n";
 
 	// If there is no template requested, show $CFG["INDEX"].
 	// This code is used when accessing the /user/ templates, before login credentials have between

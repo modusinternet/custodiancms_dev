@@ -1,40 +1,29 @@
 <?php
-//header("Content-Type:text/html; charset=UTF-8");
-/*
+header("Content-Type:text/html; charset=UTF-8");
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-*/
 
 if($_SERVER["SCRIPT_NAME"] != "/ccmsusr/index.php") {
 	echo "This script can NOT be called directly.";
-	die();
+	exit;
 }
 
 $message = NULL;
 $ccms_pass_reset_form_message = NULL;
 
-// This line scrubs out all the sessions that are expired.
-//$qry = $CFG["DBH"]->prepare("DELETE FROM `ccms_session` WHERE `exp` < :first;");
-//$qry->execute(array(':first' => $CLEAN["SESSION"]["first"]));
-
-//echo "xyzzy";
-
 if($CLEAN["SESSION"]["fail"] >= 5) {
 	// If the users session record indicates that they have attempted to login 5 or more times and failed; do not
 	// show this page at all.  Simply redirect them base to the homepage for this site immediatly.
 	header("Location: /");
-	die();
+	exit;
 } elseif($CLEAN["logout"] == "1") {
 	// log out
-	//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = NULL WHERE `code` = :code LIMIT 1;");
-	//$qry->execute(array(':code' => $CLEAN["SESSION"]["code"]));
 	$_SESSION["USER_ID"] = "";
 	$message = "Logout Successful";
 } elseif($CLEAN["login"] == "1") {
-//print_r($_SESSION);
 	// Login credentials posted, test them.
 	if(!ccms_badIPCheck($_SERVER["REMOTE_ADDR"])) {
 		$message = "There is a problem with your login, your IP Address is currently being blocked.  Please contact the website administrators directly by either phone or email if you feel this message is in error for more information.";
@@ -71,10 +60,8 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 		$qry->execute(array(':loginEmail' => $CLEAN["loginEmail"]));
 		$row = $qry->fetch(PDO::FETCH_ASSOC);
 		if($row) {
-//echo "11";
 			// An active user with the same email address WAS found in the database.
 			if(password_verify($CLEAN["loginPassword"], $row["hash"])) {
-//echo "22";
 				// The submitted password matches the hashed password stored on the server.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
@@ -84,36 +71,21 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
 				$qry->execute(array(':hash' => $hash, ':id' => $row["id"]));
 
-				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `user_id` = :id, `fail` = 0 WHERE `code` = :code LIMIT 1;");
-				//$qry->execute(array(':id' => $row["id"], ':code' => $CLEAN["SESSION"]["code"]));
-//print_r($_SESSION);
-//echo "\n";
 				$_SESSION["USER_ID"] = $row["id"];
-//print_r($_SESSION);
-//echo "\n";
 				$_SESSION["FAIL"] = 0;
-//echo "33";
-//echo "ccms_lng=[".$CLEAN["ccms_lng"]."]\n";
-//echo "ccms_tpl=[".$CLEAN["ccms_tpl"]."]\n";
-//echo "INDEX=[".$CFG["INDEX"]."]\n";
+
 				//header("Refresh:30; url=/" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 				header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
-//echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
-//phpinfo();
-				die();
+				exit;
 			} else {
-//echo "44";
 				// Password failed so we increment the fail field by 1, once it reaches 5 the login page wont
 				// even be available to the user anymore till their session expires.
-				//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
 				$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
-				//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-				//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-				//if($CLEAN["SESSION"]["fail"] >= 5) {
+
 				if($_SESSION["FAIL"] >= 5) {
 					// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 					header("Location: /");
-					die();
+					exit;
 				} else {
 					$message = "Password failed, please try again.";
 				}
@@ -122,15 +94,12 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 			// An active user with the same email address WAS NOT found in the database.
 			// Login failed so we increment the fail field by 1, once it reaches 5 the login page wont
 			// even be available to the user anymore till their session expires.
-			//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
 			$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
-			//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-			//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-			//if($CLEAN["SESSION"]["fail"] >= 5) {
+
 			if($_SESSION["FAIL"] >= 5) {
 				// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 				header("Location: /");
-				die();
+				exit;
 			} else {
 				$message = "Login failed, please try again.";
 			}
@@ -138,15 +107,12 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 	} else {
 		// Login failed so we increment the fail field by 1, once it reaches 5 the login page wont
 		// even be available to the user anymore till their session expires.
-		//$CLEAN["SESSION"]["fail"] = $CLEAN["SESSION"]["fail"] + 1;
 		$_SESSION["FAIL"] = $_SESSION["FAIL"] + 1;
-		//$qry = $CFG["DBH"]->prepare("UPDATE `ccms_session` SET `fail` = :fail WHERE `code` = :code LIMIT 1;");
-		//$qry->execute(array(':fail' => $CLEAN["SESSION"]["fail"], ':code' => $CLEAN["SESSION"]["code"]));
-		//if($CLEAN["SESSION"]["fail"] >= 5) {
+
 		if($_SESSION["FAIL"] >= 5) {
 			// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 			header("Location: /");
-			die();
+			exit;
 		} else {
 			$message .= " Login failed, please try again.";
 		}
@@ -241,7 +207,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 			if($CLEAN["SESSION"]["fail"] >= 5) {
 				// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 				header("Location: /");
-				die();
+				exit;
 			} else {
 				$ccms_pass_reset_form_message["fail"] = "Password reset failed.  An active user with the email address you submitted was not found.";
 			}
@@ -255,7 +221,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 		if($CLEAN["SESSION"]["fail"] >= 5) {
 			// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 			header("Location: /");
-			die();
+			exit;
 		} else {
 			$ccms_pass_reset_form_message["fail"] .= "Password reset failed, please try again.";
 		}
@@ -290,7 +256,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 			if($CLEAN["SESSION"]["fail"] >= 5) {
 				// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 				header("Location: /");
-				die();
+				exit;
 			} else {
 				$ccms_pass_reset_form_message["fail"] = "Password reset failed.  This link is expired or invalid from this browser/device/location.  Please request a new password reset Email for this device from this location.";
 			}
@@ -306,7 +272,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 		if($CLEAN["SESSION"]["fail"] >= 5) {
 			// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 			header("Location: /");
-			die();
+			exit;
 		} else {
 			$ccms_pass_reset_form_message["fail"] .= " Password reset failed, please try again.";
 		}
@@ -414,7 +380,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 		if($CLEAN["SESSION"]["fail"] >= 5) {
 			// Maximum number of fails for this session have been reached.  Do not accept anymore tries till this session record expires.
 			header("Location: /");
-			die();
+			exit;
 		} else {
 			$ccms_pass_reset_form_message["fail"] .= " Please request a new password reset Email for this browser/device/location because they are one-time use only.";
 		}
