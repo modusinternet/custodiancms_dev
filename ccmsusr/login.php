@@ -98,6 +98,7 @@ if($CLEAN["SESSION"]["fail"] >= 5) {
 //echo "INDEX=[".$CFG["INDEX"]."]\n";
 				//header("Location: /" . $CLEAN["ccms_lng"] . "/user/".$CFG["INDEX"]);
 echo "Location: /" . $CLEAN["ccms_lng"] . "/user/" . $CFG["INDEX"];
+phpinfo();
 die();
 			} else {
 //echo "44";
