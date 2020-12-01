@@ -50,7 +50,7 @@ if(!isset($_SESSION["USER_ID"]) || $CLEAN["logout"] == "1" || $CLEAN["login"] ==
 
 //echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]";
 phpinfo();
-die();
+//die();
 
 CCMS_Main();
 
