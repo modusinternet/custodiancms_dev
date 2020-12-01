@@ -649,7 +649,7 @@ function CCMS_TPL_Parser($a = null) {
 function CCMS_Main() {
 	global $CFG, $CLEAN;
 
-echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]\n";
+//echo "CLEAN[ccms_tpl]=[".$CLEAN["ccms_tpl"]."]\n";
 
 	// If there is no template requested, show $CFG["INDEX"].
 	// This code is used when accessing the /user/ templates, before login credentials have between
