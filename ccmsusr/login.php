@@ -65,7 +65,7 @@ if($_SESSION["FAIL"] >= 5) {
 				// The submitted password matches the hashed password stored on the server.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
-				$options = ['cost' => 50];
+				$options = ['cost' => 10];
 				$hash = password_hash($CLEAN["loginPassword"], PASSWORD_BCRYPT, $options);
 
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
@@ -382,7 +382,7 @@ $email_message .= "\r\n\r\n--" . $boundary . "--";
 				// Encrypt the new password and overwrite the old one.
 				// Rehash the password and replace original password hash on the server to make even more secure.
 				// See https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/ for more details.
-				$options = ['cost' => 50];
+				$options = ['cost' => 10];
 				$hash = password_hash($CLEAN["password1"], PASSWORD_BCRYPT, $options);
 
 				$qry = $CFG["DBH"]->prepare("UPDATE `ccms_user` SET `hash` = :hash WHERE `id` = :id LIMIT 1;");
