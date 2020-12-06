@@ -120,7 +120,7 @@ if(!is_callable('shell_exec') && true === stripos(ini_get('disable_functions'), 
 								<pre style="padding: 15px; margin: 15px 0px 20px;"><?=$msg[git][status2][output];?></pre>
 								<p>Note: Pushing from your server to a GitHub repository is not recommended for security reasons which is why it is not an automated feature in Custodian CMS.  Use the command-line option describe below if needed.</p>
 								<p class="boxed">git add .<br>
-									git commit -m "from server"<br>
+									git commit -am "from server"<br>
 									git push -u origin master</p>
 							</div>
 						</div>
