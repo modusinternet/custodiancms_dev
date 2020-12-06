@@ -54,11 +54,11 @@ $CFG["DEBUG_SQL"] = 0;
 // $CFG["DEBUG_ERROR_REPORTING"] = 1; // on
 $CFG["DEBUG_ERROR_REPORTING"] = 0;
 
-// COOKIE based SESSION expire time.  Set in number of minutes.
+// COOKIE based SESSION expire time.  Set in number of seconds.
 // e.g.:
-// $CFG["COOKIE_SESSION_EXPIRE"] = 30; // 30 minutes.
-// $CFG["COOKIE_SESSION_EXPIRE"] = 180; // 3 hours.
-$CFG["COOKIE_SESSION_EXPIRE"] = 120;
+// $CFG["COOKIE_SESSION_EXPIRE"] = 1800; // 1800 seconds = 30 minutes.
+// $CFG["COOKIE_SESSION_EXPIRE"] = 10800; // 10800 seconds = 3 hours.
+$CFG["COOKIE_SESSION_EXPIRE"] = 1800;
 
 // When emails are sent by the server what email address do you want them to be sent from.
 $CFG["EMAIL_FROM"] = "";

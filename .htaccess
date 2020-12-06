@@ -244,4 +244,7 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	ExpiresByType video/x-la-asf "access plus 1 month"
 	ExpiresByType video/x-ms-asf "access plus 1 month"
 </IfModule>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 526e305aa92e7e05475813ac1b56710787ee56e2
