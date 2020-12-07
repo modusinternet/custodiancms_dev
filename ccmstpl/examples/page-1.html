@@ -62,21 +62,18 @@
 			else window.addEventListener('load', cb);
 
 			function loadJSResources() {
-				loadFirst("/ccmsusr/_js/jquery-2.2.4.min.js", function() { /* JQuery */
-
-					/* Fade in web page. */
-					$("#no-fouc").delay(200).animate({"opacity": "1"}, 500);
+				/*
+				loadFirst("/ccmsusr/_js/jquery-2.2.4.min.js", function() {
 
 				});
+				*/
 			}
 
-			if(window.addEventListener) {
-				window.addEventListener("load", loadJSResources, false);
-			} else if(window.attachEvent) {
-				window.attachEvent("onload", loadJSResources);
-			} else {
-				window.onload = loadJSResources;
-			}
+			if(window.addEventListener){
+				window.addEventListener("load",loadJSResources,false);
+			}else if(window.attachEvent){
+				window.attachEvent("onload",loadJSResources);
+			}else{window.onload=loadJSResources;}
 		</script>
 	</body>
 </html>
