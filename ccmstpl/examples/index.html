@@ -38,19 +38,19 @@
 		{CCMS_TPL:examples/header-body.html}
 		<h1>Welcome to your new copy of Custodian CMS</h1>
 		@Version
-		<p style="margin-left: 20px;">
+		<p style="margin-left:20px;">
 			{CCMS_LIB:_default.php;FUNC:ccms_version} (Release Date: {CCMS_LIB:_default.php;FUNC:ccms_release_date})
-		</p><br />
+		</p><br>
 		@Copyright
-		<p style="margin-left: 20px;">
+		<p style="margin-left:20px;">
 			&copy; {CCMS_LIB:_default.php;FUNC:ccms_dateYear} assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>
 		</p>
-		<p style="margin-left: 20px;">
-			<h1>The MIT License (MIT)</h1>
-			Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />
-			<br />
-			The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />
-			<br />
+		<h1>The MIT License (MIT)</h1>
+		<p style="margin-left:20px;">
+			Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+			<br>
+			The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+			<br>
 			THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</p>
 		<h2>Info</h2>
@@ -76,26 +76,26 @@
 		<p>
 			The following is a guide on how to add new languages and content to the database using phpMyAdmin.  Once the new admin system is ready this will become trivial.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-1.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-1.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
 		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-2.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
-			Add the browser language codes you want your site to support to the <span class="oj">ccms_lng_charset</span> table above and set one of them to <span class="oj">default</span> (<span class="oj">1</span>).  Check here for a full list of codes: <a href="https://www.metamodpro.com/browser-language-codes" style="display: inline-block; word-break: break-all;" target="_blank">www.metamodpro.com/browser-language-codes</a> or <a href="https://www.fincher.org/Utilities/CountryLanguageList.shtml" style="display: inline-block; word-break: break-all;" target="_blank">www.fincher.org/Utilities/CountryLanguageList.shtml</a>  You do not need to keep all the languages codes that are installed by the <span class="oj">/ccms-setup-db.sql</span> file, they are just there as an example for you and to help demonstrate what a site supporting a large number of languages and pointer languages might look like.  (If you change the languages you wish to support in the <span class="oj">ccms_lng_charset</span> table remember to add or remove language columns as needed in the <span class="oj">ccms_ins_db</span> table aswell.)<br />
-			<br />
+			Add the browser language codes you want your site to support to the <span class="oj">ccms_lng_charset</span> table above and set one of them to <span class="oj">default</span> (<span class="oj">1</span>).  Check here for a full list of codes: <a href="https://www.metamodpro.com/browser-language-codes" style="display: inline-block; word-break: break-all;" target="_blank">www.metamodpro.com/browser-language-codes</a> or <a href="https://www.fincher.org/Utilities/CountryLanguageList.shtml" style="display: inline-block; word-break: break-all;" target="_blank">www.fincher.org/Utilities/CountryLanguageList.shtml</a>  You do not need to keep all the languages codes that are installed by the <span class="oj">/ccms-setup-db.sql</span> file, they are just there as an example for you and to help demonstrate what a site supporting a large number of languages and pointer languages might look like.  (If you change the languages you wish to support in the <span class="oj">ccms_lng_charset</span> table remember to add or remove language columns as needed in the <span class="oj">ccms_ins_db</span> table aswell.)<br>
+			<br>
 			If you are adding a new pointer language (<span class="oj">ptrLng</span>) you do not need to include the character direction (<span class="oj">dir</span>) or a language column in the <span class="oj">ccms_ins_db</span> table.  Only languages which are <span style="text-decoration: underline;">not</span> pointers require the <span class="oj">dir</span> field be filled in and a column in the <span class="oj">ccms_ins_db</span> table.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-3.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-3.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
 		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-4.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
-			<span style="color: red;">( <s>utf8_general_ci</s> changed to utf8mb4_general_ci in current version. )</span><br />
+			<span style="color: red;">( <s>utf8_general_ci</s> changed to utf8mb4_general_ci in current version. )</span><br>
 			Add columns for each of your new language codes to the <span class="oj">ccms_ins_db</span> table.  <span style="text-decoration: underline;">Accept</span> for <span class="oj">ptrLng</span> records.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-5.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-5.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
 		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-6.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
 			Add records to the <span class="oj">ccms_ins_db</span> table containing the <span class="oj">grp</span>, <span class="oj">name</span> and content for each language you would like to view in your website.
 		</p>
 		<p>
-			Place the <span class="oj">CCMS_DB_PRELOAD</span> tag at the top of your html to preload all the <span class="oj">ccms_ins_db grp</span> records into memory that you might need for a given page.<br />
+			Place the <span class="oj">CCMS_DB_PRELOAD</span> tag at the top of your html to preload all the <span class="oj">ccms_ins_db grp</span> records into memory that you might need for a given page.<br>
 			e.g.:
 		</p>
 <pre>&#123;CCMS_DB_PRELOAD:index}&lt;!DOCTYPE html>
@@ -104,7 +104,7 @@
 		&lt;meta charset="utf-8">
 </pre>
 		<p>
-			Then use the <span class="oj">CCMS_DB</span> tag to display database content.  CCMS will automatically determine if the prefered language of the visitors browser is even supported by your website and display content from your database in the correct language, if available.  Otherwise the websites default language will be displayed.<br />
+			Then use the <span class="oj">CCMS_DB</span> tag to display database content.  CCMS will automatically determine if the prefered language of the visitors browser is even supported by your website and display content from your database in the correct language, if available.  Otherwise the websites default language will be displayed.<br>
 			e.g.:
 		</p>
 <pre>&lt;p>
@@ -131,27 +131,27 @@
 		<p dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}" style="max-width: 640px">
 			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
 				"<bdo dir="{CCMS_DB_DIR:index,para1:1}">{CCMS_DB:index,para1}</bdo>"
-			</span><br />
-			<br />
+			</span><br>
+			<br>
 			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
 				"<bdo dir="{CCMS_DB_DIR:index,para2:1}">{CCMS_DB:index,para2}</bdo>"
-			</span><br />
-			<br />
+			</span><br>
+			<br>
 			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
 				"<bdo dir="{CCMS_DB_DIR:index,para3}">{CCMS_DB:index,para3}</bdo>"
-			</span><br />
-			<br />
+			</span><br>
+			<br>
 			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
 				"<bdo dir="{CCMS_DB_DIR:index,para4:1}">{CCMS_DB:index,para4}</bdo>"
-			</span><br />
-			<br />
+			</span><br>
+			<br>
 		</p>
 		<p>
-			Content specific images based on browser language codes are even easier to work with.  Each of the images below are saved on the server in 5 different languages and as you change your desired language using the links above the images below will reflect that change.<br />
+			Content specific images based on browser language codes are even easier to work with.  Each of the images below are saved on the server in 5 different languages and as you change your desired language using the links above the images below will reflect that change.<br>
 			<img alt="Dynamically determined image link." class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/text-on-graphic-{CCMS_LIB:_default.php;FUNC:ccms_lng}.png" title="Dynamically determined image link." />
 		</p>
 		<p>
-			These links are examples of other pages which all contain content translated by Google Translate so forgive me if its a little off.<br />
+			These links are examples of other pages which all contain content translated by Google Translate so forgive me if its a little off.<br>
 			<a class="tapTarget" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">Page #1</a>
 			<a class="tapTarget" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">Page #2</a>
 			<a class="tapTarget" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html">Page #3</a>
