@@ -80,17 +80,15 @@ function ccms_canonical() {
 	// We need to tell search engines not to index the content on the https://somedomain.com but go ahead and index the content on the
 	// https://somedomain.com/cx/ page.
 
-	if($_SERVER['SCRIPT_URL'] === "/"){
+	if($_SERVER['REQUEST_URI'] === "/"){
 		// if the visitor is looking at the root of the website WITHOUT the language dir.
 		// ie: https://yourdomain.com
-
 		echo '<meta name="robots" content="noindex" />';
-		echo '<link rel="canonical" href="' . $_SERVER['SCRIPT_URI'] . $CLEAN["ccms_lng"] . '/" />';
+		echo '<link rel="canonical" href="' . $_SERVER['REQUEST_SCHEME'] . "://" . $CFG["DOMAIN"] . "/" . $CLEAN["ccms_lng"] . '/" />';
 	} else {
 		// if the visitor is looking at the root of the website WITH the language dir.
 		// ie: https://yourdomain.com/en/
-
-		echo '<link rel="canonical" href="' . $_SERVER['SCRIPT_URI'] . '" />';
+		echo '<link rel="canonical" href="' . $_SERVER['REQUEST_SCHEME'] . "://" . $CFG["DOMAIN"] . $_SERVER['REQUEST_URI'] . '" />';
 	}
 }
 
