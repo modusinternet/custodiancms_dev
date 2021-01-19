@@ -670,8 +670,8 @@ if($CLEAN["logout"] == "" && $CLEAN["login"] == "" && $CLEAN["ccms_pass_reset_fo
 			else window.addEventListener('load', cb);
 
 			function loadJSResources() {
-				loadFirst("/ccmsusr/_js/jquery-2.2.0.min.js", function() { /* JQuery */
-					loadFirst("/ccmsusr/_js/bootstrap-3.3.7.min.js", function() { /* Bootstrap */
+				loadFirst("/ccmsusr/_js/jquery-3.5.1.min.js", function() {
+					loadFirst("/ccmsusr/_js/bootstrap-3.3.7.min.js", function() {
 						loadFirst("https://www.google.com/recaptcha/api.js?hl={CCMS_LIB:_default.php;FUNC:ccms_lng}", function() { /* Google reCaptcha */
 							loadFirst("/ccmsusr/_js/jquery.validate-1.17.0.min.js", function() { /* JQuery Validate */
 								/*loadFirst("/ccmsusr/_js/custodiancms.js", function() { /* CustodianCMS JavaScript */
