@@ -191,20 +191,18 @@
 		<script>
 			function loadFirst(e,t){var a=document.createElement("script");a.async = true;a.readyState?a.onreadystatechange=function(){("loaded"==a.readyState||"complete"==a.readyState)&&(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src=e,document.body.appendChild(a);}
 
-			var cb = function() {
-				var l = document.createElement('link'); l.rel = 'stylesheet';
-				/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/css/style.css";*/
-				l.href = "/ccmstpl/examples/css/style.css";
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+			var l=document.createElement("link");
+			l.rel="stylesheet";
+			/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/css/style.css";*/
+			l.href = "/ccmstpl/examples/css/style.css";
+			var h=document.getElementsByTagName("head")[0];
+			h.parentNode.insertBefore(l,h);
 
-				var l = document.createElement('link'); l.rel = 'stylesheet';
-				l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-			};
-
-			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-			if (raf) raf(cb);
-			else window.addEventListener('load', cb);
+			var l=document.createElement("link");
+			l.rel="stylesheet";
+			l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
+			var h=document.getElementsByTagName("head")[0];
+			h.parentNode.insertBefore(l,h);
 
 			function loadJSResources() {
 				loadFirst("/ccmsusr/_js/jquery-2.2.4.min.js",function(){
