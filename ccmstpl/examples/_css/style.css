@@ -90,25 +90,15 @@ ul{list-style:none}
 
 ul.circle{list-style:circle outside}
 
+.b-lazy{
+	-webkit-transition:opacity 500ms ease-in-out;
+	-moz-transition:opacity 500ms ease-in-out;
+	-o-transition:opacity 500ms ease-in-out;
+	transition:opacity 500ms ease-in-out;
+	max-width:100%;
+	opacity:0
+}
+
+.b-loaded{opacity:1}
+
 .oj,ul.oj>li{color:var(--cl3)}
-
-
-
-
-
-
-.scale {
-	max-width: 100%;
-	height: auto;
-}
-
-.b-lazy {
-	-webkit-transition: opacity 500ms ease-in-out;
-	-moz-transition: opacity 500ms ease-in-out;
-	-o-transition: opacity 500ms ease-in-out;
-	transition: opacity 500ms ease-in-out;
-	max-width: 100%;
-	opacity: 0;
-}
-
-.b-loaded {opacity:1}
