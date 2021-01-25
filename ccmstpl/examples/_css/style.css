@@ -81,9 +81,12 @@ ol,ul{
 p{margin-bottom:20px}
 
 pre{
+	border:dotted 1px var(--cl3);
 	color:var(--cl3);
-	font:16px/1.7 'Open Sans';
-	overflow:auto
+	font:300 2.6rem/3.5rem "Open Sans",sans-serif;
+	margin-bottom:20px;
+	overflow:auto;
+	padding:10px
 }
 
 ul{list-style:none}
