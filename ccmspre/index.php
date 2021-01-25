@@ -580,11 +580,7 @@ function CCMS_TPL_Parser($a = null) {
 						call_user_func_array($c[4], $tmp);
 					}
 				} else {
-
-					error_reporting(E_ALL);
-					ini_set('display_errors', 1);
 					require_once $_SERVER["DOCUMENT_ROOT"] . "/" . $CFG["LIBDIR"] . "/" . $c[2];
-
 					if (function_exists($c[4])) {
 						if ($c["5"] == "") {
 							call_user_func($c[4]);

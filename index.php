@@ -24,6 +24,11 @@ if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.php")) {
 
 require_once "ccmspre/config.php";
 
+if($CFG["DEBUG_ERROR_REPORTING"]) {
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+}
+
 ob_start("ob_gzhandler");
 
 require_once $CFG["PREDIR"] . '/whitelist_public.php';
