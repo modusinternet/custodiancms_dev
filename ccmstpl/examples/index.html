@@ -2,8 +2,51 @@
 <html lang="{CCMS_LIB:_default.php;FUNC:ccms_lng}">
 	<head>
 		{CCMS_TPL:examples/header-head.html}
-		<title>Custodian CMS v{CCMS_LIB:_default.php;FUNC:ccms_version} | Example Templates | Homepage</title>
-		<meta name="description" content="" />
+		<title>Custodian CMS v{CCMS_LIB:_default.php;FUNC:ccms_version} | {CCMS_DB:index,title}</title>
+		<meta name="description" content="{CCMS_DB:index,description}" />
+
+		<!-- Google / Search Engine Tags -->
+		<meta itemprop="name" content="{CCMS_DB:all,company-name} | {CCMS_DB:index,title}" />
+		<meta itemprop="description" content="{CCMS_DB:index,description}" />
+
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/en/" />
+		<meta property="og:title" content="{CCMS_DB:all,company-name} | {CCMS_DB:index,title}" />
+		<meta property="og:description" content="{CCMS_DB:index,description}" />
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:title" content="{CCMS_DB:all,company-name} | {CCMS_DB:index,title}" />
+		<meta name="twitter:description" content="{CCMS_DB:index,description}" />
+
+		<script type="application/ld+json">
+		[
+			{
+				"@context":"https://schema.org",
+				"@type":"WebSite",
+				"name":"{CCMS_DB:all,company-name}",
+				"url":"https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/en/",
+				"alternateName":"{CCMS_DB:all,company-name} | {CCMS_DB:index,title}"
+			},{
+				"@context":"https://schema.org",
+				"@type":"Organization",
+				"name":"{CCMS_DB:all,company-name}",
+				"description":"{CCMS_DB:index,description}",
+				"url":"https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/en/",
+				"logo":{
+					"@type":"ImageObject",
+					"url":"{CCMS_LIB:site.php;FUNC:load_resource("AWS")}/ccmstpl/_img/logo1.png"
+				}
+				{CCMS_TPL:_css/header-schema.html}
+			}
+		]
+		</script>
+
+
+
+
+
+
+
 
 		<style>
 			{CCMS_TPL:examples/_css/header.html}
