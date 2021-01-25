@@ -12,6 +12,7 @@ h1,h2,h3,h4,h5,h6{
 	color:var(--cl2);
 	font-family:"Roboto",sans-serif;
 	font-weight:100;
+	margin:40px 0 20px;
 	text-align:center
 }
 
