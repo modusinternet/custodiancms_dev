@@ -53,15 +53,12 @@
 		<p style="margin-left:20px;">
 			&copy; {CCMS_LIB:_default.php;FUNC:ccms_dateYear} assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>
 		</p>
-		<h1>License (MIT)</h1>
+		<span style="color:var(--cl2);font-family:"Roboto",sans-serif;font-weight:100;margin:40px 020px">License (MIT)</span>
 		<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 		<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 		<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-		<h2>Info</h2>
+		<h1>Info</h1>
 		<p>CCMS is not a WYSIWYG system or set of pre-built templates for building quick and dirty blogs.  It is a tool for real website developers and people that would like to build their own secure, portable, multilingual, websites without all the foundation work.</p>
-
-
-
 		<ul class="circle">
 			<li>CCMS is primarily designed to supports multilingual content based on the UTF-8 character set.</li>
 			<li>CCMS uses .htaccess files around the site to help keep things organized and secure.</li>
@@ -70,6 +67,11 @@
 			<li>In CCMS you do not do your programming directly inside your HTML templates, allthough you could if you really wanted to by giving your template a .php extention, you refer to chunks of programming code found in the <span class="oj">/ccmslib/</span> folder like this:  <span class="oj" style="display: inline-block; word-break: break-all;">&#123;CCMS_LIB:_default.php;FUNC:name_of_some_function}</span>  Using this method helps keep your HTML templates clean easy to read.</li>
 			<li>CCMS automatically submits caching headers out with anything requested from your site in order to help reduce the amount of calls/overhead your server has to respond to.</li>
 		</ul>
+
+
+
+
+
 		<h2>Configuration</h2>
 		<p>
 			The templates you are reading now can be found in <span class="oj">/ccmstpl/</span> and the <span class="oj">/ccmstpl/index.html</span> file is currently configured in your <span class="oj">/ccmspre/config.php</span> file to be your default template, the first template CCMS parses when nothing else is specified.  For the purposes of this demonstration there is only one template, besides a few error templates, found in the <span class="oj">/ccmstpl/</span> directory which you can read and overwrite when you are ready.  All other resources related to what you see here now are located in the <span class="oj">/ccmstpl/examples/</span> directory.  When you are ready you can delete this folder and all of its contents as-well.
