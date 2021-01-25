@@ -71,33 +71,26 @@
 		<h2>Multilingual Content Example</h2>
 		<p>The following section demonstrates how to build links in your HTML to expose translated content found in the database.</p>
 		<ul>
-			<li><a href="/en/#a" onclick="lcu('en')">English</a></li>
-			<li><a href="/fr/#a" onclick="lcu('fr')">Français (French)</a></li>
-			<li><a href="/de/#a" onclick="lcu('de')">Deutsch (German)</a></li>
-			<li><a href="/ar/#a" onclick="lcu('ar')">العربية (Arabic)</a></li>
-			<li><a href="/he/#a" onclick="lcu('he')">עברית (Hebrew)</a></li>
-			<li><a href="/hi/#a" onclick="lcu('hi')">हिन्दी (Hindi)</a></li>
-			<li><a href="/ja/#a" onclick="lcu('ja')">日本語 (Japanese)</a></li>
-			<li><a href="/zh-cn/#a" onclick="lcu('zh-cn')">中文 (Chinese, Simplified)</a></li>
+			<li><a href="/en/#a">English</a></li>
+			<li><a href="/fr/#a">Français (French)</a></li>
+			<li><a href="/de/#a">Deutsch (German)</a></li>
+			<li><a href="/ar/#a">العربية (Arabic)</a></li>
+			<li><a href="/he/#a">עברית (Hebrew)</a></li>
+			<li><a href="/hi/#a">हिन्दी (Hindi)</a></li>
+			<li><a href="/ja/#a">日本語 (Japanese)</a></li>
+			<li><a href="/zh-cn/#a">中文 (Chinese, Simplified)</a></li>
 		</ul>
-		<p dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}" style="max-width: 640px">
-			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
-				"<bdo dir="{CCMS_DB_DIR:index,para1:1}">{CCMS_DB:index,para1}</bdo>"
-			</span><br>
-			<br>
-			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
-				"<bdo dir="{CCMS_DB_DIR:index,para2:1}">{CCMS_DB:index,para2}</bdo>"
-			</span><br>
-			<br>
-			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
-				"<bdo dir="{CCMS_DB_DIR:index,para3}">{CCMS_DB:index,para3}</bdo>"
-			</span><br>
-			<br>
-			<span style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">
-				"<bdo dir="{CCMS_DB_DIR:index,para4:1}">{CCMS_DB:index,para4}</bdo>"
-			</span><br>
-			<br>
-		</p>
+		<div dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}">
+			<p dir="{CCMS_DB_DIR:index,para1:1}" style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">"{CCMS_DB:index,para1}"</p>
+			<p dir="{CCMS_DB_DIR:index,para2:1}" style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">"{CCMS_DB:index,para2}"</p>
+			<p dir="{CCMS_DB_DIR:index,para3}" style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">"{CCMS_DB:index,para3}"</p>
+			<p dir="{CCMS_DB_DIR:index,para4:1}" style="color: rgb(134, 177, 53); margin: 5px; padding: 5px;">"{CCMS_DB:index,para4}"</p>
+		</div>
+
+
+
+
+		
 		<p>
 			Content specific images based on browser language codes are even easier to work with.  Each of the images below are saved on the server in 5 different languages and as you change your desired language using the links above the images below will reflect that change.<br>
 			<img alt="Dynamically determined image link." class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/text-on-graphic-{CCMS_LIB:_default.php;FUNC:ccms_lng}.png" title="Dynamically determined image link." />
@@ -108,7 +101,7 @@
 			<a class="tapTarget" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">Page #2</a>
 			<a class="tapTarget" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html">Page #3</a>
 		</p>
-		
+
 
 
 
