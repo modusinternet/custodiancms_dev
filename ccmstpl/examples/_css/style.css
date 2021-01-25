@@ -6,7 +6,7 @@ a, a:visited{
 	text-decoration:underline;
 }
 
-a:hover,a:focus{text-decoration-style:dotted}
+a:hover,a:focus{text-decoration-style:double}
 
 h1,h2,h3,h4,h5,h6{
 	color:var(--cl2);
@@ -66,7 +66,7 @@ ol,ul{
 }
 
 
-p{margin-bottom:10px}
+p{margin-bottom:20px}
 
 pre{
 	color:var(--cl3);
@@ -75,6 +75,10 @@ pre{
 }
 
 ul{list-style:none}
+
+
+
+
 
 
 
