@@ -1,118 +1,88 @@
-/*
-@font-face{
-	font-family:'Open Sans';
-	font-style:normal;
-	font-weight:300;
-	src:local('Open Sans Light'),local('OpenSans-Light'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-300.woff2') format('woff2'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-300.woff')format('woff')
+/* article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block} */
+a, a:visited{
+	border:0px none;
+	color:var(--cl3);
+	outline:0px;
+	text-decoration:underline;
 }
 
-@font-face{
-	font-family:'Open Sans';
-	font-style:normal;
-	font-weight:400;
-	src:local('Open Sans Regular'),local('OpenSans-Regular'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-regular.woff2') format('woff2'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-regular.woff')format('woff')
+a:hover,a:focus{text-decoration-style:dotted}
+
+h1,h2,h3,h4,h5,h6{
+	color:var(--cl2);
+	font-family:"Roboto",sans-serif;
+	font-weight:100;
+	text-align:center
 }
 
-@font-face{
-	font-family:'Open Sans';
-	font-style:italic;
-	font-weight:400;
-	src:local('Open Sans Italic'),local('OpenSans-Italic'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-italic.woff2') format('woff2'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-italic.woff')format('woff')
+h1{
+	font-size:4.4rem;
+	line-height:5rem
 }
 
-@font-face{
-	font-family:'Open Sans';
-	font-style:italic;
-	font-weight:300;
-	src:local('Open Sans Light Italic'),local('OpenSans-LightItalic'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-300italic.woff2') format('woff2'),
-		url('/ccmsusr/_css/fonts/open-sans-v15-latin_cyrillic-ext_vietnamese_cyrillic_latin-ext_greek-ext_greek-300italic.woff')format('woff')
+h2{
+	font-size:3.6rem;
+	line-height:4.6rem
 }
 
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{
-	margin:0;
-	padding:0;
-	border:0;
-	vertical-align:baseline
+h3{
+	font-size:3rem;
+	line-height:4.2rem
 }
 
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
-
-body{line-height:1}
-*/
-
-ol,ul{list-style:none}
-
-blockquote,q{quotes:none}
-
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
-
-table{border-collapse:collapse;border-spacing:0}
-
-/*
-html, body, div, span, h2, p, a, img, ol, ul, li {
-	color: #666;
-	font: 100 18px/1.8em 'Open Sans',sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-size-adjust: 100%;
+h4{
+	font-size:2.4rem;
+	line-height:3.8rem
 }
 
-body {
-	background: #fff;
-	padding: 20px;
-}
-*/
-
-pre {
-	color: rgb(236, 127, 39);
-	font: 16px/1.7 'Open Sans';
-	overflow: auto;
+h5{
+	font-size:1.8rem;
+	line-height:3.4rem
 }
 
-h1, h2 {
-	color: rgb(134, 177, 53);
-	font-size: 220%;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	margin: 25px 0 10px;
+h6{
+	font-size:1.2rem;
+	line-height:2.8rem
 }
 
-h2 { font-size: 200%; }
-
-p { margin-bottom: 10px; }
-
-a, a:visited {
-	border: 0px none;
-	color: rgb(236, 127, 39);
-	outline: 0px;
-	text-decoration: none;
+input{
+	font-family:sans-serif;
+	font-size:1.6rem
 }
 
-a:hover, a:focus {
-	color: rgb(236, 127, 39);
-	border-bottom: 1px dotted rgb(236, 127, 39);
+input[type="search"]::-ms-clear{
+	/* removes close icon - IE */
+	display:none
 }
 
-a.tapTarget {
-	font-size: 20px;
-	font-weight: bold;
-	margin: 5px;
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration{display:none}
+
+ol,ul{
+	list-style:none;
+	margin:0 0 20px 20px
 }
 
-ul, ol { margin: 0 0 20px 20px; }
 
-ul { list-style: none; }
+p{margin-bottom:10px}
+
+pre{
+	color:var(--cl3);
+	font:16px/1.7 'Open Sans';
+	overflow:auto
+}
+
+ul{list-style:none}
+
+
+
+
 
 ul.circle { list-style: circle outside; }
 
-.oj, ul.oj>li { color: rgb(236, 127, 39); }
+.oj,ul.oj>li{color:var(--cl3)}
 
 img { margin-bottom: 10px; }
 
