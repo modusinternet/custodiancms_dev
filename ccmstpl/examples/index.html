@@ -3,10 +3,10 @@
 	<head>
 		{CCMS_TPL:examples/header-head.html}
 		<title>Custodian CMS v{CCMS_LIB:_default.php;FUNC:ccms_version} | Example Templates | Homepage</title>
-		<meta name="description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
+		<meta name="description" content="" />
 
 		<style>
-			{CCMS_TPL:/examples/css/header.html}
+			{CCMS_TPL:examples/_css/header.html}
 		</style>
 	</head>
 	<body>
@@ -51,21 +51,21 @@
 		<p>
 			The following is a guide on how to add new languages and content to the database using phpMyAdmin.  Once the new admin system is ready this will become trivial.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-1.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-2.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-1.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-2.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
 			Add the browser language codes you want your site to support to the <span class="oj">ccms_lng_charset</span> table above and set one of them to <span class="oj">default</span> (<span class="oj">1</span>).  Check here for a full list of codes: <a href="https://www.metamodpro.com/browser-language-codes" style="display: inline-block; word-break: break-all;" target="_blank">www.metamodpro.com/browser-language-codes</a> or <a href="https://www.fincher.org/Utilities/CountryLanguageList.shtml" style="display: inline-block; word-break: break-all;" target="_blank">www.fincher.org/Utilities/CountryLanguageList.shtml</a>  You do not need to keep all the languages codes that are installed by the <span class="oj">/ccms-setup-db.sql</span> file, they are just there as an example for you and to help demonstrate what a site supporting a large number of languages and pointer languages might look like.  (If you change the languages you wish to support in the <span class="oj">ccms_lng_charset</span> table remember to add or remove language columns as needed in the <span class="oj">ccms_ins_db</span> table aswell.)<br>
 			<br>
 			If you are adding a new pointer language (<span class="oj">ptrLng</span>) you do not need to include the character direction (<span class="oj">dir</span>) or a language column in the <span class="oj">ccms_ins_db</span> table.  Only languages which are <span style="text-decoration: underline;">not</span> pointers require the <span class="oj">dir</span> field be filled in and a column in the <span class="oj">ccms_ins_db</span> table.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-3.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-4.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-3.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-4.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
 			<span style="color: red;">( <s>utf8_general_ci</s> changed to utf8mb4_general_ci in current version. )</span><br>
 			Add columns for each of your new language codes to the <span class="oj">ccms_ins_db</span> table.  <span style="text-decoration: underline;">Accept</span> for <span class="oj">ptrLng</span> records.
 		</p>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-5.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
-		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/pma-6.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-5.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" /><br>
+		<img alt="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/pma-6.png" title="Screenshot of Custodian CMS database tables viewed with phpMyAdmin" />
 		<p>
 			Add records to the <span class="oj">ccms_ins_db</span> table containing the <span class="oj">grp</span>, <span class="oj">name</span> and content for each language you would like to view in your website.
 		</p>
@@ -123,7 +123,7 @@
 		</p>
 		<p>
 			Content specific images based on browser language codes are even easier to work with.  Each of the images below are saved on the server in 5 different languages and as you change your desired language using the links above the images below will reflect that change.<br>
-			<img alt="Dynamically determined image link." class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/img/text-on-graphic-{CCMS_LIB:_default.php;FUNC:ccms_lng}.png" title="Dynamically determined image link." />
+			<img alt="Dynamically determined image link." class="b-lazy ds scale" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/ccmstpl/examples/_img/text-on-graphic-{CCMS_LIB:_default.php;FUNC:ccms_lng}.png" title="Dynamically determined image link." />
 		</p>
 		<p>
 			These links are examples of other pages which all contain content translated by Google Translate so forgive me if its a little off.<br>
@@ -193,8 +193,8 @@
 
 			var l=document.createElement("link");
 			l.rel="stylesheet";
-			/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/css/style.css";*/
-			l.href = "/ccmstpl/examples/css/style.css";
+			/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/_css/style.css";*/
+			l.href = "/ccmstpl/examples/_css/style.css";
 			var h=document.getElementsByTagName("head")[0];
 			h.parentNode.insertBefore(l,h);
 
