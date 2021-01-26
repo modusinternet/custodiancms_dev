@@ -48,7 +48,7 @@ if("IntersectionObserver" in window){
 				window.removeEventListener("resize",lazyload);
 				window.removeEventListener("orientationChange",lazyload);
 			}
-		},200);
+		},2000);
 	}
 	document.addEventListener("scroll",lazyload);
 	window.addEventListener("resize",lazyload);
