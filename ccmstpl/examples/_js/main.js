@@ -15,7 +15,7 @@ window.setTimeout(function(){
 var lazyloadImages;
 
 if ("IntersectionObserver" in window) {
-  lazyloadImages = document.querySelectorAll(".lazy");
+  lazyloadImages = document.querySelectorAll("img.lazy");
   var imageObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -31,7 +31,7 @@ if ("IntersectionObserver" in window) {
   });
 } else {
   var lazyloadThrottleTimeout;
-  lazyloadImages = document.querySelectorAll(".lazy");
+  lazyloadImages = document.querySelectorAll("img.lazy");
 
   function lazyload () {
     if(lazyloadThrottleTimeout) {
