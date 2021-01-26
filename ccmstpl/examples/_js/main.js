@@ -12,7 +12,6 @@ window.setTimeout(function(){
 
 
 /* Lazyload Background Images Begin */
-/*document.addEventListener("DOMContentLoaded", function() {*/
 var lazyloadImages;
 if("IntersectionObserver" in window){
 	lazyloadImages = document.querySelectorAll(".lazy");
@@ -55,5 +54,4 @@ if("IntersectionObserver" in window){
 	window.addEventListener("resize",lazyload);
 	window.addEventListener("orientationChange",lazyload);
 }
-/* }) */
 /* Lazyload Background Images End */
