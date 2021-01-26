@@ -12,7 +12,6 @@ window.setTimeout(function(){
 
 
 /* Lazyload Background Images Begin */
-document.addEventListener("DOMContentLoaded", function() {
   var lazyloadImages;
 
   if ("IntersectionObserver" in window) {
@@ -60,5 +59,5 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener("resize", lazyload);
     window.addEventListener("orientationChange", lazyload);
   }
-})
+
 /* Lazyload Background Images End */
