@@ -94,15 +94,6 @@
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html">Page #3</a>
 		<h2>Configuration</h2>
 		<p>The templates you are looking at now can be found in <span class="oj">/ccmstpl/</span> and the <span class="oj">/ccmstpl/index.html</span> file is currently configured in your <span class="oj">/ccmspre/config.php</span> file to be your default starting template. (The first template CCMS parses when nothing else is specified) For the purposes of this demonstration there is only one template, besides a few error templates, found in the <span class="oj">/ccmstpl/</span> directory which you can read and overwrite when you are ready.  All other resources related to what you see here now are located in the <span class="oj">/ccmstpl/examples/</span> directory.  When you are ready you can delete this folder and all of its contents as-well.</p>
-
-
-
-
-
-
-
-
-
 		<p>CCMS does not come with an admin system yet, it won't be ready till the next big release.  Fortunately its not needed to take advantage of CCMS's features, for now you need to use tools like phpMyAdmin to add, remove or update your database inserts.</p>
 		<h2>Adding Content in Many Languages</h2>
 		<p>The following is a guide on how to add new languages and content to the database using phpMyAdmin.  Once the new admin system is ready this will become trivial.</p>
@@ -180,8 +171,7 @@
 
 			function loadJSResources() {
 				loadFirst("/ccmstpl/examples/_js/main.js",function(){
-
-
+					
 				});
 			}
 
