@@ -1,7 +1,7 @@
 {CCMS_DB_PRELOAD:all,index}<!DOCTYPE html>
 <html lang="{CCMS_LIB:_default.php;FUNC:ccms_lng}">
 	<head>
-		{CCMS_TPL:examples/header-head.html}
+		{CCMS_TPL:/examples/header-head.html}
 		<title>{CCMS_DB:all,company-name} v{CCMS_LIB:_default.php;FUNC:ccms_version} | {CCMS_DB:index,title}</title>
 		<meta name="description" content="{CCMS_DB:index,description}" />
 
@@ -35,16 +35,16 @@
 				"logo":{
 					"@type":"ImageObject",
 					"url":"/ccmstpl/examples/_img/logo1.png"
-				}{CCMS_TPL:examples/_css/schema.html}
+				}{CCMS_TPL:/examples/schema.html}
 			}
 		]
 		</script>
 		<style>
-			{CCMS_TPL:examples/_css/header.html}
+			{CCMS_TPL:/examples/_css/header.html}
 		</style>
 	</head>
 	<body>
-		{CCMS_TPL:examples/header-body.html}<br>
+		{CCMS_TPL:/examples/header-body.html}<br>
 		@Version
 		<p style="margin-left:20px;">
 			{CCMS_LIB:_default.php;FUNC:ccms_version} (Release Date: {CCMS_LIB:_default.php;FUNC:ccms_release_date})
@@ -61,9 +61,8 @@
 		<p>CCMS is not a WYSIWYG system or set of pre-built templates for building quick and dirty blogs.  It is a tool for real website developers and people that would like to build their own secure, portable, multilingual, websites without all the foundation work.</p>
 		<ul class="circle">
 			<li>CCMS is primarily designed to supports multilingual content based on the UTF-8 character set.</li>
-			<li>CCMS uses .htaccess files around the site to help keep things organized and secure.</li>
-			<li>CCMS enforces SEO friendly URI practices to help keep all content, regardless of language, on one site with one set of templates.</li>
-			<li>CCMS is able to detect the language preferences of your visitors and render content, as it becomes available, in the appropriate character set.  This means you can add additional languages and begin translating your content at any point, durring or after your development.  You don't need a second website address or set of templates to support additional languages either.  Traditionally you build a website in your primary language first and a second site or set of templates to support any additional languages later.  Not with CCMS, just build your site once and go live when you are ready.  Later you can extend your language support and add translated versions of your exsisting content without shutting down or interupting anything.</li>
+			<li>CCMS enforces SEO friendly URI practices to help keep all content, regardless of language, on one site, with one set of templates.</li>
+			<li>CCMS is able to detect the language preferences of your visitors and will automatically attempt to pull the appropriate content from the database, as it becomes available, in the appropriate character set.  This means you can add additional languages and begin translating your content at any point, durring or after your initial development period.  You don't need a second website address or set of templates to support additional languages.  Traditionally you build a website in your primary language first and a second site or set of templates to support any additional languages later.  Not with CCMS, just build your site once and go live when you are ready.  Later you can extend your language support and add translated versions of your exsisting content without shutting down or interupting anything.</li>
 			<li>In CCMS you do not do your programming directly inside your HTML templates, allthough you could if you really wanted to by giving your template a .php extention, you refer to chunks of programming code found in the <span class="oj">/ccmslib/</span> folder like this:  <span class="oj" style="display: inline-block; word-break: break-all;">&#123;CCMS_LIB:_default.php;FUNC:name_of_some_function}</span>  Using this method helps keep your HTML templates clean easy to read.</li>
 			<li>CCMS automatically submits caching headers out with anything requested from your site in order to help reduce the amount of calls/overhead your server has to respond to.</li>
 		</ul>
@@ -92,13 +91,6 @@
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">Page #1</a>
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">Page #2</a>
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html">Page #3</a>
-
-
-
-
-
-
-
 		<h2>Configuration</h2>
 		<p>The templates you are looking at now can be found in <span class="oj">/ccmstpl/</span> and the <span class="oj">/ccmstpl/index.html</span> file is currently configured in your <span class="oj">/ccmspre/config.php</span> file to be your default starting template. (The first template CCMS parses when nothing else is specified) For the purposes of this demonstration there is only one template, besides a few error templates, found in the <span class="oj">/ccmstpl/</span> directory which you can read and overwrite when you are ready.  All other resources related to what you see here now are located in the <span class="oj">/ccmstpl/examples/</span> directory.  When you are ready you can delete this folder and all of its contents as-well.</p>
 
@@ -205,7 +197,7 @@
 		<p>
 			Now build your website.  Remember, this is a template driven CMS which means if you want to add pages to your site you need to add them yourself.  As you complete each page copy content into the <span class="oj">ccms_ins_db</span> database table, add multilingual versions of content to each record and replace original content in your template with a <span class="oj">CCMS_DB tag</span>.  For more information, community assistance or example code visit:  <a href="https://custodiancms.org" style="display: inline-block; word-break: break-all;" target="_blank">https://custodiancms.org</a>.
 		</p>
-		{CCMS_TPL:examples/footer.html}
+		{CCMS_TPL:/examples/footer.html}
 		<script>
 			function loadFirst(e,t){var a=document.createElement("script");a.async = true;a.readyState?a.onreadystatechange=function(){("loaded"==a.readyState||"complete"==a.readyState)&&(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src=e,document.body.appendChild(a);}
 
