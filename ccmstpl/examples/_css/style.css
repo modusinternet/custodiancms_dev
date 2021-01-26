@@ -60,8 +60,11 @@ h6{
 img{
 	filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
 	margin-bottom:20px;
+	opacity:1;
 	transition:all 2.0s ease-in-out
 }
+
+img.lazy{opacity:0;}
 
 input{
 	font-family:sans-serif;
