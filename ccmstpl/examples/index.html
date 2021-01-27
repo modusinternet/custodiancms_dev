@@ -59,7 +59,7 @@
 		<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 		<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 		<h1>Info</h1>
-		<p dir="{CCMS_DB_DIR:index,description:1}">{CCMS_DB:index,description}</p>		
+		<p dir="{CCMS_DB_DIR:index,description:1}">{CCMS_DB:index,description}</p>
 		<p>CCMS is not a WYSIWYG system or set of pre-built templates for building quick and dirty blogs.  It is a tool for real website developers and people that would like to build their own secure, portable, multilingual, websites without all the foundation work.</p>
 		<ul class="circle">
 			<li>CCMS is primarily designed to supports multilingual content based on the UTF-8 character set.</li>
@@ -161,6 +161,7 @@
 		<p>Now build your website.  Remember, this is a template driven CMS which means if you want to add pages to your site you need to add them yourself.  As you complete each page copy content into the <span class="oj">ccms_ins_db</span> database table, add multilingual versions of content to each record and replace original content in your template with a <span class="oj">CCMS_DB tag</span>.  For more information, community assistance or example code visit:  <a href="https://custodiancms.org" style="display: inline-block; word-break: break-all;" target="_blank">https://custodiancms.org</a>.</p>
 		{CCMS_TPL:/examples/footer.html}
 		<script>
+			{CCMS_TPL:/examples/_js/footer.html}
 			function loadFirst(e,t){var a=document.createElement("script");a.async = true;a.readyState?a.onreadystatechange=function(){("loaded"==a.readyState||"complete"==a.readyState)&&(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src=e,document.body.appendChild(a);}
 
 			var l=document.createElement("link");
