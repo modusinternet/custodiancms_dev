@@ -1,71 +1,81 @@
 {CCMS_DB_PRELOAD:all,page,page-3}<!DOCTYPE html>
 <html lang="{CCMS_LIB:_default.php;FUNC:ccms_lng}">
 	<head>
-		{CCMS_TPL:examples/header-head.html}
-		<title>Custodian CMS v{CCMS_LIB:_default.php;FUNC:ccms_version} | {CCMS_DB:page,title}3</title>
+		{CCMS_TPL:/examples/header-head.html}
+		<title>{CCMS_DB:all,company-name} v{CCMS_LIB:_default.php;FUNC:ccms_version} | {CCMS_DB:page,title}3</title>
 		<meta name="description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
-		<style>
-			/*
-				You can improve your 'Above Fold Content' score on Google Pagespeed using the two online utilities and placing your resurlts below.
-				https://jonassebastianohlsson.com/criticalpathcssgenerator/
-				https://cssminifier.com/
-			*/
-			svg{
-				-webkit-filter:drop-shadow(2px 2px 0.2rem rgba(0,0,0,0.2));
-				filter:drop-shadow(2px 2px 0.2rem rgba(0,0,0,0.2));
-				max-width:400px;
-				-webkit-transition:all 1.0s ease-in-out;
-				-moz-transition:all 1.0s ease-in-out;
-				-o-transition:all 1.0s ease-in-out;
-				transition:all 1.0s ease-in-out
+
+		<!-- Google / Search Engine Tags -->
+		<meta itemprop="name" content="{CCMS_DB:all,company-name} | {CCMS_DB:page,title}3" />
+		<meta itemprop="description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
+
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/en/" />
+		<meta property="og:title" content="{CCMS_DB:all,company-name} | {CCMS_DB:page,title}3" />
+		<meta property="og:description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:title" content="{CCMS_DB:all,company-name} | {CCMS_DB:page,title}3" />
+		<meta name="twitter:description" content="Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages." />
+
+		<script type="application/ld+json">
+		[
+			{
+				"@context":"https://schema.org",
+				"@type":"WebSite",
+				"name":"{CCMS_DB:all,company-name}",
+				"url":"https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html",
+				"alternateName":"{CCMS_DB:all,company-name} | {CCMS_DB:page,title}3"
+			},{
+				"@context":"https://schema.org",
+				"@type":"Organization",
+				"name":"{CCMS_DB:all,company-name}",
+				"description":"Welcome to Custodian CMS, a multilingual, template and content management system.  Write one template, using one domain, on one server and support multipule languages.",
+				"url":"https://{CCMS_LIB:_default.php;FUNC:ccms_cfgDomain}/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html",
+				"logo":{
+					"@type":"ImageObject",
+					"url":"/ccmstpl/examples/_img/logo1.png"
+				}{CCMS_TPL:/examples/schema.html}
 			}
+		]
+		</script>
+		<style>
+			{CCMS_TPL:/examples/_css/header.html}
 		</style>
 	</head>
 	<body>
 		{CCMS_TPL:examples/header-body.html}
 		<ul>
-			<li><a class="tapTarget" href="/en/examples/page-3.html" onclick="lcu('en')">English</a></li>
-			<li><a class="tapTarget" href="/fr/examples/page-3.html" onclick="lcu('fr')">Français (French)</a></li>
-			<li><a class="tapTarget" href="/de/examples/page-3.html" onclick="lcu('de')">Deutsch (German)</a></li>
-			<li><a class="tapTarget" href="/ar/examples/page-3.html" onclick="lcu('ar')">العربية (Arabic)</a></li>
-			<li><a class="tapTarget" href="/he/examples/page-3.html" onclick="lcu('he')">עברית (Hebrew)</a></li>
-			<li><a class="tapTarget" href="/hi/examples/page-3.html" onclick="lcu('hi')">हिन्दी (Hindi)</a></li>
-			<li><a class="tapTarget" href="/ja/examples/page-3.html" onclick="lcu('ja')">日本語 (Japanese)</a></li>
-			<li><a class="tapTarget" href="/zh-cn/examples/page-3.html" onclick="lcu('zh-cn')">中文 (Chinese, Simplified)</a></li>
+			<li><a href="/en/examples/page-3.html">English</a></li>
+			<li><a href="/fr/examples/page-3.html">Français (French)</a></li>
+			<li><a href="/de/examples/page-3.html">Deutsch (Germany)</a></li>
+			<li><a href="/ar/examples/page-3.html">العربية (Arabic)</a></li>
+			<li><a href="/he/examples/page-3.html">עברית (Hebrew)</a></li>
+			<li><a href="/hi/examples/page-3.html">हिन्दी (Hindi)</a></li>
+			<li><a href="/ja/examples/page-3.html">日本語 (Japanese)</a></li>
+			<li><a href="/zh-cn/examples/page-3.html">中文 (Chinese, Simplified)</a></li>
 		</ul>
-		<p>
-			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">{CCMS_DB:page,page-num}1</a>
-			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">{CCMS_DB:page,page-num}2</a>
-			<a class="tapTarget" dir="{CCMS_DB_DIR:page,page-num}" href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html" style="text-decoration: underline;">{CCMS_DB:page,page-num}3</a>
+		<p dir="{CCMS_DB_DIR:page,page-num}">
+			<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">{CCMS_DB:page,page-num}1</a> |
+			<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">{CCMS_DB:page,page-num}2</a> |
+			<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html" style="text-decoration-style:double">{CCMS_DB:page,page-num}3</a>
 		</p>
-		<p dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}">
-			<bdo dir="{CCMS_DB_DIR:page-3,para1:1}">{CCMS_DB:page-3,para1}</bdo>
-		</p>
-		{CCMS_TPL:examples/footer.html}
+		<p dir="{CCMS_DB_DIR:page-2,para1:1}">{CCMS_DB:page-3,para1}</p>
+		{CCMS_TPL:/examples/footer.html}
 		<script>
 			function loadFirst(e,t){var a=document.createElement("script");a.async = true;a.readyState?a.onreadystatechange=function(){("loaded"==a.readyState||"complete"==a.readyState)&&(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src=e,document.body.appendChild(a);}
 
-			var cb = function() {
-				var l = document.createElement('link'); l.rel = 'stylesheet';
-				/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/css/style.css";*/
-				l.href = "/ccmstpl/examples/css/style.min.css";
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-
-				var l = document.createElement('link'); l.rel = 'stylesheet';
-				l.href = "/ccmsusr/_css/font-awesome-4.7.0.min.css";
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-			};
-
-			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-			if (raf) raf(cb);
-			else window.addEventListener('load', cb);
+			var l=document.createElement("link");
+			l.rel="stylesheet";
+			/*l.href = "/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/_css/style.css";*/
+			l.href = "/ccmstpl/examples/_css/style.css";
+			var h=document.getElementsByTagName("head")[0];
+			h.parentNode.insertBefore(l,h);
 
 			function loadJSResources() {
-				/*
-				loadFirst("/ccmsusr/_js/jquery-2.2.4.min.js", function() {
+				loadFirst("/ccmstpl/examples/_js/main.js",function(){
 
 				});
-				*/
 			}
 
 			if(window.addEventListener){
