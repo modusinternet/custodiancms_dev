@@ -25,7 +25,7 @@ Then click the 'Yes, Edit' button at the bottom and give it about 10 minutes to 
 */
 
 
-const cacheName = '{CCMS_LIB:_default.php;FUNC:ccms_lng}-2021-01-26.v01';
+const cacheName = 'en-2021-01-26.v01';
 
 
 /*
@@ -36,8 +36,8 @@ arg3 = a variable found in the config file that represents a partial pathway to 
 arg4 = (1 = append language direction to link), (empty = do not append language direction to link)
 */
 var cacheFiles = [
-	'/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/offline.html',
-	'/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/manifest.html',
+	/*'/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/offline.html',*/
+	'/en/examples/manifest.html',
 	'/ccmstpl/examples/_img/ico/apple-touch-icon.png',
 	'/ccmstpl/examples/_img/ico/safari-pinned-tab.svg',
 	'/ccmstpl/examples/_img/ico/favicon.ico',
