@@ -100,7 +100,10 @@ pre{
 
 ul{list-style:none}
 
-ul.circle{list-style:circle outside}
+ul.circle{
+	list-style:circle outside;
+	margin-left:30px
+}
 
 .b-lazy{
 	-webkit-transition:opacity 500ms ease-in-out;
