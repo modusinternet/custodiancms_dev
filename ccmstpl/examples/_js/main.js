@@ -12,7 +12,11 @@ window.setTimeout(function(){
 
 
 /* Active link selector BEGIN */
-navActiveArray.forEach(function(s){$("#"+s).addClass("active");});
+/*navActiveArray.forEach(function(s){$("#"+s).addClass("active");});*/
+navActiveArray.forEach(function(s){
+	var element = document.getElementById("#"+s");
+	element.classList.add("active");
+})
 /*navActiveFooterArray.forEach(function(s){$("#"+s).addClass("active");});*/
 /* Active link selector END */
 
