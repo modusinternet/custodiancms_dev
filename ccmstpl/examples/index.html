@@ -170,9 +170,17 @@
 			var h=document.getElementsByTagName("head")[0];
 			h.parentNode.insertBefore(l,h);
 
-			function loadJSResources() {
-				loadFirst("/ccmstpl/examples/_js/main.js",function(){
+			var l=document.createElement("link");
+			l.rel="stylesheet";
+			l.href = "/ccmstpl/examples/_css/GDPR.css";
+			var h=document.getElementsByTagName("head")[0];
+			h.parentNode.insertBefore(l,h);
 
+			function loadJSResources() {
+				loadFirst("/ccmstpl/examples/_js/GDPR.js",function(){
+					loadFirst("/ccmstpl/examples/_js/main.js",function(){
+
+					});
 				});
 			}
 
