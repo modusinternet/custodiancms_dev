@@ -50,18 +50,6 @@ h6{
 	line-height:2.8rem
 }
 
-/*
-.ds {
-	-webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
-	-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=10, OffY=10, Color='#444')";
-	filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=10, OffY=10, Color='#444')";
-	-webkit-transition: all 1.0s ease-in-out;
-	-moz-transition: all 1.0s ease-in-out;
-	-o-transition: all 1.0s ease-in-out;
-	transition: all 1.0s ease-in-out;
-}
-*/
-
 img{
 	filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
 	margin-bottom:20px;
@@ -117,3 +105,52 @@ ul.circle{
 .b-loaded{opacity:1}
 
 .oj,ul.oj>li{color:var(--cl3)}
+
+/* Add to Home Screen (A2HS) START */
+#A2HS-box{
+	left:0;
+	position:fixed;
+	right:0;
+	top:-300px;
+	transition:all 2s;
+	z-index:var(--z-index-A2HS-box)
+}
+
+#A2HS-box.active{top:0}
+
+#A2HS-box>div{
+	box-shadow:0 0 20px 3px rgba(0,0,0,.22);
+	background:#fff;
+	/*padding:1.286em;*/
+	padding:20px;
+	position:relative;
+	margin:0 auto;
+	max-width:500px;
+	width:auto
+}
+
+#A2HS-box>div:nth-child(2){text-align:right}
+
+#A2HS-box>div img{
+	float:left;
+	margin-right:10px;
+	width:75px
+}
+
+#A2HS-box>div>button{
+	background:#fff;
+	border:none;
+	box-shadow:none;
+	color:#1165f1;
+	padding:1rem 2rem;
+	cursor:pointer
+}
+
+#A2HS-box>div>button:nth-child(2){
+	background:#1165f1;
+	box-shadow:0 2px 5px 0 rgba(0,0,0,.16), 0 2px 6px 0 rgba(0,0,0,.12);
+	color:#fff
+}
+
+#A2HS-box svg{width:100px}
+/* Add to Home Screen (A2HS) END */
