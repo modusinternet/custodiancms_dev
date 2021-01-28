@@ -1,4 +1,3 @@
-/* article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block} */
 a, a:visited{
 	border:0px none;
 	color:var(--cl3);
@@ -92,6 +91,8 @@ ul.circle{
 	list-style:circle outside;
 	margin-left:30px
 }
+
+svg path{fill:var(--cl3)}
 
 .b-lazy{
 	-webkit-transition:opacity 500ms ease-in-out;
