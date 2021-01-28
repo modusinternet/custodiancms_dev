@@ -12,14 +12,18 @@ window.setTimeout(function(){
 
 
 /* Active link selector BEGIN */
-activeArray_01.forEach(function(id){
-	var element = document.getElementById(id);
-	element.classList.add("active");
-})
-activeArray_02.forEach(function(id){
-	var element = document.getElementById(id);
-	element.classList.add("active");
-})
+try {
+	activeArray_01.forEach(function(id){
+		var element = document.getElementById(id);
+		element.classList.add("active");
+	})
+	activeArray_02.forEach(function(id){
+		var element = document.getElementById(id);
+		element.classList.add("active");
+	})
+} catch (e) {
+	console.log(e);
+}
 /* Active link selector END */
 
 
