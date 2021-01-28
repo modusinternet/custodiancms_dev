@@ -72,14 +72,7 @@
 		<h2>Multilingual Examples</h2>
 		<p>The following section demonstrates how to build links in your HTML to expose translated content found in the database.</p>
 		<ul>
-			<li><a href="/en/#a">English</a></li>
-			<li><a href="/fr/#a">Français (French)</a></li>
-			<li><a href="/de/#a">Deutsch (German)</a></li>
-			<li><a href="/ar/#a">العربية (Arabic)</a></li>
-			<li><a href="/he/#a">עברית (Hebrew)</a></li>
-			<li><a href="/hi/#a">हिन्दी (Hindi)</a></li>
-			<li><a href="/ja/#a">日本語 (Japanese)</a></li>
-			<li><a href="/zh-cn/#a">中文 (Chinese, Simplified)</a></li>
+			{CCMS_LIB:_default.php;FUNC:ccms_lngList}
 		</ul>
 		<div dir="{CCMS_LIB:_default.php;FUNC:ccms_lng_dir}">
 			<p dir="{CCMS_DB_DIR:index,para1:1}" style="color:rgb(134,177,53)">"{CCMS_DB:index,para1}"</p>
@@ -91,7 +84,7 @@
 		<img alt="Dynamically determined image link." class="lazy" data-src="/ccmstpl/examples/_img/text-on-graphic-{CCMS_LIB:_default.php;FUNC:ccms_lng}.png" title="Dynamically determined image link." />
 		<p>The following links are to example pages of translated static content. FYI: Translation provided by Google so forgive me if its a little off. (Any tranlation assistance would be greatly appreciated.)</p>
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">Page #1</a> |
-		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">Page #2</a> | 
+		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-2.html">Page #2</a> |
 		<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-3.html">Page #3</a>
 		<h2>Configuration</h2>
 		<p>The templates you are looking at now can be found in <span class="oj">/ccmstpl/</span> and the <span class="oj">/ccmstpl/index.html</span> file is currently configured in your <span class="oj">/ccmspre/config.php</span> file to be your default starting template. (The first template CCMS parses when nothing else is specified) For the purposes of this demonstration there is only one template, besides a few error templates, found in the <span class="oj">/ccmstpl/</span> directory which you can read and overwrite when you are ready.  All other resources related to what you see here now are located in the <span class="oj">/ccmstpl/examples/</span> directory.  When you are ready you can delete this folder and all of its contents as-well.</p>

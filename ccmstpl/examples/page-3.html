@@ -47,14 +47,7 @@
 		<div id="loading_svg"></div>
 		{CCMS_TPL:examples/header-body.html}
 		<ul>
-			<li><a href="/en/examples/page-3.html">English</a></li>
-			<li><a href="/fr/examples/page-3.html">Français (French)</a></li>
-			<li><a href="/de/examples/page-3.html">Deutsch (Germany)</a></li>
-			<li><a href="/ar/examples/page-3.html">العربية (Arabic)</a></li>
-			<li><a href="/he/examples/page-3.html">עברית (Hebrew)</a></li>
-			<li><a href="/hi/examples/page-3.html">हिन्दी (Hindi)</a></li>
-			<li><a href="/ja/examples/page-3.html">日本語 (Japanese)</a></li>
-			<li><a href="/zh-cn/examples/page-3.html">中文 (Chinese, Simplified)</a></li>
+			{CCMS_LIB:_default.php;FUNC:ccms_lngList}
 		</ul>
 		<p dir="{CCMS_DB_DIR:page,page-num}">
 			<a href="/{CCMS_LIB:_default.php;FUNC:ccms_lng}/examples/page-1.html">{CCMS_DB:page,page-num}1</a> |
