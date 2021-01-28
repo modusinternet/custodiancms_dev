@@ -13,12 +13,23 @@ window.setTimeout(function(){
 
 /* Active link selector BEGIN */
 /* activeArray.forEach(function(s){$("#"+s).addClass("active");}); */
-activeArray.forEach(function(s){
-	var element = document.getElementById("#"+s);
+activeArray.forEach(function(id){
+	var element = document.getElementById(id);
 	element.classList.add("active");
 })
 /* activeFooterArray.forEach(function(s){$("#"+s).addClass("active");}); */
 /* Active link selector END */
+
+
+
+
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach(element => console.log(element));
+
+
+
+
 
 
 /* Lazyload Images BEGIN */
