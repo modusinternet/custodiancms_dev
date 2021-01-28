@@ -8,6 +8,11 @@ a, a:visited{
 
 a:hover,a:focus{text-decoration-style:double}
 
+a.active{
+	font-weight:400;
+	text-decoration-style:double
+}
+
 h1,h2,h3,h4,h5,h6{
 	color:var(--cl2);
 	font-family:"Roboto",sans-serif;
