@@ -11,7 +11,13 @@ window.setTimeout(function(){
 /* Loading Screen END */
 
 
-/* Lazyload Background Images Begin */
+/* Active link selector BEGIN */
+navActiveArray.forEach(function(s){$("#"+s).addClass("active");});
+/*navActiveFooterArray.forEach(function(s){$("#"+s).addClass("active");});*/
+/* Active link selector END */
+
+
+/* Lazyload Images BEGIN */
 var lazyloadImages;
 if("IntersectionObserver" in window){
 	lazyloadImages = document.querySelectorAll(".lazy");
@@ -54,4 +60,4 @@ if("IntersectionObserver" in window){
 	window.addEventListener("resize",lazyload);
 	window.addEventListener("orientationChange",lazyload);
 }
-/* Lazyload Background Images End */
+/* Lazyload Images END */
