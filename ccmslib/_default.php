@@ -61,6 +61,23 @@ function ccms_hrefLang_list() {
 	}
 }
 
+function ccms_lngList() {
+	global $CFG, $CLEAN;
+	// this line of code produces the wrong output on GoDaddy servers.
+	//$tpl = htmlspecialchars(preg_replace('/^\/([\pL\pN-]*)\/?(.*)\z/i', '${2}', $_SERVER['REDIRECT_URL']));
+	$tpl = htmlspecialchars(preg_replace('/^\/([\pL\pN-]*)\/?(.*)\z/i', '${2}', $_SERVER['REQUEST_URI']));
+	$qry = $CFG["DBH"]->prepare("SELECT * FROM `ccms_lng_charset` WHERE `status` = 1 ORDER BY lngDesc ASC;");
+	if($qry->execute()) {
+		while($row = $qry->fetch()) {
+			if($row["ptrLng"]) {
+				echo "<li id=\"lng-" . $row["lng"] . "\"><a href=\"/" . $row["ptrLng"] . "/" . $tpl . "\">" . $row["lngDesc"] . "</a></li>\n";
+			} else {
+				echo "<li id=\"lng-" . $row["lng"] . "\"><a href=\"/" . $row["lng"] . "/" . $tpl . "\">" . $row["lngDesc"] . "</a></li>\n";
+			}
+		}
+	}
+}
+
 function ccms_canonical() {
 	global $CFG, $CLEAN;
 
