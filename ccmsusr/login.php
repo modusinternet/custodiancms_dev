@@ -17,11 +17,7 @@ $ccms_pass_reset_form_message = NULL;
 if($_SESSION["FAIL"] >= 5) {
 	// If the users session record indicates that they have attempted to login 5 or more times and failed; do not
 	// show this page at all.  Simply redirect them base to the homepage for this site immediatly.
-	header("Location: /?error=sessionFailsTotal" . $_SESSION["FAIL"]);
-
-
-
-
+	header("Location: /");
 	exit;
 } elseif($CLEAN["logout"] == "1") {
 	// log out
