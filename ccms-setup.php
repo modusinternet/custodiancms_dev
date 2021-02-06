@@ -11,7 +11,7 @@ if(!(($_SERVER["SCRIPT_NAME"] == "/index.php") || ($_SERVER["SCRIPT_NAME"] == "/
 
 @include "ccmspre/config.php";
 ?><!DOCTYPE html>
-<html id="no-fouc" lang="en" style="opacity: 0;">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<title>Custodian CMS Setup v<?php echo $CFG["VERSION"];?></title>
@@ -495,13 +495,11 @@ if($CFG["DBH"]) {
 			else window.addEventListener('load', cb);
 
 			function loadJSResources() {
-				loadFirst("/ccmsusr/_js/jquery-2.2.0.min.js", function() { /* JQuery is loaded */
-					loadFirst("/ccmsusr/_js/bootstrap-3.3.7.min.js", function() { /* Bootstrap is loaded */
-						/*loadFirst("/ccmsusr/_js/custodiancms.js", function() { /* CustodianCMS JavaScript */
-						loadFirst("/ccmsusr/_js/custodiancms.min.js", function() { /* CustodianCMS JavaScript */
-
-							/* Fade in web page. */
-							$("#no-fouc").delay(200).animate({"opacity": "1"}, 500);
+				/*loadFirst("/ccmsusr/_js/jquery-2.2.0.min.js", function() {*/
+				loadFirst("/ccmsusr/_js/jquery-3.5.1.min.js", function() {
+					loadFirst("/ccmsusr/_js/bootstrap-3.3.7.min.js", function() {
+						/*loadFirst("/ccmsusr/_js/custodiancms.js", function() {*/
+						loadFirst("/ccmsusr/_js/custodiancms.min.js", function() {
 
 							$('#ccms-setup-db').popover({
 								html: true,
