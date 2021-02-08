@@ -22,7 +22,8 @@ header("Pragma: no-cache");
 
 			/* Style the tab */
 			.tab{
-				overflow:hidden;
+				border-bottom:1px solid #ec7f27;
+				overflow:hidden
 				/*
 				border:1px solid #ccc;
 				background-color:#eee
@@ -32,7 +33,8 @@ header("Pragma: no-cache");
 			/* Style the buttons inside the tab */
 			.tab button{
 				border:1px solid #ccc;
-				border-radius: 4px 4px 0 0;
+				border-bottom:none;
+				border-radius:4px 4px 0 0;
 				color:#337ab7;
 				cursor:pointer;
 				float:left;
