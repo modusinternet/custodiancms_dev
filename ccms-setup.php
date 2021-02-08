@@ -10,16 +10,27 @@ header("Pragma: no-cache");
 		<title>Custodian CMS Setup v<?php echo $CFG["VERSION"];?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
+			.logo{
+				filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
+				margin-bottom:30px;
+				max-width:1024px;
+				-webkit-transition:all 1.0s ease-in-out;
+				-moz-transition:all 1.0s ease-in-out;
+				-o-transition:all 1.0s ease-in-out;
+				transition:all 1.0s ease-in-out
+			}
+
 			/* Style the tab */
 			.tab{
 				overflow:hidden;
 				border:1px solid #ccc;
-				background-color:#f1f1f1
+				background-color:#eee
 			}
 
 			/* Style the buttons inside the tab */
 			.tab button{
 				background-color:inherit;
+				color:#337ab7;
 				float:left;
 				border:none;
 				outline:none;
@@ -30,10 +41,16 @@ header("Pragma: no-cache");
 			}
 
 			/* Change background color of buttons on hover */
-			.tab button:hover{background-color:#ddd}
+			.tab button:hover{
+				background-color:#ec7f27;
+				color:#fff
+			}
 
 			/* Create an active/current tablink class */
-			.tab button.active{background-color:#ccc}
+			.tab button.active{
+				background-color:#ec7f27;
+				color:#fff
+			}
 
 			/* Style the tab content */
 			.tabcontent{
