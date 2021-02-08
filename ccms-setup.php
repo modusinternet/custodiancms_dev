@@ -23,13 +23,15 @@ header("Pragma: no-cache");
 			/* Style the tab */
 			.tab{
 				overflow:hidden;
+				/*
 				border:1px solid #ccc;
 				background-color:#eee
+				*/
 			}
 
 			/* Style the buttons inside the tab */
 			.tab button{
-				background-color:inherit;
+				border:1px solid #ccc;
 				color:#337ab7;
 				float:left;
 				border:none;
