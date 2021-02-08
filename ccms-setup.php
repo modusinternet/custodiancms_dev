@@ -32,14 +32,15 @@ header("Pragma: no-cache");
 			/* Style the buttons inside the tab */
 			.tab button{
 				border:1px solid #ccc;
+				border-radius: 4px 4px 0 0;
 				color:#337ab7;
-				float:left;
-				border:none;
-				outline:none;
 				cursor:pointer;
+				float:left;
+				font-size:17px;
+				margin-right:2px;
+				outline:none;
 				padding:14px 16px;
-				transition:0.3s;
-				font-size:17px
+				transition:0.3s
 			}
 
 			/* Change background color of buttons on hover */
