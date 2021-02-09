@@ -196,6 +196,11 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 				-webkit-text-size-adjust:100%
 			}
 
+			h1{
+				color:var(--cl2);
+				font:300 2.6rem/3.5rem "Roboto",sans-serif
+			}
+
 			.logo{
 				filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
 				margin-bottom:30px;
@@ -335,7 +340,8 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 		</div>
 
 		<div id="tab-01" class="tabcontent">
-			<p>Welcome to Custodian CMS, <span class="oj">@Version <?php echo $CFG["VERSION"];?> (Release Date: <?php echo $CFG["RELEASE_DATE"];?>)</span>.  This page is designed to help test your server environment, check your configuration template, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to either <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
+			<h1>Welcome to Custodian CMS</h1>
+			<p>This page is designed to help test your server environment, check your configuration template, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to either <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
 		</div>
 
 		<div id="tab-02" class="tabcontent">
