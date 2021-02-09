@@ -198,7 +198,7 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 
 			h1{
 				color:var(--cl2);
-				font:300 2.6rem/3.5rem "Roboto",sans-serif
+				font:100 4.6rem/7.5rem "Roboto",sans-serif
 			}
 
 			.logo{
@@ -345,12 +345,12 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 		</div>
 
 		<div id="tab-02" class="tabcontent">
-			<h3>Install</h3>
+			<h1>Install</h1>
 			<p>Paris is the capital of France.</p>
 		</div>
 
 		<div id="tab-03" class="tabcontent">
-			<h3>Setup</h3>
+			<h1>Setup</h1>
 			<p>Tokyo is the capital of Japan.</p>
 		</div>
 
@@ -362,9 +362,7 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 			<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 		</div>
 
-		<p style="margin:10px 10px">
-			<a class="oj" href="#copyright">Copyright</a> &copy; <?php echo date("Y"); ?> assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>.
-		</p>
+		<p><a class="oj" href="#copyright">Copyright</a> &copy; <?php echo date("Y"); ?> assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>.</p>
 
 		<script>
 			function openCity(evt, cityName){
