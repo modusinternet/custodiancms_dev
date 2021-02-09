@@ -341,7 +341,7 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 
 		<div id="tab-01" class="tabcontent">
 			<h1>Welcome to Custodian CMS</h1>
-			<p>This page is designed to help test your server environment, check your configuration template, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to either <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
+			<p>This page is designed to help test your server environment, download the CCMS templates, check your configuration, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
 		</div>
 
 		<div id="tab-02" class="tabcontent">
