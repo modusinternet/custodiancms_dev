@@ -201,6 +201,8 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 				font:100 4.6rem/7.5rem "Roboto",sans-serif
 			}
 
+			p{margin: 0 0 10px}
+
 			.logo{
 				filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
 				margin-bottom:30px;
