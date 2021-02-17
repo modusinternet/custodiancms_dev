@@ -14,6 +14,10 @@
 Then you need to select the appropriate distribution under CloudFront and click the Behaviors tab.  Create or Edit an existing Behavior and select the following settings:
 
 Allowed HTTP Methods: GET, HEAD, OPTIONS
+
+Enable 'Cached HTTP Methods': GET, HEAD and OPTIONS
+NOTE: THIS IS A MAYBE, I HAVE TO LEARN MORE ABOUT THIS Setting
+
 Cache Based on Selected Request Headers: Whitelist
 Add these to the right box under Whitelist Headers, add as custom if necessary:
 	Access-Control-Allow-Origin
@@ -96,7 +100,9 @@ self.addEventListener('fetch',(event) => {
 				return cachedResponse;
 			}
 
-			const fetchResponse = await fetch(event.request);
+			/*const fetchResponse = await fetch(event.request);*/
+			const fetchResponse = await fetch(event.request, {mode:'no-cors'});
+
 			if(fetchResponse) {
 				console.log('fetchResponse: ', event.request.url);
 				/* Use this code below to preclude storing templates in cache that are located in the WordPress dirs. */
