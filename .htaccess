@@ -75,6 +75,14 @@ AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
 <IfModule mod_headers.c>
+	# Permissions-Policy
+	# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
+	# Control browser’s features such as geolocation, fullscreen, speaker, USB, autoplay, speaker,
+	# vibrate, microphone, payment, vr, etc. to enable or disable within a web application.
+	# https://github.com/w3c/webappsec-permissions-policy/blob/master/permissions-policy-explainer.md#appendix-big-changes-since-this-was-called-feature-policy
+	#------------------------------
+	Header set Permissions-Policy "accelerometer=(), autoplay=(), camera=(), encrypted-media=(), fullscreen=(self), geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(self), picture-in-picture=(), sync-xhr=(), usb=()"
+
 	# Disable your PHP version number from showing up in HTTP headers for added security.
 	#------------------------------
 	Header unset X-Powered-By
