@@ -125,7 +125,7 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT
 	# https://docs.report-uri.com/setup/ect/
 	#------------------------------
-	Header set Expect-CT "enforce, max-age=86400"
+	#Header set Expect-CT "enforce, max-age=86400"
 </IfModule>
 
 <IfModule mod_rewrite.c>
