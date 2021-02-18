@@ -108,7 +108,7 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	# HSTS (HTTP Strict Transport Security) header to ensure all communication from a browser
 	# is sent over HTTPS (HTTP Secure).
 	#------------------------------
-	Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	#Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
 	# By implementing this header, you restrict loading your site’s assets from other domains
 	# to avoid resource abuse.
