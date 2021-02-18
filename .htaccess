@@ -113,11 +113,11 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	# By implementing this header, you restrict loading your site’s assets from other domains
 	# to avoid resource abuse.
 	#------------------------------
-	Header set X-Permitted-Cross-Domain-Policies "none"
+	#Header set X-Permitted-Cross-Domain-Policies "none"
 
 	# Referrer policy.
 	#------------------------------
-	Header set Referrer-Policy "strict-origin-when-cross-origin"
+	#Header set Referrer-Policy "strict-origin-when-cross-origin"
 
 	# Forces browsers to validate the connection with web servers for certificate transparency (CT).
 	# This project aims to fix some of the flaws in the SSL/TLS certificate system.
