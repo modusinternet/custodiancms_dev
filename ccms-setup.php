@@ -120,7 +120,7 @@ define('CONFIG_FILE', __FILE__);
 // If there's authorization error, set the correct HTTP header.
 if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'ChangeThisStringToSomethingElseAndUseItInTheURL') {
 	header($_SERVER['SERVER_PROTOCOL'] . ", 403 Forbidden, missing SECRET_ACCESS_TOKEN in URI.", true, 403);
-	//header($_SERVER['SERVER_PROTOCOL'] . "403 Forbidden", true, 403);
+	/*header($_SERVER['SERVER_PROTOCOL'] . "403 Forbidden", true, 403);*/
 } else {
 	header("Content-Type: text/html; charset=UTF-8");
 	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
