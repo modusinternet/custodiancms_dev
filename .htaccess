@@ -108,18 +108,18 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	# HSTS (HTTP Strict Transport Security) header to ensure all communication from a browser
 	# is sent over HTTPS (HTTP Secure).
 	#------------------------------
-	#Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
 	# By implementing this header, you restrict loading your site’s assets from other domains
 	# to avoid resource abuse.
 	#------------------------------
-	#Header set X-Permitted-Cross-Domain-Policies "none"
+	Header set X-Permitted-Cross-Domain-Policies "none"
 
 	# Referrer policy.  Setting the referrer to 'strict-origin-when-cross-origin' means, requests
 	# for resource hosted somewhere else, like a Content Delivery Network (CDN), don't include anything
 	# else in the URI other than the protocol and the domain name, ie: https://example.com
 	#------------------------------
-	#Header set Referrer-Policy "strict-origin-when-cross-origin"
+	Header set Referrer-Policy "strict-origin-when-cross-origin"
 
 	# Forces browsers to validate the connection with web servers for certificate transparency (CT).
 	# This project aims to fix some of the flaws in the SSL/TLS certificate system.
@@ -127,7 +127,7 @@ AddOutputFilterByType DEFLATE application/x-javascript
 	# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT
 	# https://docs.report-uri.com/setup/ect/
 	#------------------------------
-	#Header set Expect-CT "enforce, max-age=86400"
+	Header set Expect-CT "enforce, max-age=86400"
 </IfModule>
 
 <IfModule mod_rewrite.c>
