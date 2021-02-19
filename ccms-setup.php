@@ -119,7 +119,7 @@ define('CONFIG_FILE', __FILE__);
 
 // If there's authorization error, set the correct HTTP header.
 if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'ChangeThisStringToSomethingElse') {
-	header($_SERVER['SERVER_PROTOCOL'] . " 403 Forbidden", true, 403);
+	header($_SERVER['SERVER_PROTOCOL'] . "403 Forbidden, missing 'SECRET_ACCESS_TOKEN' in URI.", true, 403);
 } else {
 	header("Content-Type: text/html; charset=UTF-8");
 	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -202,6 +202,19 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 			}
 
 			p{margin: 0 0 20px}
+
+			.loader{
+				width:60px;
+				height:60px;
+				background:0 0;
+				border:10px solid transparent;
+				border-top-color:#f56;
+				border-left-color:#f56;
+				border-radius:50%;
+				animation:loader .75s 10 ease forwards
+			}
+
+			@keyframes loader{100%{transform:rotate(360deg)}}
 
 			.logo{
 				filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
@@ -349,6 +362,11 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 		<div id="tab-02" class="tabcontent">
 			<h1>Install</h1>
 			<p>Paris is the capital of France.</p>
+			<div id='container'>
+
+				<!-- The response will be printed here -->
+
+			</div>
 		</div>
 
 		<div id="tab-03" class="tabcontent">
@@ -397,6 +415,92 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 
 			// Get the element with id="defaultOpen" and click on it
 			document.getElementById("defaultOpen").click();
+
+
+
+
+
+
+			function ajaxCall(location, url){
+				if(window.XMLHttpRequest){
+					var req = new XMLHttpRequest();
+					req.onreadystatechange = function() {
+						if(this.readyState === 4){
+							document.getElementById('container').innerHTML = '<div>' + this.responseText +'</div>';
+						} else {
+							document.getElementById('container').innerHTML = '<div class="loader"></div>';
+						}
+						//alert("load XML:" + "http<?=$CFG["HTTPS"];?>://<?=$_SERVER["HTTP_HOST"];?>" + location);
+						req.open("POST", "https://<?=$_SERVER["HTTP_HOST"];?>" + location, true);
+						req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						req.onreadystatechange = ajaxCallProcess();
+						req.send(url);
+					}
+				} else {
+					alert("Your browser does not appear to support modern Ajax calls.");
+				}
+			}
+
+			function ajaxCallProcess(){
+				if(req.readyState == 4){
+					if(req.status == 200){
+						var node = req.responseXML.getElementsByTagName("errorMessage");
+						if(node && (node.length > 0)){
+							if(document.getElementById("wait_div")){
+								div_wait_Hide();
+							}
+							errorMessage = req.responseXML.getElementsByTagName("errorMessage")[0].firstChild.data;
+							alert(errorMessage);
+							var node = req.responseXML.getElementsByTagName("errorField");
+							if(node && (node.length > 0)){
+								var errorField = req.responseXML.getElementsByTagName("errorField")[0].firstChild.data;
+								if(document.getElementById(errorField)){
+									document.getElementById(errorField).focus();
+								}
+							}
+							if(document.getElementById("submit")) document.getElementById("submit").disabled = false;
+							if(document.getElementById("cmd"))  document.getElementById("cmd").disabled = false;
+							if(document.getElementById("reset"))  document.getElementById("reset").disabled = false;
+							if(document.getElementById("cancel")) document.getElementById("cancel").disabled = false;
+						} else {
+							var node = req.responseXML.getElementsByTagName("method");
+							if(node && (node.length > 0)){
+								method = req.responseXML.getElementsByTagName("method")[0].firstChild.data;
+								eval(method);
+							}
+						}
+					} else {
+						alert("Error:\n" + req.statusText);
+					}
+				}
+			}
+
+function div_wait_Hide(){
+	document.getElementById('wait_div').style.display='none';
+	document.getElementById('wait_ifrm').style.display='none';
+}
+
+function div_wait_Show(){
+	var DivWait = document.getElementById('wait_div');
+	var IfrWait = document.getElementById('wait_ifrm');
+	var posXY = getoffset(document.getElementById("submit"));
+	DivWait.style.top = (parseInt(-150) + parseInt(posXY[0]) - parseInt(DivWait.style.height) - parseInt(document.getElementById("submit").offsetHeight)*2) + "px";
+	DivWait.style.left = (parseInt(150) + parseInt(posXY[1]) + parseInt(document.getElementById("submit").offsetWidth)) + "px";
+	DivWait.style.display = "block";
+	DivWait.style.zindex = "9";
+	IfrWait.style.width = DivWait.offsetWidth;
+	IfrWait.style.height = DivWait.offsetHeight;
+	IfrWait.style.top = DivWait.style.top;
+	IfrWait.style.left = DivWait.style.left;
+	IfrWait.style.zIndex = DivWait.style.zIndex - 1;
+	IfrWait.style.display = "block";
+}
+
+
+
+
+
+
 		</script>
 	</body>
 </html>
