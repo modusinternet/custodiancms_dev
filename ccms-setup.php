@@ -189,7 +189,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			body{
 				color:var(--cl1);
 				background-color:var(--cl0);
-				font:300 2.6rem/3.5rem "Open Sans",sans-serif;
+				font:300 2.2rem/3.3rem "Open Sans",sans-serif;
 				opacity:0;
 				padding:20px;
 				-webkit-font-smoothing:antialiased;
