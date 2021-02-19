@@ -17,10 +17,10 @@ System user running PHP (e.g. `www-data`) needs to have the necessary access per
 */
 
 /*
-Protect the script from unauthorized access by using a secret access token. If it's not present in the access URL as a GET variable named `sat` e.g. ccms-install-en.php?sat=Chang...lse the script is not going to deploy.
+Protect the script from unauthorized access by using a secret access token. If it's not present in the access URL as a GET variable named `sat` e.g. ccms-setup.php?sat=ChangeThisStringToSomethingElseAndUseItInTheURL the script is not going to deploy.
 @var string
 */
-define('SECRET_ACCESS_TOKEN', 'ChangeThisStringToSomethingElse');
+define('SECRET_ACCESS_TOKEN', 'ChangeThisStringToSomethingElseAndUseItInTheURL');
 
 /*
 The address of the remote Git repository that contains the code that's being deployed. If the repository is private, you'll need to use the SSH address.
@@ -118,7 +118,7 @@ define('EMAIL_ON_ERROR', false);
 define('CONFIG_FILE', __FILE__);
 
 // If there's authorization error, set the correct HTTP header.
-if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'ChangeThisStringToSomethingElse') {
+if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'ChangeThisStringToSomethingElseAndUseItInTheURL') {
 	/*header($_SERVER['SERVER_PROTOCOL'] . "403 Forbidden, missing 'SECRET_ACCESS_TOKEN' in URI.", true, 403);*/
 	header($_SERVER['SERVER_PROTOCOL'] . "403 Forbidden", true, 403);
 } else {
@@ -290,7 +290,6 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 
 
 
-
 			.oj{color:rgb(236,127,39)}
 			.td-ul{text-decoration:underline}
 			.td-dul{
@@ -301,6 +300,10 @@ if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCES
 				font-size:150%;
 				color:rgb(134,177,53)
 			}
+
+
+
+
 		</style>
 	</head>
 	<body>
