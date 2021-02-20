@@ -360,16 +360,17 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="tab-01" class="tabcontent">
 			<h1>Welcome to Custodian CMS</h1>
 			<p>This page is designed to help test your server environment, download the CCMS templates, check your configuration, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
+			<button type = "button" onclick = "ajaxCall('https://custodiancms.org','/install/en.php')">Update Details</button>
+			<div id="container"><!-- The response will be printed here --></div>
+
+			<div id="lng"></div>
+			<div id="txt01"></div>
+
 		</div>
 
 		<div id="tab-02" class="tabcontent">
 			<h1>Install</h1>
 			<p>Paris is the capital of France.</p>
-			<div id='container'>
-
-				<!-- The response will be printed here -->
-
-			</div>
 		</div>
 
 		<div id="tab-03" class="tabcontent">
@@ -424,23 +425,19 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 
+			/*
 			function ajaxCall(location, url){
-				if(window.XMLHttpRequest){
-					var req = new XMLHttpRequest();
-					req.onreadystatechange = function() {
-						if(this.readyState === 4){
-							document.getElementById('container').innerHTML = '<div>' + this.responseText +'</div>';
-						} else {
-							document.getElementById('container').innerHTML = '<div class="loader"></div>';
-						}
-						//alert("load XML:" + "http<?=$CFG["HTTPS"];?>://<?=$_SERVER["HTTP_HOST"];?>" + location);
-						req.open("POST", "https://<?=$_SERVER["HTTP_HOST"];?>" + location, true);
-						req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-						req.onreadystatechange = ajaxCallProcess();
-						req.send(url);
+				var req = new XMLHttpRequest();
+				req.onreadystatechange = function(){
+					if(this.readyState === 4){
+						document.getElementById('container').innerHTML = this.responseText;
+					} else {
+						document.getElementById('container').innerHTML = '<div class="loader"></div>';
 					}
-				} else {
-					alert("Your browser does not appear to support modern Ajax calls.");
+					req.open("POST", "https://<?=$_SERVER["HTTP_HOST"];?>" + location, true);
+					req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					req.onreadystatechange = ajaxCallProcess();
+					req.send(url);
 				}
 			}
 
@@ -477,6 +474,33 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					}
 				}
 			}
+			*/
+
+			function ajaxCall(host, url) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function(){
+					if(this.readyState === 4){
+						document.getElementById('container').innerHTML = "";
+
+
+						var jsonObj = JSON.parse(this.responseText);
+						// jsonObj variable now contains the data structure and can
+						// be accessed as jsonObj.name and jsonObj.country.
+						document.getElementById("lng").innerHTML = jsonObj.lng;
+						document.getElementById("txt01").innerHTML = jsonObj.txt01;
+
+
+					} else {
+						document.getElementById('container').innerHTML = '<div class="loader"></div>';
+					}
+				};
+				xhttp.open("POST", host, true);
+				xhttp.send(url);
+			}
+
+
+
+
 
 function div_wait_Hide(){
 	document.getElementById('wait_div').style.display='none';
