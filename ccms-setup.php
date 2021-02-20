@@ -360,7 +360,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="tab-01" class="tabcontent">
 			<h1>Welcome to Custodian CMS</h1>
 			<p>This page is designed to help test your server environment, download the CCMS templates, check your configuration, import example database content and help establish your first administrator.  Once everything is properly configured and the setup process is complete, you will need to <span class="oj">rename or remove the /ccms-setup.php template from your server to continue</span>.</p>
-			<button type = "button" onclick = "ajaxCall('https://custodiancms.org','/install/en.php')">Update Details</button>
+			<button type = "button" onclick = "ajaxCall('https://custodiancms.org/install/en.php')">Update Details</button>
 			<div id="container"><!-- The response will be printed here --></div>
 
 			<div id="lng"></div>
@@ -476,7 +476,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 			*/
 
-			function ajaxCall(host, url) {
+			function ajaxCall(url) {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function(){
 					if(this.readyState === 4){
@@ -494,8 +494,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						document.getElementById('container').innerHTML = '<div class="loader"></div>';
 					}
 				};
-				xhttp.open("POST", host, true);
-				xhttp.send(url);
+				xhttp.open("POST", url, true);
+				xhttp.send();
 			}
 
 
