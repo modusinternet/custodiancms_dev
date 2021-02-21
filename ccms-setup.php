@@ -263,9 +263,17 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				color:#fff
 			}
 
-			.tab button svg path{
-				color:#337ab7;
+			.tab button:hover svg path{
+				background-color:#ec7f27;
+				fill:#fff
 			}
+
+			.tab button.active svg path{
+				background-color:#ec7f27;
+				fill:#fff
+			}
+
+			.tab button svg path{fill:#337ab7}
 
 
 
