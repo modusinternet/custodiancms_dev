@@ -351,10 +351,15 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 		<div class="tab">
-			<button class="tablinks" onclick="openCity(event,'tab-01')" id="defaultOpen">Welcome</button>
-			<button class="tablinks" onclick="openCity(event,'tab-02')">Install</button>
-			<button class="tablinks" onclick="openCity(event,'tab-03')">Setup</button>
-			<button class="tablinks" onclick="openCity(event,'tab-04')">Copyright</button>
+			<button class="tabLinks" onclick="openTab(event,'tab-01')" id="defaultOpen">Welcome</button>
+			<button class="tabLinks" onclick="openTab(event,'tab-02')">Install</button>
+			<button class="tabLinks" onclick="openTab(event,'tab-03')">Setup</button>
+			<button class="tabLinks" onclick="openTab(event,'tab-04')">Copyright</button>
+			<button class="tabLinks" onclick="openTab(event,'tab-05')">
+
+				<svg style="" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m7.5 164.053c4.142 0 7.5-3.357 7.5-7.5v-90.51c0-9.649 7.851-17.5 17.5-17.5h233c9.649 0 17.5 7.851 17.5 17.5v21.638c0 4.143 3.358 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-21.638c0-17.921-14.58-32.5-32.5-32.5h-233c-17.92 0-32.5 14.579-32.5 32.5v90.51c0 4.142 3.358 7.5 7.5 7.5z"/><path d="m504.5 336.074c4.142 0 7.5-3.357 7.5-7.5v-94.834c0-17.921-14.58-32.5-32.5-32.5h-181.5v-78.581c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v78.581h-21.641c-24.833 0-45.248 19.216-47.193 43.557h-83.633c-8.087 0-15.691 3.149-21.409 8.867l-41.934 41.934c-.321.321-.942.061-.942-.388v-31.525c0-10.415-8.473-18.888-18.888-18.888h-14.86c-9.649 0-17.5-7.851-17.5-17.5v-35.701c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v35.701c0 17.921 14.58 32.5 32.5 32.5h14.859c2.144 0 3.888 1.744 3.888 3.888v31.525c0 8.574 6.977 15.55 15.553 15.55 4.154 0 8.061-1.618 10.997-4.556l41.933-41.933c2.885-2.886 6.722-4.475 10.803-4.475h83.467v135.197c0 17.921 14.58 32.5 32.5 32.5h134.967c4.081 0 7.917 1.589 10.803 4.475l41.934 41.934c2.938 2.938 6.843 4.555 10.996 4.555 8.576 0 15.553-6.976 15.553-15.55v-31.524c0-2.145 1.744-3.889 3.888-3.889h14.859c17.92 0 32.5-14.579 32.5-32.5v-31.696c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v31.696c0 9.649-7.851 17.5-17.5 17.5h-14.859c-10.415 0-18.888 8.474-18.888 18.889v31.524c0 .449-.624.708-.943.388l-41.933-41.934c-5.718-5.718-13.322-8.867-21.409-8.867h-134.968c-9.649 0-17.5-7.851-17.5-17.5v-146.394c0-17.843 14.517-32.359 32.359-32.359h218.141c9.649 0 17.5 7.851 17.5 17.5v94.834c0 4.142 3.358 7.499 7.5 7.499z"/><path d="m338.946 313.548c-3.871-1.476-8.204.468-9.678 4.34l-19.966 52.424c-1.474 3.87.468 8.203 4.339 9.678.879.335 1.781.493 2.668.493 3.022 0 5.871-1.84 7.01-4.833l9.339-24.521h61.768l9.246 24.501c1.134 3.003 3.987 4.854 7.019 4.854.879 0 1.775-.156 2.646-.485 3.875-1.462 5.832-5.789 4.369-9.665l-43.591-115.508c-1.625-4.31-5.811-7.203-10.421-7.203-.002 0-.005 0-.007 0-4.584.006-8.759 2.888-10.389 7.169l-11.589 30.429c-1.475 3.871.468 8.204 4.339 9.679 3.871 1.477 8.204-.468 9.678-4.339l7.957-20.893 25.082 66.462h-50.395l4.914-12.902c1.475-3.873-.467-8.206-4.338-9.68z"/><path d="m89.576 192.21c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c22.521 0 43.132-8.324 58.924-22.056 15.791 13.732 36.403 22.056 58.924 22.056 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5c-18.456 0-35.362-6.722-48.433-17.83 11.305-13.724 18.623-30.846 20.178-49.578h23.131c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5h-46.3v-24.951c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v24.951h-46.3c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5h23.131c1.555 18.733 8.873 35.855 20.178 49.578-13.07 11.107-29.977 17.83-48.433 17.83zm74.532-67.408c-1.448 14.502-7.063 27.786-15.608 38.668-8.545-10.882-14.16-24.166-15.608-38.668z"/></svg><!-- Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+
+		</button>
 		</div>
 
 		<div id="tab-01" class="tabcontent">
@@ -386,22 +391,29 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 		</div>
 
+		<div id="tab-05" class="tabcontent">
+			<h1>Language</h1>
+			<p>Tokyo is the capital of Japan.</p>
+		</div>
+
+
+
 		<div>
 			<a class="oj" href="#copyright">Copyright</a> &copy; <?php echo date("Y"); ?> assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>.
 		</div>
 
 		<script>
-			function openCity(evt, cityName){
-				var i,tabcontent,tablinks;
+			function openTab(evt, tabID){
+				var i,tabcontent,tabLinks;
 				tabcontent=document.getElementsByClassName("tabcontent");
 				for(i=0;i<tabcontent.length;i++){
 					tabcontent[i].style.display="none";
 				}
-				tablinks=document.getElementsByClassName("tablinks");
-				for(i=0;i<tablinks.length;i++){
-					tablinks[i].className=tablinks[i].className.replace(" active","");
+				tabLinks=document.getElementsByClassName("tabLinks");
+				for(i=0;i<tabLinks.length;i++){
+					tabLinks[i].className=tabLinks[i].className.replace(" active","");
 				}
-				document.getElementById(cityName).style.display="block";
+				document.getElementById(tabID).style.display="block";
 				evt.currentTarget.className+=" active";
 			}
 
