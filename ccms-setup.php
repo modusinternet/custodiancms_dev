@@ -252,28 +252,19 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 
 			/* Change background color of buttons on hover */
-			.tab button:hover{
+			.tab button:hover, .tab button:hover svg path{
 				background-color:#ec7f27;
 				color:#fff
 			}
 
 			/* Create an active/current tablink class */
-			.tab button.active{
+			.tab button.active, .tab button.active svg path{
 				background-color:#ec7f27;
 				color:#fff
 			}
 
-
-
-			/* Change background color of buttons on hover */
 			.tab button svg path{
 				color:#337ab7;
-			}
-
-			/* Create an active/current tablink class */
-			.tab button.active svg path{
-				background-color:#ec7f27;
-				color:#fff
 			}
 
 
