@@ -517,7 +517,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				xhttp.send();
 			}
 
-			ajaxCall("https://custodiancms.org/install/en.txt");
+			ajaxCall("https://custodiancms.org/install/en.php");
 
 
 
