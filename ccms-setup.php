@@ -378,7 +378,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		</div>
 
 		<div id="tab001" class="tabcontent">
-			
+
 		</div>
 
 		<div id="tab002" class="tabcontent">
@@ -506,7 +506,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						var obj = JSON.parse(this.responseText);
 						// obj variable now contains the data structure and can
 						// be accessed as obj.name and obj.country.
-						document.getElementById("lng").innerHTML = obj.tab001.text001;
+						document.getElementById("tab001").innerHTML = obj.tab001.text001;
 
 
 					} else {
