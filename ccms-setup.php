@@ -377,9 +377,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		</button>
 		</div>
 
-		<div id="tab001" class="tabcontent">
-
-		</div>
+		<div id="tab001" class="tabcontent"></div>
 
 		<div id="tab002" class="tabcontent">
 			<h1>Install</h1>
@@ -399,10 +397,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 		</div>
 
-		<div id="tab005" class="tabcontent">
-			<h1>Language</h1>
-			<p>Tokyo is the capital of Japan.</p>
-		</div>
+		<div id="tab005" class="tabcontent"></div>
 
 
 
@@ -501,16 +496,19 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				xhttp.onreadystatechange = function(){
 					if(this.readyState === 4){
 						document.getElementById('tab001').innerHTML = "";
+						document.getElementById('tab005').innerHTML = "";
 
 
 						var obj = JSON.parse(this.responseText);
 						// obj variable now contains the data structure and can
 						// be accessed as obj.name and obj.country.
 						document.getElementById("tab001").innerHTML = obj.tab001.text001;
+						document.getElementById("tab005").innerHTML = obj.tab005.text001;
 
 
 					} else {
 						document.getElementById('tab001').innerHTML = '<div class="loader"></div>';
+						document.getElementById('tab005').innerHTML = '<div class="loader"></div>';
 					}
 				};
 				xhttp.open("POST", url, true);
