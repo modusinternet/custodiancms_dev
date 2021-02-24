@@ -393,8 +393,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 		<div id="tab005" class="tabcontent"></div>
 
-
-
 		<div id="footer"></div>
 
 		<script>
@@ -412,21 +410,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
-			/* Loading Screen START */
-			window.setTimeout(function(){
-				document.getElementById("loading_svg").style.opacity="0";
-				window.setTimeout(function(){
-					document.getElementById("loading_svg").style.display="none";
-				},500);
-			},500);
-			window.setTimeout(function(){
-				document.getElementsByTagName("body")[0].style.opacity="1";
-			},250);
-			/* Loading Screen END */
-
-			// Get the element with id="defaultOpen" and click on it
-			document.getElementById("defaultOpen").click();
-
 			function ajaxCall(url) {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function(){
@@ -441,17 +424,45 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
 						document.getElementById("footer").innerHTML = obj.footer;
 					} else {
-						document.getElementById("tab001").innerHTML = "<div class=\"loader\"></div>";
-						document.getElementById("tab004").innerHTML = "<div class=\"loader\"></div>";
-						document.getElementById("tab005").innerHTML = "<div class=\"loader\"></div>";
-						document.getElementById("footer").innerHTML = "<div class=\"loader\"></div>";
+						document.getElementById("tab001").innerHTML = '<div class="loader"></div>';
+						document.getElementById("tab004").innerHTML = '<div class="loader"></div>';
+						document.getElementById("tab005").innerHTML = '<div class="loader"></div>';
+						document.getElementById("footer").innerHTML = '<div class="loader"></div>';
 					}
 				};
 				xhttp.open("POST", url, true);
 				xhttp.send();
 			}
 
+			/* Loading Screen START */
+			window.setTimeout(function(){
+				document.getElementById("loading_svg").style.opacity="0";
+				window.setTimeout(function(){
+					document.getElementById("loading_svg").style.display="none";
+				},500);
+			},500);
+			window.setTimeout(function(){
+				document.getElementsByTagName("body")[0].style.opacity="1";
+			},250);
+			/* Loading Screen END */
+
+			/* Load the English version of the site START */
 			ajaxCall("https://custodiancms.org/install/en.php");
+			/* Load the English version of the site END */
+
+			/* Show the id="defaultOpen" tab START */
+			document.getElementById("defaultOpen").click();
+			/* Show the id="defaultOpen" tab END */
+
+
+
+
+
+
+
+
+
+
 
 			/*
 			function ajaxCall(location, url){
