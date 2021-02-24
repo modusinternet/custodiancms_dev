@@ -395,9 +395,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 
-		<div>
-			<a class="oj" href="#copyright">Copyright</a> &copy; <?php echo date("Y"); ?> assigned by Vincent Hallberg of <a class='oj' href="https://custodiancms.org" target="_blank">custodiancms.org</a> and <a class='oj' href="https://modusinternet.com" target="_blank">modusinternet.com</a>.
-		</div>
+		<div id="footer"></div>
 
 		<script>
 			function openTab(evt, tabID){
@@ -429,10 +427,31 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			// Get the element with id="defaultOpen" and click on it
 			document.getElementById("defaultOpen").click();
 
+			function ajaxCall(url) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function(){
+					if(this.readyState === 4){
+						document.getElementById('tab001').innerHTML = "";
+						document.getElementById('tab004').innerHTML = "";
+						document.getElementById('tab005').innerHTML = "";
+						document.getElementById('footer').innerHTML = "";
+						var obj = JSON.parse(this.responseText);
+						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
+						document.getElementById("tab004").innerHTML = obj.tab004[0].text001;
+						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
+						document.getElementById("footer").innerHTML = obj.footer[0];
+					} else {
+						document.getElementById('tab001').innerHTML = '<div class="loader"></div>';
+						document.getElementById('tab004').innerHTML = '<div class="loader"></div>';
+						document.getElementById('tab005').innerHTML = '<div class="loader"></div>';
+						document.getElementById('footer').innerHTML = '<div class="loader"></div>';
+					}
+				};
+				xhttp.open("POST", url, true);
+				xhttp.send();
+			}
 
-
-
-
+			ajaxCall("https://custodiancms.org/install/en.php");
 
 			/*
 			function ajaxCall(location, url){
@@ -485,28 +504,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 			*/
 
-			function ajaxCall(url) {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function(){
-					if(this.readyState === 4){
-						document.getElementById('tab001').innerHTML = "";
-						document.getElementById('tab004').innerHTML = "";
-						document.getElementById('tab005').innerHTML = "";
-						var obj = JSON.parse(this.responseText);
-						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
-						document.getElementById("tab004").innerHTML = obj.tab004[0].text001;
-						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
-					} else {
-						document.getElementById('tab001').innerHTML = '<div class="loader"></div>';
-						document.getElementById('tab004').innerHTML = '<div class="loader"></div>';
-						document.getElementById('tab005').innerHTML = '<div class="loader"></div>';
-					}
-				};
-				xhttp.open("POST", url, true);
-				xhttp.send();
-			}
 
-			ajaxCall("https://custodiancms.org/install/en.php");
 
 
 
