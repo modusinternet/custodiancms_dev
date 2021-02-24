@@ -366,7 +366,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 		<div class="tab">
-			<button class="tabLinks defaultOpen" onclick="openTab(event,'tab001')">Welcome</button>
+			<button class="tabLinks" id="defaultOpen" onclick="openTab(event,'tab001')">Welcome</button>
 			<button class="tabLinks" onclick="openTab(event,'tab002')">Install</button>
 			<button class="tabLinks" onclick="openTab(event,'tab003')">Setup</button>
 			<button class="tabLinks" onclick="openTab(event,'tab004')">Copyright</button>
@@ -452,8 +452,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			/* Load the English version of the site END */
 
 			/* Show the element with class="defaultOpen" START */
-			/*document.getElementById("defaultOpen").click();*/
-			document.getElementsByClassName("defaultOpen").click();
+			document.getElementById("defaultOpen").click();
+			/*document.getElementsByClassName("defaultOpen").click();*/
 			/* Show the element with class="defaultOpen" END */
 
 
