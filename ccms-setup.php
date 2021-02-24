@@ -408,7 +408,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				}
 				document.getElementById(tabID).style.display="block";
 				evt.currentTarget.className+=" active";
-				/*document.getElementById(tabID).className+=" active";*/
 			}
 
 			function ajaxCall(url) {
@@ -453,18 +452,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			/* Show the element with class="defaultOpen" START */
 			document.getElementById("defaultOpen").click();
-			/*document.getElementsByClassName("defaultOpen").click();*/
 			/* Show the element with class="defaultOpen" END */
-
-
-
-
-
-
-
-
-
-
 
 			/*
 			function ajaxCall(location, url){
@@ -516,39 +504,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				}
 			}
 			*/
-
-
-
-
-
-
-
-function div_wait_Hide(){
-	document.getElementById('wait_div').style.display='none';
-	document.getElementById('wait_ifrm').style.display='none';
-}
-
-function div_wait_Show(){
-	var DivWait = document.getElementById('wait_div');
-	var IfrWait = document.getElementById('wait_ifrm');
-	var posXY = getoffset(document.getElementById("submit"));
-	DivWait.style.top = (parseInt(-150) + parseInt(posXY[0]) - parseInt(DivWait.style.height) - parseInt(document.getElementById("submit").offsetHeight)*2) + "px";
-	DivWait.style.left = (parseInt(150) + parseInt(posXY[1]) + parseInt(document.getElementById("submit").offsetWidth)) + "px";
-	DivWait.style.display = "block";
-	DivWait.style.zindex = "9";
-	IfrWait.style.width = DivWait.offsetWidth;
-	IfrWait.style.height = DivWait.offsetHeight;
-	IfrWait.style.top = DivWait.style.top;
-	IfrWait.style.left = DivWait.style.left;
-	IfrWait.style.zIndex = DivWait.style.zIndex - 1;
-	IfrWait.style.display = "block";
-}
-
-
-
-
-
-
 		</script>
 	</body>
 </html>
