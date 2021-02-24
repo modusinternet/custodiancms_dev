@@ -452,6 +452,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			/* Load the English version of the site END */
 
 			/* Show the element with class="defaultOpen" START */
+			/*document.getElementById("defaultOpen").click();*/
 			document.getElementsByClassName("defaultOpen").click();
 			/* Show the element with class="defaultOpen" END */
 
