@@ -379,15 +379,9 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 		<div id="tab001" class="tabcontent"></div>
 
-		<div id="tab002" class="tabcontent">
-			<h1>Install</h1>
-			<p>Paris is the capital of France.</p>
-		</div>
+		<div id="tab002" class="tabcontent"></div>
 
-		<div id="tab003" class="tabcontent">
-			<h1>Setup</h1>
-			<p>Tokyo is the capital of Japan.</p>
-		</div>
+		<div id="tab003" class="tabcontent"></div>
 
 		<div id="tab004" class="tabcontent"></div>
 
@@ -415,16 +409,22 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				xhttp.onreadystatechange = function(){
 					if(this.readyState === 4){
 						document.getElementById("tab001").innerHTML = "";
+						document.getElementById("tab002").innerHTML = "";
+						document.getElementById("tab003").innerHTML = "";
 						document.getElementById("tab004").innerHTML = "";
 						document.getElementById("tab005").innerHTML = "";
 						document.getElementById("footer").innerHTML = "";
 						var obj = JSON.parse(this.responseText);
 						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
+						document.getElementById("tab002").innerHTML = obj.tab002[0].text001;
+						document.getElementById("tab003").innerHTML = obj.tab003[0].text001;
 						document.getElementById("tab004").innerHTML = obj.tab004[0].text001;
 						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
 						document.getElementById("footer").innerHTML = obj.footer;
 					} else {
 						document.getElementById("tab001").innerHTML = '<div class="loader"></div>';
+						document.getElementById("tab002").innerHTML = '<div class="loader"></div>';
+						document.getElementById("tab003").innerHTML = '<div class="loader"></div>';
 						document.getElementById("tab004").innerHTML = '<div class="loader"></div>';
 						document.getElementById("tab005").innerHTML = '<div class="loader"></div>';
 						document.getElementById("footer").innerHTML = '<div class="loader"></div>';
