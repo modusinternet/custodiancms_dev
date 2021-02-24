@@ -366,7 +366,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 		<div class="tab">
-			<button class="tabLinks active" onclick="openTab(event,'tab001')">Welcome</button>
+			<button class="tabLinks" id="defaultOpen" onclick="openTab(event,'tab001')">Welcome</button>
 			<button class="tabLinks" onclick="openTab(event,'tab002')">Install</button>
 			<button class="tabLinks" onclick="openTab(event,'tab003')">Setup</button>
 			<button class="tabLinks" onclick="openTab(event,'tab004')">Copyright</button>
@@ -407,8 +407,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					tabLinks[i].className=tabLinks[i].className.replace(" active","");
 				}
 				document.getElementById(tabID).style.display="block";
-				/*evt.currentTarget.className+=" active";*/
-				document.getElementById(tabID).className+=" active";
+				evt.currentTarget.className+=" active";
+				/*document.getElementById(tabID).className+=" active";*/
 			}
 
 			function ajaxCall(url) {
