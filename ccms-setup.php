@@ -407,7 +407,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					tabLinks[i].className=tabLinks[i].className.replace(" active","");
 				}
 				document.getElementById(tabID).style.display="block";
-				evt.currentTarget.className+=" active";
+				/*evt.currentTarget.className+=" active";*/
+				document.getElementById(tabID).className+=" active";
 			}
 
 			function ajaxCall(url) {
@@ -450,9 +451,9 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			ajaxCall("https://custodiancms.org/install/en.php");
 			/* Load the English version of the site END */
 
-			/* Show the id="defaultOpen" tab START */
-			document.getElementById("defaultOpen").click();
-			/* Show the id="defaultOpen" tab END */
+			/* Show the element with class="defaultOpen" START */
+			document.getElementsByClassName("defaultOpen").click();
+			/* Show the element with class="defaultOpen" END */
 
 
 
