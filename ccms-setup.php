@@ -503,10 +503,10 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						// obj variable now contains the data structure and can
 						// be accessed as obj.name and obj.country.
 						/*document.getElementById("tab001").innerHTML = obj.tab001.text001;*/
-						document.getElementById("tab001").innerHTML = obj.tab001[text001];
+						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
 
 						/*document.getElementById("tab005").innerHTML = obj.tab005.text001;*/
-						document.getElementById("tab005").innerHTML = obj.tab005[text001];
+						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
 
 
 					} else {
