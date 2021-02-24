@@ -439,7 +439,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
 						document.getElementById("tab004").innerHTML = obj.tab004[0].text001;
 						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
-						document.getElementById("footer").innerHTML = obj.footer[0];
+						document.getElementById("footer").innerHTML = obj.footer;
 					} else {
 						document.getElementById("tab001").innerHTML = "<div class=\"loader\"></div>";
 						document.getElementById("tab004").innerHTML = "<div class=\"loader\"></div>";
