@@ -431,20 +431,20 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function(){
 					if(this.readyState === 4){
-						document.getElementById('tab001').innerHTML = "";
-						document.getElementById('tab004').innerHTML = "";
-						document.getElementById('tab005').innerHTML = "";
-						document.getElementById('footer').innerHTML = "";
+						document.getElementById("tab001").innerHTML = "";
+						document.getElementById("tab004").innerHTML = "";
+						document.getElementById("tab005").innerHTML = "";
+						document.getElementById("footer").innerHTML = "";
 						var obj = JSON.parse(this.responseText);
 						document.getElementById("tab001").innerHTML = obj.tab001[0].text001;
 						document.getElementById("tab004").innerHTML = obj.tab004[0].text001;
 						document.getElementById("tab005").innerHTML = obj.tab005[0].text001;
 						document.getElementById("footer").innerHTML = obj.footer[0];
 					} else {
-						document.getElementById('tab001').innerHTML = '<div class="loader"></div>';
-						document.getElementById('tab004').innerHTML = '<div class="loader"></div>';
-						document.getElementById('tab005').innerHTML = '<div class="loader"></div>';
-						document.getElementById('footer').innerHTML = '<div class="loader"></div>';
+						document.getElementById("tab001").innerHTML = "<div class=\"loader\"></div>";
+						document.getElementById("tab004").innerHTML = "<div class=\"loader\"></div>";
+						document.getElementById("tab005").innerHTML = "<div class=\"loader\"></div>";
+						document.getElementById("footer").innerHTML = "<div class=\"loader\"></div>";
 					}
 				};
 				xhttp.open("POST", url, true);
