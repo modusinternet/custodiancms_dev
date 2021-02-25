@@ -378,8 +378,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
-			//let dude;
-
 			function openTab(evt, tabID){
 				var i,tabcontent,tab;
 				tabcontent=document.getElementsByClassName("tabcontent");
