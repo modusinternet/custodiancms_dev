@@ -392,6 +392,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
+			var obj;
+
 			function setLng(url) {
 				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
@@ -402,14 +404,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 				if(sessionStorage.getItem(url) !== null) {
 					/* This JSON content is already found locally, don't download, just display. */
-					var obj = JSON.parse(sessionStorage.getItem(url));
+					obj = JSON.parse(sessionStorage.getItem(url));
 				} else {
 					/* Pull the JSON file from the website and save it in sessionStorage. */
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function(){
 						if(this.readyState === 4){
 							sessionStorage.setItem(url, this.responseText);
-							var obj = JSON.parse(this.responseText);
+							obj = JSON.parse(this.responseText);
 						}
 					};
 					xhttp.open("POST", url, true);
