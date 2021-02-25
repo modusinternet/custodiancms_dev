@@ -378,7 +378,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
-			let dude;
+			let dude = "";
 
 			function openTab(evt, tabID){
 				var i,tabcontent,tab;
@@ -418,14 +418,12 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					req.send();
 				}
 
-				/*
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
 				document.getElementById("tabC04").innerHTML = "";
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
-				*/
 
 				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
 				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
