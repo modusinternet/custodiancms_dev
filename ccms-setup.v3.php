@@ -392,34 +392,43 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
-			function ajaxCall(url) {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function(){
-					if(this.readyState === 4){
-						document.getElementById("tabC01").innerHTML = "";
-						document.getElementById("tabC02").innerHTML = "";
-						document.getElementById("tabC03").innerHTML = "";
-						document.getElementById("tabC04").innerHTML = "";
-						document.getElementById("tabC05").innerHTML = "";
-						document.getElementById("footer").innerHTML = "";
-						var obj = JSON.parse(this.responseText);
-						document.getElementById("tabC01").innerHTML = obj.tabC01[0].text001;
-						document.getElementById("tabC02").innerHTML = obj.tabC02[0].text001;
-						document.getElementById("tabC03").innerHTML = obj.tabC03[0].text001;
-						document.getElementById("tabC04").innerHTML = obj.tabC04[0].text001;
-						document.getElementById("tabC05").innerHTML = obj.tabC05[0].text001;
-						document.getElementById("footer").innerHTML = obj.footer;
-					} else {
-						document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
-						document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
-						document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
-						document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
-						document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
-						document.getElementById("footer").innerHTML = '<div class="loader"></div>';
-					}
-				};
-				xhttp.open("POST", url, true);
-				xhttp.send();
+			function setLng(url) {
+				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
+				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
+
+				if(sessionStorage.getItem(url) !== null) {
+					/* This JSON content is already found locally, don't download, just display. */
+					var obj = JSON.parse(sessionStorage.getItem(url));
+				} else {
+					/* Pull the JSON file from the website and save it in sessionStorage. */
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function(){
+						if(this.readyState === 4){
+							sessionStorage.setItem(url, this.responseText);
+							var obj = JSON.parse(this.responseText);
+						}
+					};
+					xhttp.open("POST", url, true);
+					xhttp.send();
+				}
+
+				document.getElementById("tabC01").innerHTML = "";
+				document.getElementById("tabC02").innerHTML = "";
+				document.getElementById("tabC03").innerHTML = "";
+				document.getElementById("tabC04").innerHTML = "";
+				document.getElementById("tabC05").innerHTML = "";
+				document.getElementById("footer").innerHTML = "";
+
+				document.getElementById("tabC01").innerHTML = obj.tabC01[0].text01;
+				document.getElementById("tabC02").innerHTML = obj.tabC02[0].text01;
+				document.getElementById("tabC03").innerHTML = obj.tabC03[0].text01;
+				document.getElementById("tabC04").innerHTML = obj.tabC04[0].text01;
+				document.getElementById("tabC05").innerHTML = obj.tabC05[0].text01;
+				document.getElementById("footer").innerHTML = obj.footer;
 			}
 
 			/* Loading Screen START */
@@ -434,13 +443,13 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			},250);
 			/* Loading Screen END */
 
-			/* Load the English version of the site START */
-			ajaxCall("https://custodiancms.org/install/en.php");
-			/* Load the English version of the site END */
+			/* Load the English version of the site first START */
+			setLng("https://custodiancms.org/install/en.php");
+			/* Load the English version of the site first END */
 
-			/* Show the element with class="defaultOpen" START */
+			/* Set the first tab to be highlighted and content to be displayed START */
 			document.getElementById("tab01").click();
-			/* Show the element with class="defaultOpen" END */
+			/* Set the first tab to be highlighted and content to be displayed END */
 
 			/*
 			function ajaxCall(location, url){
