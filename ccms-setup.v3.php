@@ -405,23 +405,25 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					window.dude = JSON.parse(sessionStorage.getItem(url));
 				} else {
 					/* Pull the JSON file from the website and save it in sessionStorage. */
-					var xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function(){
+					var req = new XMLHttpRequest();
+					req.onreadystatechange = function(){
 						if(this.readyState == 4 && this.status == 200){
 							sessionStorage.setItem(url, this.responseText);
 							window.dude = JSON.parse(this.responseText);
 						}
 					};
-					xhttp.open("POST", url, true);
-					xhttp.send();
+					req.open("POST", url, true);
+					req.send();
 				}
 
+				/*
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
 				document.getElementById("tabC04").innerHTML = "";
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
+				*/
 
 				document.getElementById("tabC01").innerHTML = window.dude.tabC01[0].text01;
 				document.getElementById("tabC02").innerHTML = window.dude.tabC02[0].text01;
