@@ -378,6 +378,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
+			let dude;
+
 			function openTab(evt, tabID){
 				var i,tabcontent,tab;
 				tabcontent=document.getElementsByClassName("tabcontent");
@@ -402,14 +404,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 				if(sessionStorage.getItem(url) !== null) {
 					/* This JSON content is already found locally, don't download, just display. */
-					window.dude = JSON.parse(sessionStorage.getItem(url));
+					dude = JSON.parse(sessionStorage.getItem(url));
 				} else {
 					/* Pull the JSON file from the website and save it in sessionStorage. */
 					var req = new XMLHttpRequest();
 					req.onreadystatechange = function(){
 						if(this.readyState == 4 && this.status == 200){
 							sessionStorage.setItem(url, this.responseText);
-							window.dude = JSON.parse(this.responseText);
+							dude = JSON.parse(this.responseText);
 						}
 					};
 					req.open("POST", url, true);
@@ -425,12 +427,12 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = "";
 				*/
 
-				document.getElementById("tabC01").innerHTML = window.dude.tabC01[0].text01;
-				document.getElementById("tabC02").innerHTML = window.dude.tabC02[0].text01;
-				document.getElementById("tabC03").innerHTML = window.dude.tabC03[0].text01;
-				document.getElementById("tabC04").innerHTML = window.dude.tabC04[0].text01;
-				document.getElementById("tabC05").innerHTML = window.dude.tabC05[0].text01;
-				document.getElementById("footer").innerHTML = window.dude.footer;
+				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
+				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
+				document.getElementById("tabC03").innerHTML = dude.tabC03[0].text01;
+				document.getElementById("tabC04").innerHTML = dude.tabC04[0].text01;
+				document.getElementById("tabC05").innerHTML = dude.tabC05[0].text01;
+				document.getElementById("footer").innerHTML = dude.footer;
 			}
 
 			/* Loading Screen START */
