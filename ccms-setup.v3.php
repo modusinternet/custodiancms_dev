@@ -378,7 +378,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
-			let dude;
+			//let dude;
 
 			function openTab(evt, tabID){
 				var i,tabcontent,tab;
@@ -404,14 +404,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 				if(sessionStorage.getItem(url) !== null) {
 					/* This JSON content is already found locally, don't download, just display. */
-					dude = JSON.parse(sessionStorage.getItem(url));
+					window.dude = JSON.parse(sessionStorage.getItem(url));
 				} else {
 					/* Pull the JSON file from the website and save it in sessionStorage. */
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function(){
 						if(this.readyState === 4){
 							sessionStorage.setItem(url, this.responseText);
-							dude = JSON.parse(this.responseText);
+							window.dude = JSON.parse(this.responseText);
 						}
 					};
 					xhttp.open("POST", url, true);
@@ -425,12 +425,12 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
 
-				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
-				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
-				document.getElementById("tabC03").innerHTML = dude.tabC03[0].text01;
-				document.getElementById("tabC04").innerHTML = dude.tabC04[0].text01;
-				document.getElementById("tabC05").innerHTML = dude.tabC05[0].text01;
-				document.getElementById("footer").innerHTML = dude.footer;
+				document.getElementById("tabC01").innerHTML = window.dude.tabC01[0].text01;
+				document.getElementById("tabC02").innerHTML = window.dude.tabC02[0].text01;
+				document.getElementById("tabC03").innerHTML = window.dude.tabC03[0].text01;
+				document.getElementById("tabC04").innerHTML = window.dude.tabC04[0].text01;
+				document.getElementById("tabC05").innerHTML = window.dude.tabC05[0].text01;
+				document.getElementById("footer").innerHTML = window.dude.footer;
 			}
 
 			/* Loading Screen START */
