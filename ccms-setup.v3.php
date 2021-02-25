@@ -409,9 +409,12 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					/* Pull the JSON file from the website and save it in sessionStorage. */
 					var req = new XMLHttpRequest();
 					req.onreadystatechange = function(){
-						if(this.readyState == 4 && this.status == 200){
-							sessionStorage.setItem(url, this.responseText);
-							dude = JSON.parse(this.responseText);
+						/* if(req.readyState == 4 && req.status == 200){*/
+						if(req.readyState === req.DONE){
+							if(req.status === 200){
+								sessionStorage.setItem(url, req.responseText);
+								dude = JSON.parse(req.responseText);
+							}
 						}
 					};
 					req.open("POST", url, true);
