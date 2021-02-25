@@ -378,6 +378,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
+			var obj;
+
 			function openTab(evt, tabID){
 				var i,tabcontent,tab;
 				tabcontent=document.getElementsByClassName("tabcontent");
@@ -391,8 +393,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById(tabID).style.display="block";
 				evt.currentTarget.className+=" active";
 			}
-
-			var obj;
 
 			function setLng(url) {
 				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
