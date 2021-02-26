@@ -413,8 +413,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						if(req.readyState === req.DONE){
 							if(req.status === 200){
 								sessionStorage.setItem(url, req.responseText);
-								//dude = JSON.parse(req.responseText);
-								console.log(req.responseText);
+								dude = req.responseText;
+								dude = JSON.parse(dude);
 							}
 						}
 					};
