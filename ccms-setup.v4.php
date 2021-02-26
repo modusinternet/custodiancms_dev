@@ -532,11 +532,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
 
+				document.getElementById("tabC01").innerHTML = data.tabC01.txt01;
+				/*
 				document.getElementById("tabC01").innerHTML = data.tabC01[0].txt01;
 				document.getElementById("tabC02").innerHTML = data.tabC02[0].txt01;
 				document.getElementById("tabC03").innerHTML = data.tabC03[0].txt01;
 				document.getElementById("tabC04").innerHTML = data.tabC04[0].txt01;
 				document.getElementById("tabC05").innerHTML = data.tabC05[0].txt01;
+				*/
 				document.getElementById("footer").innerHTML = data.footer;
 			}
 
