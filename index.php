@@ -17,8 +17,8 @@ if($_SERVER["REAL_DOCUMENT_ROOT"]) {
 	$_SERVER["DOCUMENT_ROOT"] = $_SERVER["REAL_DOCUMENT_ROOT"];
 }
 
-if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.v3.php")) {
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.v3.php");
+if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.v4.php")) {
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/ccms-setup.v4.php");
 	die();
 }
 
