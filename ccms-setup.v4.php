@@ -494,9 +494,37 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 			*/
 
-			function processXhr(dude){
+			function setLng(url, callback){
+				var xhr = new XMLHttpRequest();
+
+				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
+				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
+				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
+
+				xhr.open("POST", url, true);
+				xhr.send();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState === 4){
+						if(xhr.status === 200){
+							console.log("xhr done successfully");
+							var resp = xhr.responseText;
+							var respJson = JSON.parse(resp);
+							callback(respJson);
+						} else {
+							console.log("xhr failed");
+						}
+					} else {
+						console.log("xhr processing going on");
+					}
+				}
+				console.log("request sent succesfully");
+			}
+
+			function processXhr(data){
 				console.log("inside processXhr");
-				//dude = JSON.parse(data);
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
@@ -504,41 +532,15 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
 
-				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
-				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
-				document.getElementById("tabC03").innerHTML = dude.tabC03[0].text01;
-				document.getElementById("tabC04").innerHTML = dude.tabC04[0].text01;
-				document.getElementById("tabC05").innerHTML = dude.tabC05[0].text01;
-				document.getElementById("footer").innerHTML = dude.footer;
+				document.getElementById("tabC01").innerHTML = data.tabC01[0].txt01;
+				document.getElementById("tabC02").innerHTML = data.tabC02[0].txt01;
+				document.getElementById("tabC03").innerHTML = data.tabC03[0].txt01;
+				document.getElementById("tabC04").innerHTML = data.tabC04[0].txt01;
+				document.getElementById("tabC05").innerHTML = data.tabC05[0].txt01;
+				document.getElementById("footer").innerHTML = data.footer;
 			}
 
-
-
-
-
-
-function setLng(url, callback){
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.send();
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState === 4){
-			if(xhr.status === 200){
-				console.log("xhr done successfully");
-				var resp = xhr.responseText;
-				var respJson = JSON.parse(resp);
-				callback(respJson);
-			} else {
-				console.log("xhr failed");
-			}
-		} else {
-			console.log("xhr processing going on");
-		}
-	}
-	console.log("request sent succesfully");
-}
-
-setLng("https://custodiancms.org/install/en.php", processXhr);
+			setLng("https://custodiancms.org/install/en.php", processXhr);
 
 
 
