@@ -428,7 +428,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
 
-				document.getElementById("tabC01").innerHTML = JSON.stringify(dude.tabC01[0].text01);
+				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
 				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
 				document.getElementById("tabC03").innerHTML = dude.tabC03[0].text01;
 				document.getElementById("tabC04").innerHTML = dude.tabC04[0].text01;
