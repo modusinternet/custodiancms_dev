@@ -472,6 +472,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			let dude = "";
 
+			/*
 			function setLng(url, callback){
 				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
@@ -491,6 +492,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				xhr.send();
 				console.log("request sent to the server");
 			}
+			*/
 
 			function processXhr(data){
 				console.log("inside processXhr");
@@ -510,11 +512,33 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = dude.footer;
 			}
 
-			setLng("https://custodiancms.org/install/en.php", processXhr);
 
 
 
 
+
+function setLng(url, callback){
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.send();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4){
+			if(xhr.status === 200){
+				console.log("xhr done successfully");
+				var resp = xhr.responseText;
+				var respJson = JSON.parse(resp);
+				callback(respJson);
+			} else {
+				console.log("xhr failed");
+			}
+		} else {
+			console.log("xhr processing going on");
+		}
+	}
+	console.log("request sent succesfully");
+}
+
+setLng("https://custodiancms.org/install/en.php", processXhr);
 
 
 
