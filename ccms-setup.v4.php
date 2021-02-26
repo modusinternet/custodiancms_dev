@@ -437,17 +437,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = dude.footer;
 			}
 
-			/* Loading Screen START
-			window.setTimeout(function(){
-				document.getElementById("loading_svg").style.opacity="0";
-				window.setTimeout(function(){
-					document.getElementById("loading_svg").style.display="none";
-				},500);
-			},500);
-			window.setTimeout(function(){
-				document.getElementsByTagName("body")[0].style.opacity="1";
-			},250);
-			/* Loading Screen END
+
 
 			/* Load the English version of the site first START
 			setLng("https://custodiancms.org/install/en.php");
@@ -467,6 +457,18 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 
+
+			/* Loading Screen START */
+			window.setTimeout(function(){
+				document.getElementById("loading_svg").style.opacity="0";
+				window.setTimeout(function(){
+					document.getElementById("loading_svg").style.display="none";
+				},500);
+			},500);
+			window.setTimeout(function(){
+				document.getElementsByTagName("body")[0].style.opacity="1";
+			},250);
+			/* Loading Screen END */
 
 			let dude = "";
 
