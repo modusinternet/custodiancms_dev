@@ -494,9 +494,9 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 			*/
 
-			function processXhr(data){
+			function processXhr(dude){
 				console.log("inside processXhr");
-				dude = JSON.parse(data);
+				//dude = JSON.parse(data);
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
