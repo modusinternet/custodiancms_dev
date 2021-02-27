@@ -378,7 +378,19 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 		<div id="footer"></div>
 
 		<script>
-			function openTab(evt, tabID){
+			/* Loading Screen START */
+			window.setTimeout(function(){
+				document.getElementById("loading_svg").style.opacity="0";
+				window.setTimeout(function(){
+					document.getElementById("loading_svg").style.display="none";
+				},500);
+			},500);
+			window.setTimeout(function(){
+				document.getElementsByTagName("body")[0].style.opacity="1";
+			},250);
+			/* Loading Screen END */
+
+			function openTab(evt,tabID){
 				var i,tabcontent,tab;
 				tabcontent=document.getElementsByClassName("tabcontent");
 				for(i=0;i<tabcontent.length;i++){
@@ -392,18 +404,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
-			/* Loading Screen START */
-			window.setTimeout(function(){
-				document.getElementById("loading_svg").style.opacity="0";
-				window.setTimeout(function(){
-					document.getElementById("loading_svg").style.display="none";
-				},500);
-			},500);
-			window.setTimeout(function(){
-				document.getElementsByTagName("body")[0].style.opacity="1";
-			},250);
-			/* Loading Screen END */
-
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
 
@@ -414,23 +414,32 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
 				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
 
-				xhr.open("POST", url, true);
-				xhr.send();
-				xhr.onreadystatechange = function(){
-					if(xhr.readyState === 4){
-						if(xhr.status === 200){
-							console.log("xhr done successfully");
-							var resp = xhr.responseText;
-							var respJson = JSON.parse(resp);
-							callback(respJson);
+				if(sessionStorage.getItem(url) !== null) {
+					/* This JSON content is already found locally, don't download, just display. */
+					var respJson = JSON.parse(sessionStorage.getItem(url));
+					callback(respJson);
+				} else {
+					/* Pull the JSON file from the website and save it in sessionStorage. */
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", url, true);
+					xhr.send();
+					xhr.onreadystatechange = function(){
+						if(xhr.readyState === 4){
+							if(xhr.status === 200){
+								console.log("xhr done successfully");
+								sessionStorage.setItem(url, req.responseText);
+								var resp = xhr.responseText;
+								var respJson = JSON.parse(resp);
+								callback(respJson);
+							} else {
+								console.log("xhr failed");
+							}
 						} else {
-							console.log("xhr failed");
+							console.log("xhr processing going on");
 						}
-					} else {
-						console.log("xhr processing going on");
 					}
+					console.log("request sent succesfully");
 				}
-				console.log("request sent succesfully");
 			}
 
 			function processXhr(data){
