@@ -392,72 +392,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
-			/*
-			let dude = "";
-
-			function setLng(url) {
-				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
-				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
-
-				if(sessionStorage.getItem(url) !== null) {
-					/* This JSON content is already found locally, don't download, just display.
-					dude = JSON.parse(sessionStorage.getItem(url));
-				} else {
-					/* Pull the JSON file from the website and save it in sessionStorage.
-					var req = new XMLHttpRequest();
-					req.onreadystatechange = function(){
-						/* if(req.readyState == 4 && req.status == 200){
-						if(req.readyState === req.DONE){
-							if(req.status === 200){
-								sessionStorage.setItem(url, req.responseText);
-								dude = JSON.parse(req.responseText);
-							}
-						}
-					};
-					req.open("POST", url, true);
-					req.send();
-				}
-
-				document.getElementById("tabC01").innerHTML = "";
-				document.getElementById("tabC02").innerHTML = "";
-				document.getElementById("tabC03").innerHTML = "";
-				document.getElementById("tabC04").innerHTML = "";
-				document.getElementById("tabC05").innerHTML = "";
-				document.getElementById("footer").innerHTML = "";
-
-				document.getElementById("tabC01").innerHTML = dude.tabC01[0].text01;
-				document.getElementById("tabC02").innerHTML = dude.tabC02[0].text01;
-				document.getElementById("tabC03").innerHTML = dude.tabC03[0].text01;
-				document.getElementById("tabC04").innerHTML = dude.tabC04[0].text01;
-				document.getElementById("tabC05").innerHTML = dude.tabC05[0].text01;
-				document.getElementById("footer").innerHTML = dude.footer;
-			}
-
-
-
-			/* Load the English version of the site first START
-			setLng("https://custodiancms.org/install/en.php");
-			/* Load the English version of the site first END
-
-			/* Set the first tab to be highlighted and content to be displayed START
-			document.getElementById("tab01").click();
-			/* Set the first tab to be highlighted and content to be displayed END */
-
-
-
-
-
-
-
-
-
-
-
-
 			/* Loading Screen START */
 			window.setTimeout(function(){
 				document.getElementById("loading_svg").style.opacity="0";
@@ -469,30 +403,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementsByTagName("body")[0].style.opacity="1";
 			},250);
 			/* Loading Screen END */
-
-			let dude = "";
-
-			/*
-			function setLng(url, callback){
-				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
-				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
-
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", url, true);
-				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xhr.onreadystatechange = function(){
-					if(xhr.readyState === 4 && xhr.state === 200){
-						callback(xhr.response);
-					}
-				}
-				xhr.send();
-				console.log("request sent to the server");
-			}
-			*/
 
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
@@ -540,60 +450,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = data.footer;
 			}
 
+			/* Load the English version of the site first START */
 			setLng("https://custodiancms.org/install/en.php", processXhr);
+			/* Load the English version of the site first END
 
+			/* Set the first tab to be highlighted and content to be displayed START */
+			document.getElementById("tab01").click();
+			/* Set the first tab to be highlighted and content to be displayed END */
 
-
-			/*
-			function ajaxCall(location, url){
-				var req = new XMLHttpRequest();
-				req.onreadystatechange = function(){
-					if(this.readyState === 4){
-						document.getElementById('container').innerHTML = this.responseText;
-					} else {
-						document.getElementById('container').innerHTML = '<div class="loader"></div>';
-					}
-					req.open("POST", "https://<?=$_SERVER["HTTP_HOST"];?>" + location, true);
-					req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-					req.onreadystatechange = ajaxCallProcess();
-					req.send(url);
-				}
-			}
-
-			function ajaxCallProcess(){
-				if(req.readyState == 4){
-					if(req.status == 200){
-						var node = req.responseXML.getElementsByTagName("errorMessage");
-						if(node && (node.length > 0)){
-							if(document.getElementById("wait_div")){
-								div_wait_Hide();
-							}
-							errorMessage = req.responseXML.getElementsByTagName("errorMessage")[0].firstChild.data;
-							alert(errorMessage);
-							var node = req.responseXML.getElementsByTagName("errorField");
-							if(node && (node.length > 0)){
-								var errorField = req.responseXML.getElementsByTagName("errorField")[0].firstChild.data;
-								if(document.getElementById(errorField)){
-									document.getElementById(errorField).focus();
-								}
-							}
-							if(document.getElementById("submit")) document.getElementById("submit").disabled = false;
-							if(document.getElementById("cmd"))  document.getElementById("cmd").disabled = false;
-							if(document.getElementById("reset"))  document.getElementById("reset").disabled = false;
-							if(document.getElementById("cancel")) document.getElementById("cancel").disabled = false;
-						} else {
-							var node = req.responseXML.getElementsByTagName("method");
-							if(node && (node.length > 0)){
-								method = req.responseXML.getElementsByTagName("method")[0].firstChild.data;
-								eval(method);
-							}
-						}
-					} else {
-						alert("Error:\n" + req.statusText);
-					}
-				}
-			}
-			*/
 		</script>
 	</body>
 </html>
