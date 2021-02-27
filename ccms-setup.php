@@ -391,10 +391,9 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				evt.currentTarget.className+=" active";
 			}
 
-			function setLng(url,callback){
+			function setLng(url,callback,lng){
+				if(lng !== null) sessionStorage.setItem("lng",lng);
 				var xhr = new XMLHttpRequest();
-				//document.getElementById("loading_svg").style.display="block";
-				document.getElementById("loading_svg").style.opacity="1";
 				if(sessionStorage.getItem(url) !== null) {
 					var respJson = JSON.parse(sessionStorage.getItem(url));
 					callback(respJson);
@@ -419,8 +418,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					}
 					console.log("request sent succesfully");
 				}
-				//document.getElementById("loading_svg").style.display="none";
-				document.getElementById("loading_svg").style.opacity="0";
 			}
 
 			function processXhr(data){
@@ -443,12 +440,11 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				setLng("https://custodiancms.org/install/en.php",processXhr);
 			}
 			*/
-			try{ 
+			try{
 				var tmp = sessionStorage.getItem(lng);
 				setLng("https://custodiancms.org/install/"+tmp+".php",processXhr);
 			}catch(e){
-				sessionStorage.setItem(lng,"en");
-				setLng("https://custodiancms.org/install/en.php",processXhr);
+				setLng("https://custodiancms.org/install/en.php",processXhr,"en");
 			}
 			/* Load the English version of the site first END
 
