@@ -406,20 +406,16 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
-
 				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
 				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
-
 				if(sessionStorage.getItem(url) !== null) {
-					/* This JSON content is already found locally, don't download, just display. */
 					var respJson = JSON.parse(sessionStorage.getItem(url));
 					callback(respJson);
 				} else {
-					/* Pull the JSON file from the website and save it in sessionStorage. */
 					var xhr = new XMLHttpRequest();
 					xhr.open("POST", url, true);
 					xhr.send();
