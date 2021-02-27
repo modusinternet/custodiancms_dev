@@ -203,19 +203,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			p{margin: 0 0 20px}
 
-			.loader{
-				width:60px;
-				height:60px;
-				background:0 0;
-				border:10px solid transparent;
-				border-top-color:#f56;
-				border-left-color:#f56;
-				border-radius:50%;
-				animation:loader .75s 10 ease forwards
-			}
-
-			@keyframes loader{100%{transform:rotate(360deg)}}
-
 			.logo{
 				filter:drop-shadow(2px 2px 4px rgba(0,0,0,.4));
 				margin-bottom:30px;
@@ -406,14 +393,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
-				/*
-				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
-				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
-				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
-				*/
 				document.getElementById("loading_svg").style.display="block";
 				document.getElementById("loading_svg").style.opacity="1";
 				if(sessionStorage.getItem(url) !== null) {
@@ -446,15 +425,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function processXhr(data){
 				console.log("inside processXhr");
-				/*
-				document.getElementById("tabC01").innerHTML = "";
-				document.getElementById("tabC02").innerHTML = "";
-				document.getElementById("tabC03").innerHTML = "";
-				document.getElementById("tabC04").innerHTML = "";
-				document.getElementById("tabC05").innerHTML = "";
-				document.getElementById("footer").innerHTML = "";
-				*/
-
 				document.getElementById("tabC01").innerHTML = data.tabC01[0].txt01;
 				document.getElementById("tabC02").innerHTML = data.tabC02[0].txt01;
 				document.getElementById("tabC03").innerHTML = data.tabC03[0].txt01;
