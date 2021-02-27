@@ -406,12 +406,16 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
+				/*
 				document.getElementById("tabC01").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC02").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC03").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC04").innerHTML = '<div class="loader"></div>';
 				document.getElementById("tabC05").innerHTML = '<div class="loader"></div>';
 				document.getElementById("footer").innerHTML = '<div class="loader"></div>';
+				*/
+				document.getElementById("loading_svg").style.display="block";
+				document.getElementById("loading_svg").style.opacity="1";
 				if(sessionStorage.getItem(url) !== null) {
 					var respJson = JSON.parse(sessionStorage.getItem(url));
 					callback(respJson);
@@ -436,16 +440,20 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					}
 					console.log("request sent succesfully");
 				}
+				document.getElementById("loading_svg").style.display="none";
+				document.getElementById("loading_svg").style.opacity="0";
 			}
 
 			function processXhr(data){
 				console.log("inside processXhr");
+				/*
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
 				document.getElementById("tabC04").innerHTML = "";
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
+				*/
 
 				document.getElementById("tabC01").innerHTML = data.tabC01[0].txt01;
 				document.getElementById("tabC02").innerHTML = data.tabC02[0].txt01;
