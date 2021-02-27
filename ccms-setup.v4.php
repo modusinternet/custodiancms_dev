@@ -427,7 +427,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						if(xhr.readyState === 4){
 							if(xhr.status === 200){
 								console.log("xhr done successfully");
-								sessionStorage.setItem(url, req.responseText);
+								sessionStorage.setItem(url,xhr.responseText);
 								var resp = xhr.responseText;
 								var respJson = JSON.parse(resp);
 								callback(respJson);
