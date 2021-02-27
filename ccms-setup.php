@@ -393,7 +393,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function setLng(url, callback){
 				var xhr = new XMLHttpRequest();
-				document.getElementById("loading_svg").style.display="block";
+				//document.getElementById("loading_svg").style.display="block";
 				document.getElementById("loading_svg").style.opacity="1";
 				if(sessionStorage.getItem(url) !== null) {
 					var respJson = JSON.parse(sessionStorage.getItem(url));
@@ -419,7 +419,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					}
 					console.log("request sent succesfully");
 				}
-				document.getElementById("loading_svg").style.display="none";
+				//document.getElementById("loading_svg").style.display="none";
 				document.getElementById("loading_svg").style.opacity="0";
 			}
 
