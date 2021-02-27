@@ -511,8 +511,11 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 						if(xhr.status === 200){
 							console.log("xhr done successfully");
 							var resp = xhr.responseText;
+							/*
 							var respJson = JSON.parse(resp);
 							callback(respJson);
+							*/
+							callback(resp);
 						} else {
 							console.log("xhr failed");
 						}
@@ -523,8 +526,9 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				console.log("request sent succesfully");
 			}
 
-			function processXhr(data){
+			function processXhr(resp){
 				console.log("inside processXhr");
+				var data = JSON.parse(resp);
 				document.getElementById("tabC01").innerHTML = "";
 				document.getElementById("tabC02").innerHTML = "";
 				document.getElementById("tabC03").innerHTML = "";
@@ -532,14 +536,11 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("tabC05").innerHTML = "";
 				document.getElementById("footer").innerHTML = "";
 
-				document.getElementById("tabC01").innerHTML = data.tabC01.txt01;
-				/*
 				document.getElementById("tabC01").innerHTML = data.tabC01[0].txt01;
 				document.getElementById("tabC02").innerHTML = data.tabC02[0].txt01;
 				document.getElementById("tabC03").innerHTML = data.tabC03[0].txt01;
 				document.getElementById("tabC04").innerHTML = data.tabC04[0].txt01;
 				document.getElementById("tabC05").innerHTML = data.tabC05[0].txt01;
-				*/
 				document.getElementById("footer").innerHTML = data.footer;
 			}
 
