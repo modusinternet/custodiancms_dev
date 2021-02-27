@@ -392,7 +392,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			}
 
 			function setLng(url,callback,lng){
-				if(lng !== null){
+				if(lng !== ""){
 					sessionStorage.setItem("lng",lng);
 				}
 				var xhr = new XMLHttpRequest();
