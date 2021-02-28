@@ -443,7 +443,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			if(sessionStorage.length == 0){
 				setLng("https://custodiancms.org/install/en.php",processXhr,"en");
 			} else {
-				var tmp = sessionStorage.getItem(lng);
+				var tmp = sessionStorage.getItem("lng");
 				setLng("https://custodiancms.org/install/"+tmp+".php",processXhr);
 			}
 			/* Load the English version of the site first END
