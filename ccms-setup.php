@@ -440,11 +440,11 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				setLng("https://custodiancms.org/install/en.php",processXhr);
 			}
 			*/
-			try{
+			if(sessionStorage.length == 0){
+				setLng("https://custodiancms.org/install/en.php",processXhr,"en");
+			} else {
 				var tmp = sessionStorage.getItem(lng);
 				setLng("https://custodiancms.org/install/"+tmp+".php",processXhr);
-			}catch(e){
-				setLng("https://custodiancms.org/install/en.php",processXhr,"en");
 			}
 			/* Load the English version of the site first END
 
