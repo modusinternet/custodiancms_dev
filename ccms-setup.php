@@ -341,7 +341,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 		<div class="tabs">
-			<button class="tab" id="tab01" onclick="openTab(event,'tabC01')">Welcome</button>
+			<button class="tab" id="tab01" onclick="openTab(event,'tabC01')"></button>
 			<button class="tab" id="tab02" onclick="openTab(event,'tabC02')">Install</button>
 			<button class="tab" id="tab03" onclick="openTab(event,'tabC03')">Setup</button>
 			<button class="tab" id="tab04" onclick="openTab(event,'tabC04')">Copyright</button>
