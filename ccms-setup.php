@@ -481,9 +481,15 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				})
 				*/
 
+				/*
 				data.forEach((item, index) => {
 					console.log(`${index} : ${item}`);
 				});
+				*/
+
+				for( let prop in data ){
+					console.log( json[data] );
+				}
 
 
 
