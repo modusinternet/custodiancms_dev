@@ -474,11 +474,16 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				}
 				*/
 
+				/*
 				data.forEach((item, index) => {
   				console.log("item="+item+"\n") //value
   				console.log("index="+index+"\n\n") //index
 				})
+				*/
 
+				data.forEach((item, index) => {
+					console.log(`${index} : ${item}`);
+				});
 
 
 
