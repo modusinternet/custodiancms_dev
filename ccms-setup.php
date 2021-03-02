@@ -410,7 +410,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 								var respJson = JSON.parse(resp);
 
 
-								console.log(respJson.length);
+								console.log(resp.length);
 
 
 								//callback(respJson);
