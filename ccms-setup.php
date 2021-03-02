@@ -422,22 +422,68 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			function processXhr(data){
 				console.log("inside processXhr");
+				/*
 				document.getElementById("tab01").innerHTML = data.tab01[0].tab01title;
 				document.getElementById("tabC01").innerHTML = data.tab01[0].tab01txt01;
-
 				document.getElementById("tab02").innerHTML = data.tab02[0].tab02title;
 				document.getElementById("tabC02").innerHTML = data.tab02[0].tab02txt01;
-
 				document.getElementById("tab03").innerHTML = data.tab03[0].tab03title;
 				document.getElementById("tabC03").innerHTML = data.tab03[0].tab03txt01;
-
 				document.getElementById("tab04").innerHTML = data.tab04[0].tab04title;
 				document.getElementById("tabC04").innerHTML = data.tab04[0].tab04txt01;
-
 				document.getElementById("tab05").innerHTML = data.tab05[0].tab05title;
 				document.getElementById("tabC05").innerHTML = data.tab05[0].tab05txt01;
-
 				document.getElementById("footer").innerHTML = data.footer;
+				*/
+
+				/*
+				var json = {
+					"row": [{
+						"id": "5",
+						"name": "test",
+						"email": "test@test.com",
+						"street": "mystreet",
+						"city": "mycity",
+						"state": "mystate",
+						"zipcode": "123456",
+						"myimage": "image.gif"
+					}]
+				}​
+				var data = json.row;
+
+				{
+					"tab01":[{
+						"tab01title":"Welcome",
+						"tab01txt01":"sadf asd"
+					}],
+					"tab02":[{
+						"tab02title":"Install",
+						"tab02txt01":"asdfsda sad fsds"
+					}],
+					"footer":"dsaf asdfs"
+				}
+				*/
+
+				/*
+				for(var i = 0;i < data.length;i++){
+					var object = data[i];
+					for(property in object){
+						var value = object[property];
+						alert(property + "=" + value); // This alerts "id=5",  etc..
+					}
+				}
+				*/
+
+				data.forEach((item, index) => {
+  				console.log("item="+item+"\n") //value
+  				console.log("index="+index+"\n\n") //index
+				})
+
+
+
+
+
+
 			}
 
 			/* Load the English version of the site if lng has not already been set START */
