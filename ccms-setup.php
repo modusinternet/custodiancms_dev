@@ -408,7 +408,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 								sessionStorage.setItem(url,xhr.responseText);
 								var resp = xhr.responseText;
 								var respJson = JSON.parse(resp);
-								callback(respJson);
+
+
+								for( let prop in respJson ){
+									console.log( json[respJson] );
+								}
+
+
+								//callback(respJson);
 							} else {
 								console.log("xhr failed");
 							}
@@ -487,9 +494,11 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				});
 				*/
 
+				/*
 				for( let prop in data ){
 					console.log( json[data] );
 				}
+				*/
 
 
 
