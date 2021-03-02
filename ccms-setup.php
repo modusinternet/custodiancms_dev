@@ -411,7 +411,14 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 
 								for(const [k, v] of Object.entries(respJson)){
-									console.log(`Here is key ${k} and here is value ${v}`);
+									console.log(`key=${k}\n`);
+
+									if(typeOf ${v} == "object"){
+										console.log(`value=an object\n\n`);
+									} else {
+										console.log(`value=${v}\n\n`);
+									}
+
 								}
 
 
