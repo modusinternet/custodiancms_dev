@@ -410,7 +410,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 								var respJson = JSON.parse(resp);
 
 
-								for(const [key, value] of resp) {
+								for(const [key, value] of respJson) {
 									console.log("key="+key+"\n");
 									console.log("value="+value+"\n\n");
 								}
