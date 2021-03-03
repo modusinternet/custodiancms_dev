@@ -321,7 +321,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				==========*/
 				#tabs{
 					/*grid-template-columns:1fr 1fr 1fr 1fr auto 1fr;*/
-					grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+					/*grid-template-columns:repeat(auto-fill,minmax(200px,1fr));*/
+					grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 					grid-template-areas:
 						"tab01 tab02 tab03 tab04 tabSpacer tab05"
 				}
