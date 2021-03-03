@@ -431,7 +431,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 											}
 										}
 									} else if(typeof respJson[key] === "string") {
-										console.log(key + " = " + respJson[key]);
+										//console.log(key + " = " + respJson[key]);
+										document.getElementById("key").innerHTML = respJson[key];
 									}
 								}
 
