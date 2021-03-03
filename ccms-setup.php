@@ -427,8 +427,8 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 									if(typeof respJson[key] === "object") {
 										for(var i = 0; i < respJson[key].length; i++) {
 											for(var property in respJson[key][i]) {
-												console.log(property + " = " + respJson[key][i][property]);
-												//document.getElementById(property).innerHTML = respJson[key][i][property];
+												//console.log(property + " = " + respJson[key][i][property]);
+												document.getElementById(property).innerHTML = respJson[key][i][property];
 											}
 										}
 									} else if(typeof respJson[key] === "string") {
