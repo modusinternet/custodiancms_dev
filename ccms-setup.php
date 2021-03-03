@@ -300,8 +300,6 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 			#tabs>#tab02title{grid-area:tab02}
 			#tabs>#tab03title{grid-area:tab03}
 			#tabs>#tab04title{grid-area:tab04}
-			#tabs>#tabSpacer{grid-area:tabSpacer}
-			#tabs>#tab05{grid-area:tab05}
 
 			#tabs{
 				display:grid;
@@ -309,9 +307,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					"tab01"
 					"tab02"
 					"tab03"
-					"tab04"
-					"tabSpacer"
-					"tab05";
+					"tab04";
 			}
 
 			/* 768px or larger. */
@@ -324,7 +320,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					/*grid-template-columns:repeat(auto-fill,minmax(200px,1fr));*/
 					grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 					grid-template-areas:
-						"tab01 tab02 tab03 tab04 tabSpacer tab05"
+						"tab01 tab02 tab03 tab04"
 				}
 				/*==========
 				END of tags found in the MAIN tag
