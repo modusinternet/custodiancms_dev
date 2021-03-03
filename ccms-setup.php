@@ -420,22 +420,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				}
 			}
 
-			function processXhr(data){
-				console.log("inside processXhr");
-				/*
-				document.getElementById("tab01").innerHTML = data.tab01[0].tab01title;
-				document.getElementById("tabC01").innerHTML = data.tab01[0].tab01txt01;
-				document.getElementById("tab02").innerHTML = data.tab02[0].tab02title;
-				document.getElementById("tabC02").innerHTML = data.tab02[0].tab02txt01;
-				document.getElementById("tab03").innerHTML = data.tab03[0].tab03title;
-				document.getElementById("tabC03").innerHTML = data.tab03[0].tab03txt01;
-				document.getElementById("tab04").innerHTML = data.tab04[0].tab04title;
-				document.getElementById("tabC04").innerHTML = data.tab04[0].tab04txt01;
-				document.getElementById("tab05").innerHTML = data.tab05[0].tab05title;
-				document.getElementById("tabC05").innerHTML = data.tab05[0].tab05txt01;
-				document.getElementById("footer").innerHTML = data.footer;
-				*/
-
+			function lngXhr(data){
 				for(var key in data) {
 					if(typeof data[key] === "object") {
 						for(var i = 0; i < data[key].length; i++) {
@@ -451,10 +436,10 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 
 			/* Load the English version of the site if lng has not already been set START */
 			if(sessionStorage.length == 0){
-				setLng("https://custodiancms.org/install/en.php",processXhr,"en");
+				setLng("https://custodiancms.org/install/en.php",lngXhr,"en");
 			} else {
 				var tmp = sessionStorage.getItem("lng");
-				setLng("https://custodiancms.org/install/"+tmp+".php",processXhr);
+				setLng("https://custodiancms.org/install/"+tmp+".php",lngXhr);
 			}
 			/* Load the English version of the site if lng has not already been set END */
 
