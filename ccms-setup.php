@@ -436,17 +436,17 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = data.footer;
 				*/
 
-				for(var key in respJson) {
-					if(typeof respJson[key] === "object") {
-						for(var i = 0; i < respJson[key].length; i++) {
-							for(var property in respJson[key][i]) {
-								//console.log(property + " = " + respJson[key][i][property]);
-								document.getElementById(property).innerHTML = respJson[key][i][property];
+				for(var key in data) {
+					if(typeof data[key] === "object") {
+						for(var i = 0; i < data[key].length; i++) {
+							for(var property in data[key][i]) {
+								//console.log(property + " = " + data[key][i][property]);
+								document.getElementById(property).innerHTML = data[key][i][property];
 							}
 						}
-					} else if(typeof respJson[key] === "string") {
-						//console.log(key + " = " + respJson[key]);
-						document.getElementById(key).innerHTML = respJson[key];
+					} else if(typeof data[key] === "string") {
+						//console.log(key + " = " + data[key]);
+						document.getElementById(key).innerHTML = data[key];
 					}
 				}
 
