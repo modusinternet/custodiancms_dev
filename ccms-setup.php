@@ -409,7 +409,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 								var resp = xhr.responseText;
 								var respJson = JSON.parse(resp);
 
-
+								/*
 								for(const [k, v] of Object.entries(respJson)){
 									console.log(`key=${k}\n`);
 
@@ -420,8 +420,20 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 									}
 
 								}
+								*/
 
 
+								for(var key in respJson) {
+									if(typeof respJson[key] === "object") {
+										for(var i = 0; i < respJson[key].length; i++) {
+											for(var property in respJson[key][i]) {
+												console.log(property + " = " + respJson[key][i][property]);
+											}
+										}
+									} else if(typeof respJson[key] === "string") {
+										console.log(key + " = " + respJson[key]);
+									}
+								}
 
 
 								//callback(respJson);
