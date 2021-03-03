@@ -408,37 +408,7 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 								sessionStorage.setItem(url,xhr.responseText);
 								var resp = xhr.responseText;
 								var respJson = JSON.parse(resp);
-
-								/*
-								for(const [k, v] of Object.entries(respJson)){
-									console.log(`key=${k}\n`);
-
-									if(typeOf ${v} == "object"){
-										console.log(`value=an object\n\n`);
-									} else {
-										console.log(`value=${v}\n\n`);
-									}
-
-								}
-								*/
-
-
-								for(var key in respJson) {
-									if(typeof respJson[key] === "object") {
-										for(var i = 0; i < respJson[key].length; i++) {
-											for(var property in respJson[key][i]) {
-												//console.log(property + " = " + respJson[key][i][property]);
-												document.getElementById(property).innerHTML = respJson[key][i][property];
-											}
-										}
-									} else if(typeof respJson[key] === "string") {
-										//console.log(key + " = " + respJson[key]);
-										document.getElementById(key).innerHTML = respJson[key];
-									}
-								}
-
-
-								//callback(respJson);
+								callback(respJson);
 							} else {
 								console.log("xhr failed");
 							}
@@ -466,66 +436,19 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				document.getElementById("footer").innerHTML = data.footer;
 				*/
 
-				/*
-				var json = {
-					"row": [{
-						"id": "5",
-						"name": "test",
-						"email": "test@test.com",
-						"street": "mystreet",
-						"city": "mycity",
-						"state": "mystate",
-						"zipcode": "123456",
-						"myimage": "image.gif"
-					}]
-				}​
-				var data = json.row;
-
-				{
-					"tab01":[{
-						"tab01title":"Welcome",
-						"tab01txt01":"sadf asd"
-					}],
-					"tab02":[{
-						"tab02title":"Install",
-						"tab02txt01":"asdfsda sad fsds"
-					}],
-					"footer":"dsaf asdfs"
-				}
-				*/
-
-				/*
-				for(var i = 0;i < data.length;i++){
-					var object = data[i];
-					for(property in object){
-						var value = object[property];
-						alert(property + "=" + value); // This alerts "id=5",  etc..
+				for(var key in respJson) {
+					if(typeof respJson[key] === "object") {
+						for(var i = 0; i < respJson[key].length; i++) {
+							for(var property in respJson[key][i]) {
+								//console.log(property + " = " + respJson[key][i][property]);
+								document.getElementById(property).innerHTML = respJson[key][i][property];
+							}
+						}
+					} else if(typeof respJson[key] === "string") {
+						//console.log(key + " = " + respJson[key]);
+						document.getElementById(key).innerHTML = respJson[key];
 					}
 				}
-				*/
-
-				/*
-				data.forEach((item, index) => {
-  				console.log("item="+item+"\n") //value
-  				console.log("index="+index+"\n\n") //index
-				})
-				*/
-
-				/*
-				data.forEach((item, index) => {
-					console.log(`${index} : ${item}`);
-				});
-				*/
-
-				/*
-				for( let prop in data ){
-					console.log( json[data] );
-				}
-				*/
-
-
-
-
 
 			}
 
