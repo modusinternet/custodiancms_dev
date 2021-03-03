@@ -440,16 +440,13 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 					if(typeof data[key] === "object") {
 						for(var i = 0; i < data[key].length; i++) {
 							for(var property in data[key][i]) {
-								//console.log(property + " = " + data[key][i][property]);
 								document.getElementById(property).innerHTML = data[key][i][property];
 							}
 						}
 					} else if(typeof data[key] === "string") {
-						//console.log(key + " = " + data[key]);
 						document.getElementById(key).innerHTML = data[key];
 					}
 				}
-
 			}
 
 			/* Load the English version of the site if lng has not already been set START */
