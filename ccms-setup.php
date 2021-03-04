@@ -411,10 +411,15 @@ if(!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS
 				for(i=0;i<tabcontent.length;i++){
 					tabcontent[i].style.display="none";
 				}
+				//document.getElementById("lngButton").style.display="none";
+
+
 				tab=document.getElementsByClassName("tab");
 				for(i=0;i<tab.length;i++){
 					tab[i].className=tab[i].className.replace(" active","");
 				}
+				document.getElementById("lngButton").replace(" active","");
+				
 				document.getElementById(tabID).style.display="block";
 				evt.currentTarget.className+=" active";
 			}
