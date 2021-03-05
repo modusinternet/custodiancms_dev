@@ -495,7 +495,7 @@ if($CFG["DBH"]) {
 			else window.addEventListener('load', cb);
 
 			function loadJSResources() {
-				loadFirst("/ccmsusr/_js/jquery-2.2.0.min.js", function() { /* JQuery is loaded */
+				loadFirst("/ccmsusr/_js/jquery-3.5.1.min.js", function() { /* JQuery is loaded */
 					loadFirst("/ccmsusr/_js/bootstrap-3.3.7.min.js", function() { /* Bootstrap is loaded */
 						/*loadFirst("/ccmsusr/_js/custodiancms.js", function() { /* CustodianCMS JavaScript */
 						loadFirst("/ccmsusr/_js/custodiancms.min.js", function() { /* CustodianCMS JavaScript */
