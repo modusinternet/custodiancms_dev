@@ -162,7 +162,7 @@ function CCMS_Set_SESSION() {
 	ini_set('session.cookie_lifetime', $CFG["COOKIE_SESSION_EXPIRE"]); //This is used to set cookie lifetime. If it is set as 0, then cookie remains until browser restart.
 	ini_set('session.cookie_httponly', 1); //This directive stops client side scripts from accessing session id preserved in cookie.
 	ini_set('session.cookie_secure', 1); //Controls whether cookies are sent via secure connections or not. Set it with 1 | 0 value. The default (off) is 0.
-	ini_set('session.cookie_samesite', "Lax");
+	ini_set('session.cookie_samesite', "Strict");
 
 	session_name("__Host-ccms_session");
 
